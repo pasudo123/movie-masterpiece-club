@@ -1,0 +1,24 @@
+
+spring:
+  profiles:
+    active: dev
+
+
+---
+spring:
+  profiles: dev
+
+server:
+  port: 8080
+  servlet:
+    context-path: /masterpiece-club-dev/v1.0
+
+
+---
+spring:
+  profiles: prod
+
+server:
+  port: 8080
+  servlet:
+    context-path: /masterpiece-club/v1.0

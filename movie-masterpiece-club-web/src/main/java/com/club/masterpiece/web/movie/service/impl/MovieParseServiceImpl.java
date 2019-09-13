@@ -16,7 +16,9 @@ public class MovieParseServiceImpl implements MovieParseService {
 
     @Override
     public String parse2Json(MovieDto.enrollRequest dto) {
-        String a;
+
+        
+
         return null;
     }
 }

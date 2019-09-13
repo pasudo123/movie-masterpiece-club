@@ -21,7 +21,7 @@ public class MovieDto {
         private String title;
         private String summary;
         private String director;
-        private LocalDateTime releaseDate;
+        private String date;
         private List<String> actors;
 
     }
