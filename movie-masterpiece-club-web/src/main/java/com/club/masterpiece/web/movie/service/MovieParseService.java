@@ -9,6 +9,6 @@ import com.club.masterpiece.web.movie.dto.MovieDto;
  **/
 public interface MovieParseService {
 
-    String parse2Json(MovieDto.enrollRequest dto);
+    String parse2Json(MovieDto.EnrollRequest dto);
 
 }

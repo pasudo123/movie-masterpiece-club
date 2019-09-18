@@ -24,7 +24,7 @@ public class MovieController {
     private final MovieParseService movieParseService;
 
     @PostMapping("parse")
-    public ResponseEntity<Object> parseToJson(@RequestBody MovieDto.enrollRequest dto){
+    public ResponseEntity<Object> parseToJson(@RequestBody MovieDto.EnrollRequest dto){
 
         movieParseService.parse2Json(dto);
 
