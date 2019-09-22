@@ -7,11 +7,27 @@ spring:
 ---
 spring:
   profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/masterpiece_club?useSSL=false&allowPublicKeyRetrieval=true&useTimezone=true&serverTimezone=UTC
+    username: root
+    password: rootpass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: validate
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
 server:
   port: 8080
   servlet:
     context-path: /masterpiece-club-dev/v1.0
+
 
 
 ---
