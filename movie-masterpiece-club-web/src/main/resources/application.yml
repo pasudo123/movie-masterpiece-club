@@ -8,7 +8,7 @@ spring:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/masterpiece_club?useSSL=false&allowPublicKeyRetrieval=true&useTimezone=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/masterpiece_club?useSSL=false&allowPublicKeyRetrieval=true&useTimezone=true&serverTimezone=Asia/Seoul
     username: root
     password: rootpass
     driver-class-name: com.mysql.cj.jdbc.Driver
