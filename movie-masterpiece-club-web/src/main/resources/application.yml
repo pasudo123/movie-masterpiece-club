@@ -38,3 +38,9 @@ server:
   port: 8080
   servlet:
     context-path: /masterpiece-club/v1.0
+
+
+---
+logging:
+  level:
+    com.club.masterpiece.web.*: debug
