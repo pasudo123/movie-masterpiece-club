@@ -1,0 +1,27 @@
+
+#articleIndex {
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    border: 1px solid red;
+    width: 100vw;
+    height: auto;
+    display: flex;
+}
+
+.header > .meeting-icon {
+    flex-grow: 1;
+}
+
+.header > .meeting-title {
+    text-align: center;
+    flex-grow: 5;
+}
+
+.header > .user-info-wrapper {
+    flex-grow: 2;
+    background: red;
+}
+

@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <h3>Vue App</h3>
-
-    <router-link to="/movie-to-json">Movie2Json</router-link> <br>
-
+    <!--<router-link to="/movie-to-json">Movie2Json</router-link> <br>-->
     <router-view></router-view>
   </div>
 </template>
@@ -17,12 +14,16 @@ export default {
 </script>
 
 <style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
+  /*-webkit-font-smoothing: antialiased;*/
+  /*-moz-osx-font-smoothing: grayscale;*/
+  /*text-align: center;*/
+  /*color: #2c3e50;*/
+  /*margin-top: 60px;*/
 }
 </style>

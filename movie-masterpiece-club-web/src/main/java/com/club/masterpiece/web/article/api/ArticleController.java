@@ -32,7 +32,6 @@ public class ArticleController {
                                         BindingResult bindingResult){
 
         if(bindingResult.hasErrors()) {
-            log.debug("Valid Exception.");
             throw new CustomValidationException("Valid Exception.", bindingResult);
         }
 

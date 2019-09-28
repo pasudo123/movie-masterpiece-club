@@ -10,6 +10,11 @@ export default new VueRouter({
 
     routes: [
         {
+            path: '',
+            name: 'masterpiece-club',
+            component: () => import('@/pages/article/index')
+        },
+        {
             path: '/movie-to-json',
             name: 'movie',
             component: () => import("@/pages/movie/Movie2Json")
