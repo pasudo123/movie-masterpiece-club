@@ -1,16 +1,15 @@
 package com.club.masterpiece.web.article.api;
 
 import com.club.masterpiece.web.article.dto.ArticleDto;
+import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
+import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.exception.CustomValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,20 +24,28 @@ import javax.validation.Valid;
 @Slf4j
 public class ArticleController {
 
-    private ArticleCreateService articleCreateService;
+    private final ArticleCreateService articleCreateService;
+    private final ArticleFindService articleFindService;
 
     @PostMapping
-    public ResponseEntity<ArticleDto.OneResponse> createArticle(@RequestBody @Valid ArticleDto.createRequest dto,
-                                        BindingResult bindingResult){
+    public ResponseEntity<ArticleDto.OneResponse> createArticle(
+            @RequestBody @Valid ArticleDto.createRequest dto,
+            BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             throw new CustomValidationException("Valid Exception.", bindingResult);
         }
 
-        log.debug("content : {}", dto.getArticleContent());
-        log.debug("content : {}", dto.getArticleType());
+        ArticleDto.OneResponse response = articleCreateService.create(dto);
 
-        return ResponseEntity.ok().body(null);
+        return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping
+    public ResponseEntity<Object> findAll() {
+
+        ArticleDto.ListResponse response = articleFindService.findAll();
+
+        return ResponseEntity.ok().body(response);
+    }
 }

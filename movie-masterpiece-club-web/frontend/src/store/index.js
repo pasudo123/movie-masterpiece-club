@@ -2,9 +2,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import jsonModule from '@/store/modules/json.module'
+import userModule from '@/store/modules/user-module';
+import articleModule from '@/store/modules/article-module';
+import jsonModule from '@/store/modules/json.module';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
@@ -24,6 +26,8 @@ export default new Vuex.Store({
     },
 
     modules: {
+        userModule,
+        articleModule,
         jsonModule
     }
 })

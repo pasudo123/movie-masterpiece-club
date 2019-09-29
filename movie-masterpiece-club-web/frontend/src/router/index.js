@@ -10,9 +10,25 @@ export default new VueRouter({
 
     routes: [
         {
+            path: '/login',
+            name: 'login',
+            component: () => import('@/pages/login/Login')
+        },
+        {
             path: '',
-            name: 'masterpiece-club',
-            component: () => import('@/pages/article/index')
+            component: () => import('@/pages/article/index'),
+            children: [
+                {
+                    path: '/',
+                    name: 'articleList',
+                    component: () => import('@/pages/article/ArticleList'),
+                },
+                {
+                    path: '/article-edit',
+                    name: 'articleEdit',
+                    component: () => import('@/pages/article/ArticleEdit')
+                }
+            ]
         },
         {
             path: '/movie-to-json',

@@ -1,0 +1,19 @@
+
+.articleElement {
+    margin: 5vh 0 5vh 0;
+    background: gainsboro;
+}
+
+.articleElement > .element{
+    width:100%;
+    display: flex;
+    align-items: center;
+}
+
+.userProfile {}
+
+.contentArea {
+    position: relative;;
+    left: 1vh;
+    border: 1px solid blue;
+}

@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -44,6 +45,19 @@ public class MasterpieceControllerAdvice {
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EmptyResultException.class)
+    public ResponseEntity<ErrorResponse> handleEmptyResultException(EmptyResultException exception, WebRequest webRequest) {
+
+        ErrorResponse response = ErrorResponse.builder()
+                .errorTimestamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND)
+                .details(Collections.singletonList(exception.getMessage()))
+                .requestUri(webRequest.getDescription(false))
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
 }

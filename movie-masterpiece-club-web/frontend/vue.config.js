@@ -19,8 +19,12 @@ module.exports = {
     configureWebpack: {
         resolve: {
             alias: {
-                '@': resolve('src')
-            }
+                '@': resolve('src'),
+                'icons': path.resolve(__dirname, 'node_modules/vue-material-design-icons')
+            },
+            extensions: [
+                '.vue'
+            ]
         },
     },
 }

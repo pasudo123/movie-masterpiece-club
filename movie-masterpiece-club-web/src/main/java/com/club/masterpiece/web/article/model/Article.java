@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.article.model;
 
+import com.club.masterpiece.web.article.dto.ArticleDto;
 import com.club.masterpiece.web.user.model.User;
 import lombok.AccessLevel;
 import lombok.Builder;
