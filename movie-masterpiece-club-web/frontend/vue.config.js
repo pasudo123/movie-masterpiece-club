@@ -7,6 +7,15 @@ function resolve(dir) {
 
 module.exports = {
 
+    /**
+     * 웹팩 빌드 안되는 문제에 대한 해결.
+     * https://github.com/vuejs/vue-cli/issues/4572
+     */
+    productionSourceMap: false,
+    css: {
+        sourceMap: true
+    },
+
     devServer: {
         port: 8899,
         proxy: {
@@ -27,4 +36,20 @@ module.exports = {
             ]
         },
     },
-}
+
+    publicPath: '/',
+    outputDir: '../src/main/resources/',
+    assetsDir: 'static',
+    pages: {
+        'login': {
+            entry: './src/pages/login/main.js',
+            template: 'public/index.html',
+            filename: './templates/login.ftl'
+        },
+        'masterpiece': {
+            entry: './src/pages/article/main.js',
+            template: 'public/index.html',
+            filename: './templates/masterpiece.ftl'
+        }
+    }
+};

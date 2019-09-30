@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.config.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,7 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  **/
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private final SecurityOAuth2UserService securityOAuth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .baseUri("/login/oauth2/callback/**")
                     .and()
                 .userInfoEndpoint()
-                    .userService(null)
+                    .userService(securityOAuth2UserService)
                     .and()
                 .defaultSuccessUrl("/login-success");
     }

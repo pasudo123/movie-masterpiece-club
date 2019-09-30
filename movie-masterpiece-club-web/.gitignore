@@ -71,3 +71,6 @@ hs_err_pid*
 target/
 
 # End of https://www.gitignore.io/api/java,java-web,code-java
+
+### 뷰 웹팩 번들링 제외
+src/main/resources/static/
