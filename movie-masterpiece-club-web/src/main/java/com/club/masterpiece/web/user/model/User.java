@@ -72,7 +72,7 @@ public class User {
         this.lastLoginDate = lastLoginDate;
     }
 
-    public void login() {
+    public void reLogin() {
         this.lastLoginDate = LocalDateTime.now();
     }
 }

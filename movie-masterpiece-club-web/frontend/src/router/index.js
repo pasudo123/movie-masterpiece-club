@@ -33,5 +33,9 @@ export default new VueRouter({
                 }
             ]
         },
+        {
+            path: '/laboratory'
+            
+        }
     ]
 });

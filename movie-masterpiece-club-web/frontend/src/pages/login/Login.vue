@@ -20,13 +20,11 @@
 
     export default {
         name: "Login",
-        components: {},
-        data() {
-            return {}
-        },
         methods: {
-            googleLogin() {
 
+            googleLogin() {
+                const ROOT_URI = process.env.VUE_APP_BASE_PATH;
+                window.location.href = `${ROOT_URI}/oauth2/authorization/google`;
             }
         },
         created() {
