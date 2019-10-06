@@ -19,7 +19,7 @@ import javax.validation.Valid;
  * Email: oraedoa@gmail.com
  **/
 @RestController
-@RequestMapping("/article")
+@RequestMapping("/gulagbu-api/article")
 @RequiredArgsConstructor
 @Slf4j
 public class ArticleController {
@@ -28,9 +28,8 @@ public class ArticleController {
     private final ArticleFindService articleFindService;
 
     @PostMapping
-    public ResponseEntity<ArticleDto.OneResponse> createArticle(
-            @RequestBody @Valid ArticleDto.createRequest dto,
-            BindingResult bindingResult) {
+    public ResponseEntity<ArticleDto.OneResponse> createArticle(@RequestBody @Valid ArticleDto.createRequest dto,
+                                                                BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             throw new CustomValidationException("Valid Exception.", bindingResult);

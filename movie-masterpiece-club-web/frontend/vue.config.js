@@ -1,26 +1,44 @@
-
 const path = require('path');
 
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
 
-module.exports = {
+const glob = require('glob');
+const pages = {};
 
-    /**
-     * 웹팩 빌드 안되는 문제에 대한 해결.
-     * https://github.com/vuejs/vue-cli/issues/4572
-     */
-    productionSourceMap: false,
-    css: {
-        sourceMap: true
-    },
+glob.sync('./src/pages/**/main.js').forEach(path => {
+    const chunk = path.split('./src/pages/')[1].split('/main.js')[0];
+
+    pages[chunk] = {
+        entry: path,
+        template: 'public/index.html',
+        title: chunk,
+        chunks: ['chunk-vendors', 'chunk-common', chunk]
+    };
+
+    // ./src/pages/article/main.js
+    // ./src/pages/login/main.js
+    console.debug("============================== path");
+    console.debug(path);
+    console.debug("============================== chunk");
+    console.debug(chunk);
+    console.debug("============================== pages[chunk]");
+    console.debug(pages[chunk]);
+    console.debug("==============================");
+
+});
+
+module.exports = {
 
     devServer: {
         port: 8899,
+
+        /** 개발단계 시, context - path 를 넣지 않는다. **/
+
         proxy: {
             [process.env.VUE_APP_BASE_API]: {
-                target: `http://localhost:8080`
+                target: 'http://localhost:8080',
             }
         }
     },
@@ -37,19 +55,25 @@ module.exports = {
         },
     },
 
-    publicPath: '/',
-    outputDir: '../src/main/resources/',
-    assetsDir: 'static',
+    publicPath: process.env.NODE_ENV === 'production'
+        ? process.env.VUE_APP_PUBLIC_PATH
+        : '/',
+    outputDir: '../src/main/resources/static/',
+    assetsDir: '',
     pages: {
-        'login': {
+        login: {
             entry: './src/pages/login/main.js',
             template: 'public/index.html',
-            filename: './templates/login.ftl'
+            title: 'login',
+            filename: './templates/login.ftl',
+            chunks: ['chunk-vendors', 'chunk-common', 'login']
         },
-        'masterpiece': {
-            entry: './src/pages/article/main.js',
+        masterpiece: {
+            entry: './src/pages/masterpiece/main.js',
             template: 'public/index.html',
-            filename: './templates/masterpiece.ftl'
+            title: 'masterpiece',
+            filename: './templates/masterpiece.ftl',
+            chunks: ['chunk-vendors', 'chunk-common', 'masterpiece']
         }
     }
 };

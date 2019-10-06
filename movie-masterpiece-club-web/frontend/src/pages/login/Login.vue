@@ -14,6 +14,10 @@
 
 <script>
 
+    import {createNamespacedHelpers} from 'vuex';
+
+    const {mapActions: loginMapActions} = createNamespacedHelpers('userModules');
+
     export default {
         name: "Login",
         components: {},
@@ -24,6 +28,9 @@
             googleLogin() {
 
             }
+        },
+        created() {
+
         }
     }
 </script>

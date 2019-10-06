@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from '@/pages/article/App.vue';
+import App from '@/pages/masterpiece/App.vue';
 import router from '@/router';
 import store from '@/store';
 import ElementUI from 'element-ui';

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Email: oraedoa@gmail.com
  **/
 @RestController
-@RequestMapping("movie")
+@RequestMapping("api/movie")
 @RequiredArgsConstructor
 @Slf4j
 public class MovieController {

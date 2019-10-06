@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/masterpiece_club?useSSL=false&allowPublicKeyRetrieval=true&useTimezone=true&serverTimezone=Asia/Seoul
+    username: root
+    password: rootpass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: validate
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 763371632947-j0qd1ij5jqivvf5nq5q1p3dd1ss7u6ku.apps.googleusercontent.com
+            client-secret: FpBYQ2-dUuZjg1vfIs4iZRNA
+            redirect-uri: http://localhost:8080/login/oauth2/callback/google
+            scope:
+              - email
+              - profile
+
+  freemarker:
+    template-loader-path: classpath:/static/templates
+    suffix: .ftl
+
+server:
+  port: 8080
+  servlet:
+    context-path: /gulagbu

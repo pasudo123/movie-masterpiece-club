@@ -48,7 +48,7 @@
 
     import {foo} from '@/utils/moment-util';
     import MovieIcon from 'icons/MovieOpen'
-    import ArticleList from '@/pages/article/ArticleList'
+    import ArticleList from '@/pages/masterpiece/ArticleList'
 
     export default {
         name: "index",
