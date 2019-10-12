@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.club.masterpiece'
-version = '0.0.1'
+version = '0.1.0' + '-' + new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = '1.8'
 
 configurations {
@@ -45,4 +45,14 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
     /** swagger end **/
+}
+
+/** 빌드 시 명령어 **/
+bootJar{
+    mainClassName = 'com.club.masterpiece.web.WebApplication'
+}
+
+/** 빌드 하지 않고 실행할 수 있다. **/
+bootRun {
+    main = 'com.club.masterpiece.web.WebApplication'
 }
