@@ -1,12 +1,13 @@
 package com.club.masterpiece.web.config.security;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+import javax.servlet.ServletContext;
 
 /**
  * Created by pasudo123 on 2019-09-29
@@ -18,13 +19,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private static final String PROD = "prod";
-    private static final String DEV = "dev";
-
+    private final ServletContext servletContext;
     private final SecurityOAuth2UserService securityOAuth2UserService;
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {}
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -38,20 +34,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/error", "/favicon.ico", "/**/*.jpg", "/**/*.png", "/**/*.css", "/**/*.js", "/**/*.map")
                 .permitAll()
-                .antMatchers("/login/**", "/gulagbu-api/**", "/masterpiece/**   ")
+//                .antMatchers("/login/**", "/gulagbu-api/**", "/masterpiece/**")
+                .antMatchers("/login/**")
                 .permitAll();
 
         http.authorizeRequests()
                 .anyRequest().authenticated();
 
+        String contextPath = servletContext.getContextPath();
+        String baseUri = "/login/oauth2/callback/**";
+
         http.oauth2Login()
                 .loginPage("/login")
                 .redirectionEndpoint()
-                .baseUri("/login/oauth2/callback/**")
+                .baseUri(baseUri)
                 .and()
                 .userInfoEndpoint()
                 .userService(securityOAuth2UserService)
                 .and()
-                .defaultSuccessUrl("/login-success");
+                .defaultSuccessUrl("/login/success");
+
+        http.logout()
+                .logoutSuccessUrl("/login")
+                .clearAuthentication(true);
     }
 }

@@ -10,6 +10,14 @@ import 'vue-material-design-icons/styles.css';
 Vue.config.productionTip = false;
 Vue.use(ElementUI, {locale});
 
+router.beforeEach((to, from, next) => {
+    store.dispatch('auth/currentAuth').then((response) => {
+        next();
+    }).catch(() => {
+        /** 에러 발생 **/
+    })
+});
+
 new Vue({
     store,
     router,

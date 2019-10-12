@@ -8,6 +8,8 @@
     background: #f0f0f0;
     width: 100%;
     height: auto;
+    display: flex;
+    align-items: center;
 }
 
 
@@ -90,4 +92,9 @@
 .userAvatar {
     position: relative;
     left: 1vw;
+}
+
+.LogoutButton{
+    position: absolute;
+    right: 4vh;
 }

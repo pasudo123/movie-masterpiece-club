@@ -21,7 +21,7 @@ public class VueController {
         return "masterpiece";
     }
 
-    @RequestMapping("/login-success")
+    @RequestMapping("/login/success")
     public String loginSuccess() {
         return "redirect:/masterpiece";
     }

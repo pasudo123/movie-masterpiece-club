@@ -22,7 +22,7 @@ spring:
           google:
             client-id: 763371632947-j0qd1ij5jqivvf5nq5q1p3dd1ss7u6ku.apps.googleusercontent.com
             client-secret: FpBYQ2-dUuZjg1vfIs4iZRNA
-            redirect-uri: http://localhost:8080/login/oauth2/callback/google
+            redirect-uri: http://localhost:8080/gulagbu/login/oauth2/callback/google
             scope:
               - email
               - profile
@@ -31,6 +31,7 @@ spring:
     template-loader-path: classpath:/static/templates
     suffix: .ftl
 
+## context path 가 있기 때문에 google redirect-uri 도 그에 따라 변경됨.
 server:
   port: 8080
   servlet:
