@@ -23,24 +23,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class ArticleCreateServiceImpl implements ArticleCreateService {
 
-    private final UserFindService userFindService;
     private final ArticleIdGenerator articleIdGenerator;
     private final ArticleRepository articleRepository;
 
     @Override
-    public ArticleDto.OneResponse create(final ArticleDto.createRequest dto) {
+    public ArticleDto.OneResponse create(final User user, final ArticleDto.createRequest dto) {
 
+        log.debug("article title : {}", dto.getTitle());
         log.debug("article content : {}", dto.getContent());
         log.debug("article type : {}", dto.getType());
 
-        // temp
-        User foundUser = userFindService.findOneById("2739a8d6-97f5-48af-a198-da8392d271e7");
-
-        Article article = Article.builder().
-                articleId(articleIdGenerator.generateId())
+        Article article = Article.builder()
+                .articleId(articleIdGenerator.generateId())
+                .title(dto.getTitle())
                 .content(dto.getContent())
                 .type(dto.getType())
-                .user(foundUser)
+                .user(user)
                 .build();
 
         Article savedArticle = articleRepository.save(article);

@@ -13,5 +13,4 @@ public class ArticleIdGenerator {
 
         return UUID.randomUUID().toString().replace("-", "");
     }
-
 }

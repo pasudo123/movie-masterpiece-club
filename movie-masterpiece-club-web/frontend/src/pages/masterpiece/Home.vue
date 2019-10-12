@@ -57,15 +57,13 @@
 
     import {foo} from '@/utils/moment-util';
     import MovieIcon from 'icons/MovieOpen'
-    import ArticleList from '@/pages/masterpiece/ArticleList'
+    import ArticleList from '@/pages/masterpiece/components/ArticleList'
 
     export default {
         name: "index",
         components: {MovieIcon, ArticleList},
         data() {
             return {
-                userEmail: 'oraedoa@gmail.com',
-                userProfile: 'https://avatars0.githubusercontent.com/u/17797352?s=460&v=4',
                 userProfileSize: 35,
             }
         },

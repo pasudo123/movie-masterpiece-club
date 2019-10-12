@@ -1,19 +1,20 @@
 
 .articleElement {
     margin: 5vh 0 5vh 0;
-    background: gainsboro;
 }
 
 .articleElement > .element{
     width:100%;
     display: flex;
     align-items: center;
+    border: 1px solid red;
 }
 
-.userProfile {}
-
 .contentArea {
-    position: relative;;
-    left: 1vh;
-    border: 1px solid blue;
+    cursor: pointer;
+    margin: 0 0 0 3vh;
+}
+
+.listTitleArea{
+    font-size: 3vh;
 }

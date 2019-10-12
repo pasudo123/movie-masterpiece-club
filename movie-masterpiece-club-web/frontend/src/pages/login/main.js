@@ -10,6 +10,8 @@ import 'vue-material-design-icons/styles.css';
 Vue.config.productionTip = false;
 Vue.use(ElementUI, {locale});
 
+
+
 new Vue({
     store,
     router,

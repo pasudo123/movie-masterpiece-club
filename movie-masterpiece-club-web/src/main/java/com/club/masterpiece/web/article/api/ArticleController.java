@@ -4,10 +4,12 @@ import com.club.masterpiece.web.article.dto.ArticleDto;
 import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
 import com.club.masterpiece.web.article.service.ArticleFindService;
+import com.club.masterpiece.web.config.security.SecurityOAuth2User;
 import com.club.masterpiece.web.exception.CustomValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,14 +30,15 @@ public class ArticleController {
     private final ArticleFindService articleFindService;
 
     @PostMapping
-    public ResponseEntity<ArticleDto.OneResponse> createArticle(@RequestBody @Valid ArticleDto.createRequest dto,
+    public ResponseEntity<ArticleDto.OneResponse> createArticle(@AuthenticationPrincipal SecurityOAuth2User user,
+                                                                @RequestBody @Valid ArticleDto.createRequest dto,
                                                                 BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             throw new CustomValidationException("Valid Exception.", bindingResult);
         }
 
-        ArticleDto.OneResponse response = articleCreateService.create(dto);
+        ArticleDto.OneResponse response = articleCreateService.create(user.getUser(), dto);
 
         return ResponseEntity.ok().body(response);
     }
@@ -44,6 +47,14 @@ public class ArticleController {
     public ResponseEntity<Object> findAll() {
 
         ArticleDto.ListResponse response = articleFindService.findAll();
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("{articleId}")
+    public ResponseEntity<ArticleDto.OneResponse> findOneById(@PathVariable("articleId") String articleId){
+
+        ArticleDto.OneResponse response = articleFindService.findOneById(articleId);
 
         return ResponseEntity.ok().body(response);
     }

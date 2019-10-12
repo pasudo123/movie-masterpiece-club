@@ -28,8 +28,9 @@ public class MasterpieceControllerAdvice {
 
         BindingResult bindingResult = exception.getBindingResult();
 
+        log.error(exception.getMessage());
         bindingResult.getFieldErrors()
-                .forEach(f -> log.debug("\nfield : {}\nmessage : {}", f.getField(), f.getDefaultMessage()));
+                .forEach(f -> log.error("field : {}, message : {}", f.getField(), f.getDefaultMessage()));
 
         List<FieldError> list = bindingResult.getFieldErrors();
         List<String> details = new ArrayList<>();
@@ -50,6 +51,7 @@ public class MasterpieceControllerAdvice {
     @ExceptionHandler(EmptyResultException.class)
     public ResponseEntity<ErrorResponse> handleEmptyResultException(EmptyResultException exception, WebRequest webRequest) {
 
+        log.error(exception.getMessage());
         ErrorResponse response = ErrorResponse.builder()
                 .errorTimestamp(LocalDateTime.now())
                 .status(HttpStatus.NOT_FOUND)

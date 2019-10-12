@@ -1,6 +1,7 @@
 package com.club.masterpiece.web.article.service;
 
 import com.club.masterpiece.web.article.dto.ArticleDto;
+import com.club.masterpiece.web.user.model.User;
 
 /**
  * Created by pasudo123 on 2019-09-23
@@ -9,6 +10,6 @@ import com.club.masterpiece.web.article.dto.ArticleDto;
  **/
 public interface ArticleCreateService {
 
-    ArticleDto.OneResponse create(ArticleDto.createRequest dto);
+    ArticleDto.OneResponse create(User user, ArticleDto.createRequest dto);
 
 }

@@ -2,8 +2,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import auth from '@/store/auth'
 import userModule from '@/store/modules/user-module';
 import articleModule from '@/store/modules/article-module';
+import laboratoryModule from '@/store/modules/laboratory-module';
 import jsonModule from '@/store/modules/json.module';
 
 Vue.use(Vuex);
@@ -26,8 +28,10 @@ export default new Vuex.Store({
     },
 
     modules: {
+        auth,
         userModule,
         articleModule,
+        laboratoryModule,
         jsonModule
     }
 })

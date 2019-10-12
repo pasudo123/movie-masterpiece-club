@@ -25,10 +25,13 @@ public class ArticleDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class createRequest{
 
-        @NotBlank(message = "ArticleContent Should not be blank.")
+        @NotBlank(message = "Article Title Should not be blank.")
+        private String title;
+
+        @NotBlank(message = "Article Content Should not be blank.")
         private String content;
 
-        @NotNull(message = "ArticleType Should not be null.")
+        @NotNull(message = "Article Type Should not be null.")
         private ArticleType type;
 
     }
@@ -37,15 +40,19 @@ public class ArticleDto {
     public static class OneResponse{
 
         private String id;
+        private String title;
         private String content;
-        private ArticleType type;
         private LocalDate registerDate;
+        private String createdName;
+        private String createdProfile;
 
         public OneResponse(Article article){
             this.id = article.getArticleId();
+            this.title = article.getTitle();
             this.content = article.getContent();
-            this.type = article.getType();
             this.registerDate = article.getRegDate().toLocalDate();
+            this.createdName = article.getUser().getUsername();
+            this.createdProfile = article.getUser().getProfile();
         }
     }
 

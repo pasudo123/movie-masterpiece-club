@@ -18,6 +18,14 @@ import java.time.LocalTime;
 public class TestDto {
 
     @Getter
+    public static class PayloadRequest{
+
+        String name;
+        String desc;
+
+    }
+
+    @Getter
     public static class Response{
 
         LocalDateTime localDateTime;

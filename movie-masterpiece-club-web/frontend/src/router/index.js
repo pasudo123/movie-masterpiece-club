@@ -24,18 +24,24 @@ export default new VueRouter({
                 {
                     path: '',
                     name: 'articleList',
-                    component: () => import('@/pages/masterpiece/ArticleList'),
+                    component: () => import('@/pages/masterpiece/components/ArticleList'),
                 },
                 {
                     path: 'article-edit',
                     name: 'articleEdit',
-                    component: () => import('@/pages/masterpiece/ArticleEdit')
+                    component: () => import('@/pages/masterpiece/components/ArticleEdit')
+                },
+                {
+                    path: 'article/:articleId',
+                    name: 'articleView',
+                    component: () => import('@/pages/masterpiece/components/ArticleView')
                 }
             ]
         },
         {
-            path: '/laboratory'
-            
+            path: '/laboratory',
+            name: 'laboratory',
+            component: () => import('@/pages/laboratory/Laboratory')
         }
     ]
 });

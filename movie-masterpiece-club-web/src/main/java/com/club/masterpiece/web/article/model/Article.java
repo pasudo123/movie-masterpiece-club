@@ -1,6 +1,5 @@
 package com.club.masterpiece.web.article.model;
 
-import com.club.masterpiece.web.article.dto.ArticleDto;
 import com.club.masterpiece.web.user.model.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -33,6 +32,9 @@ public class Article {
     @Column(name = "article_id", length = 40, nullable = false)
     private String articleId;
 
+    @Column(name = "article_title", nullable = false, length = 50)
+    private String title;
+
     @Column(name = "article_content", columnDefinition = "TEXT", nullable = false)
     private String content;
 
@@ -57,8 +59,9 @@ public class Article {
     private User user;
 
     @Builder
-    public Article(String articleId, String content, ArticleType type, User user) {
+    public Article(String articleId, String title, String content, ArticleType type, User user) {
         this.articleId = articleId;
+        this.title = title;
         this.content = content;
         this.type = type;
         this.user = user;

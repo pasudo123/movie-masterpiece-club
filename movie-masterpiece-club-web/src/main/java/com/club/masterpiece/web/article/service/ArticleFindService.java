@@ -11,4 +11,6 @@ public interface ArticleFindService {
 
     ArticleDto.ListResponse findAll();
 
+    ArticleDto.OneResponse findOneById(String articleId);
+
 }

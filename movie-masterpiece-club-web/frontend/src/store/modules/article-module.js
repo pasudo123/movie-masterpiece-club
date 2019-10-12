@@ -2,10 +2,12 @@
 import request from '@/request';
 
 
-const articleListState = {};
+const articleListState = [];
+const articleOneState = {};
 
 const state = {
-    articleListState
+    articleListState,
+    articleOneState
 };
 
 const actions = {
@@ -15,6 +17,7 @@ const actions = {
         const uri = 'article';
 
         const payload = {};
+        payload.title = params.title;
         payload.content = params.content;
         payload.type = params.type;
 
@@ -42,20 +45,45 @@ const actions = {
                 reject(error);
             })
         });
-    }
+    },
 
+    fetchOneArticle({commit}, params) {
+
+        const uri = `article/${params.articleId}`
+
+        return new Promise((resolve, reject) => {
+
+            request.get(uri).then((response) => {
+                commit('setArticleOneState', response);
+                resolve();
+            })
+        })
+    }
 };
 
 const mutations = {
+
     setArticleListState(state, response){
-        console.debug(response);
 
         let articleList = response.data.articleList;
 
         state.articleListState = [];
+
         articleList.forEach(element => {
+
+            let date = element.registerDate;
+            let array = date.split('-');
+            element.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
+
             state.articleListState.push(element);
         })
+    },
+
+    setArticleOneState(state, response) {
+
+        let articleOne = response.data;
+
+        console.debug(articleOne);
     }
 };
 
