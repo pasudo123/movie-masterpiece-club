@@ -42,15 +42,20 @@ public class Comment {
     @Column(name = "mod_date", nullable = false)
     private LocalDateTime modDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_comment_id",
             columnDefinition = "VARCHAR(40)",
             referencedColumnName = "comment_id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "fk_comment_comment_idx"))
+            nullable = true
+    )
     private Comment comment;
 
-    @OneToMany(targetEntity = Comment.class, mappedBy = "comment", fetch = FetchType.LAZY)
+    @OneToMany(
+            targetEntity = Comment.class,
+            mappedBy = "comment",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
     private List<Comment> comments = new ArrayList<>();
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
@@ -58,7 +63,8 @@ public class Comment {
             columnDefinition = "VARCHAR(45)",
             referencedColumnName = "id",
             nullable = false,
-            foreignKey = @ForeignKey(name = "fk_comment_user_idx"))
+            foreignKey = @ForeignKey(name = "fk_comment_user_idx")
+    )
     private User user;
 
     @ManyToOne(targetEntity = Article.class, fetch = FetchType.LAZY)
@@ -66,7 +72,8 @@ public class Comment {
             columnDefinition = "VARCHAR(40)",
             referencedColumnName = "article_id",
             nullable = false,
-            foreignKey = @ForeignKey(name = "fk_comment_article_idx"))
+            foreignKey = @ForeignKey(name = "fk_comment_article_idx")
+    )
     private Article article;
 
     @Builder
@@ -76,4 +83,9 @@ public class Comment {
         this.user = user;
         this.article = article;
     }
+
+//    public void setParentComment(final Comment parentComment) {
+//        this.comment = parentComment;
+//        getComment().getComments().add(this);
+//    }
 }
