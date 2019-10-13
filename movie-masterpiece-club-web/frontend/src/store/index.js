@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import auth from '@/store/auth'
 import userModule from '@/store/modules/user-module';
 import articleModule from '@/store/modules/article-module';
+import commentModule from '@/store/modules/comment-module';
 import laboratoryModule from '@/store/modules/laboratory-module';
 import jsonModule from '@/store/modules/json.module';
 
@@ -31,6 +32,7 @@ export default new Vuex.Store({
         auth,
         userModule,
         articleModule,
+        commentModule,
         laboratoryModule,
         jsonModule
     }

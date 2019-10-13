@@ -81,14 +81,21 @@ const mutations = {
 
     setArticleOneState(state, response) {
 
-        let articleOne = response.data;
+        state.articleOneState = {};
 
-        console.debug(articleOne);
+        let oneArticle = response.data;
+        let date = oneArticle.registerDate;
+        let array = date.split('-');
+        oneArticle.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
+
+        state.articleOneState = oneArticle;
     }
 };
 
 const getters = {
-    articleListState: (state) => state.articleListState
+    articleListState: (state) => state.articleListState,
+    articleOneState: (state) => state.articleOneState
+
 };
 
 export default {

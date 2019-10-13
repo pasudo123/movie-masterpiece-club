@@ -10,6 +10,7 @@
 
         <div class="contentWrapper">
             <quill-editor
+                    :options="editorOption"
                     v-model="content"/>
         </div>
 
@@ -40,7 +41,10 @@
                 isWrite: false,
                 title: '',
                 content: '',
-                type: 'GENERAL'
+                type: 'GENERAL',
+                editorOption: {
+                    theme: 'snow'
+                }
             }
         },
         methods: {
@@ -72,6 +76,10 @@
                     this.isWrite = false;
                 })
             }
+        },
+        beforeUpdate() {
+            console.debug('=====================');
+            console.debug(this.content);
         }
     }
 </script>

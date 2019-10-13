@@ -4,6 +4,9 @@ import com.club.masterpiece.web.article.dto.ArticleDto;
 import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
 import com.club.masterpiece.web.article.service.ArticleFindService;
+import com.club.masterpiece.web.comment.dto.CommentDto;
+import com.club.masterpiece.web.comment.service.CommentCreateService;
+import com.club.masterpiece.web.comment.service.CommentFindService;
 import com.club.masterpiece.web.config.security.SecurityOAuth2User;
 import com.club.masterpiece.web.exception.CustomValidationException;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,9 @@ public class ArticleController {
     private final ArticleCreateService articleCreateService;
     private final ArticleFindService articleFindService;
 
+    private final CommentCreateService commentCreateService;
+    private final CommentFindService commentFindService;
+
     @PostMapping
     public ResponseEntity<ArticleDto.OneResponse> createArticle(@AuthenticationPrincipal SecurityOAuth2User user,
                                                                 @RequestBody @Valid ArticleDto.createRequest dto,
@@ -43,6 +49,21 @@ public class ArticleController {
         return ResponseEntity.ok().body(response);
     }
 
+    @PostMapping("{articleId}/comment")
+    public ResponseEntity<CommentDto.OneResponse> createComment(@AuthenticationPrincipal SecurityOAuth2User user,
+                                                                @PathVariable("articleId") String articleId,
+                                                                @RequestBody @Valid CommentDto.CreateRequest dto,
+                                                                BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new CustomValidationException("Valid Exception.", bindingResult);
+        }
+
+        CommentDto.OneResponse response = commentCreateService.createParentComment(user.getUser(), articleId, dto);
+
+        return ResponseEntity.ok().body(response);
+    }
+
     @GetMapping
     public ResponseEntity<Object> findAll() {
 
@@ -52,9 +73,17 @@ public class ArticleController {
     }
 
     @GetMapping("{articleId}")
-    public ResponseEntity<ArticleDto.OneResponse> findOneById(@PathVariable("articleId") String articleId){
+    public ResponseEntity<ArticleDto.OneResponse> findOneById(@PathVariable("articleId") String articleId) {
 
         ArticleDto.OneResponse response = articleFindService.findOneById(articleId);
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("{articleId}/comment")
+    public ResponseEntity<CommentDto.ListResponse> findAllByArticleId(@PathVariable("articleId") String articleId) {
+
+        CommentDto.ListResponse response = commentFindService.findAllByArticleId(articleId);
 
         return ResponseEntity.ok().body(response);
     }

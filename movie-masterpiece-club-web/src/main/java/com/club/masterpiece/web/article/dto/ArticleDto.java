@@ -43,14 +43,17 @@ public class ArticleDto {
         private String title;
         private String content;
         private LocalDate registerDate;
+        private String createdUserId;
         private String createdName;
         private String createdProfile;
 
+        @SuppressWarnings("Duplicates")
         public OneResponse(Article article){
             this.id = article.getArticleId();
             this.title = article.getTitle();
             this.content = article.getContent();
             this.registerDate = article.getRegDate().toLocalDate();
+            this.createdUserId = article.getUser().getId();
             this.createdName = article.getUser().getUsername();
             this.createdProfile = article.getUser().getProfile();
         }
