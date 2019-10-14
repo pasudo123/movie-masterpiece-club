@@ -1,15 +1,67 @@
 <template>
     <div id="replyCommentEdit">
-        답글을 다는 공간이 나타난ㄷ.
+
+        <el-input
+                class="commentInputClass"
+                placeholder="답글을 입력..."
+                v-model="content" />
+
+        <el-button @click="writeReplyProcess">OK</el-button>
     </div>
 </template>
 
 <script>
+
+    import {createNamespacedHelpers} from 'vuex';
+
+    const {
+        mapActions: commentMapActions
+    } = createNamespacedHelpers('commentModule');
+
     export default {
-        name: "ReplyCommentEdit"
+        name: "ReplyCommentEdit",
+        props: {
+            commentId: {
+                type: String,
+                required: true,
+                default: () => ''
+            }
+        },
+        data() {
+            return {
+                isCreate: false,
+                content: ''
+            }
+        },
+        methods: {
+
+            ...commentMapActions(['createReplyOnComment']),
+
+            writeReplyProcess() {
+
+                if(this.isCreate) {
+                    return;
+                }
+
+                if (this.content === '') {
+                    return;
+                }
+
+                this.isCreate = true;
+
+                const params = {};
+                params.commedId = this.commentId;
+                params.content = this.content;
+
+                this.createReplyOnComment(params).then(() => {
+                    this.isCreate = false;
+                    this.content = '';
+                })
+            }
+        }
     }
 </script>
 
-<style scoped>
+<style scoped src="@/style/comment.css">
 
 </style>

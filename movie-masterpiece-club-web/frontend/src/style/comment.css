@@ -1,7 +1,11 @@
 
-#commentEdit {
+#commentEdit, #replyCommentEdit {
     display: flex;
     align-items: center;
+}
+
+#replyCommentEdit {
+    margin: 0 0 0 4vh;
 }
 
 .commentElement {
@@ -31,7 +35,7 @@
 }
 
 
-/** 답글 버튼 **/
+/** 답글 달기 버튼 **/
 .replyButton {
     margin: 0 2vh 0 2vh;
     display: inline;
@@ -42,5 +46,18 @@
 }
 
 .replyButton:active {
+    color: dodgerblue;
+}
+
+/** 답글 보기 버튼 **/
+.replyCommentShowButton {
+    display: inline;
+}
+
+.replyCommentShowButton:hover {
+    cursor: pointer;
+}
+
+.replyCommentShowButton:active {
     color: dodgerblue;
 }

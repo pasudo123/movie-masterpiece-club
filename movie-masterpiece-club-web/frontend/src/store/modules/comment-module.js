@@ -36,6 +36,25 @@ const actions = {
         })
     },
 
+    createReplyOnComment({commit}, params) {
+
+        const uri = `comment/${params.commentId}`;
+
+        const payload = {};
+        payload.content = params.content;
+
+        return new Promise((resolve, reject) => {
+
+            request.post(uri, payload).then((response) => {
+                commit('', response);
+                resolve();
+            }).catch((error) => {
+                console.error(error.response);
+                reject(error);
+            })
+        });
+    },
+
     fetchCommentList({commit}, params) {
 
         const uri = `article/${params.articleId}/comment`;
@@ -51,10 +70,6 @@ const actions = {
             })
         })
     },
-
-
-
-
 };
 
 const mutations = {

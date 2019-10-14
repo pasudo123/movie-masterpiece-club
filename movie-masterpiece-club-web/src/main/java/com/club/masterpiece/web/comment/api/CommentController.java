@@ -1,9 +1,17 @@
 package com.club.masterpiece.web.comment.api;
 
+import com.club.masterpiece.web.comment.dto.CommentDto;
+import com.club.masterpiece.web.comment.service.CommentCreateService;
+import com.club.masterpiece.web.config.security.SecurityOAuth2User;
+import com.club.masterpiece.web.exception.CustomValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by pasudo123 on 2019-10-13
@@ -17,10 +25,19 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
 
 
+    private final CommentCreateService commentCreateService;
+
     @PutMapping("{commentId}")
-    public ResponseEntity<Object> updateComment(@PathVariable("commentId") String commentId) {
+    public ResponseEntity<Object> updateComment(@AuthenticationPrincipal SecurityOAuth2User user,
+                                                @PathVariable("commentId") String commentId,
+                                                @RequestBody @Valid CommentDto.CreateRequest dto,
+                                                BindingResult bindingResult) {
 
+        if(bindingResult.hasErrors()) {
+            throw new CustomValidationException("Valid Exception.", bindingResult);
+        }
 
+//        commentCreateService.createChildComment(user.getUser(),commentId, dto);
 
         return null;
     }

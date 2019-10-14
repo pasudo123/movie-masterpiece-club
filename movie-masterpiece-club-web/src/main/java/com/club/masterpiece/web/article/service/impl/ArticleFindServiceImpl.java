@@ -38,7 +38,7 @@ public class ArticleFindServiceImpl implements ArticleFindService {
     public ArticleDto.OneResponse findOneById(String articleId) {
 
         Article article = articleRepository.findOneByArticleId(articleId)
-                .orElseThrow(() -> new EmptyResultException("Article is Not Found"));
+                .orElseThrow(() -> new EmptyResultException("Article is Not Found."));
 
         return new ArticleDto.OneResponse(article);
     }

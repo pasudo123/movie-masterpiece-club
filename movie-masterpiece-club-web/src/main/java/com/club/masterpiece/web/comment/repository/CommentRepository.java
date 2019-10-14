@@ -4,6 +4,7 @@ import com.club.masterpiece.web.comment.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by pasudo123 on 2019-09-22
@@ -11,6 +12,8 @@ import java.util.List;
  * Email: oraedoa@gmail.com
  **/
 public interface CommentRepository extends JpaRepository<Comment, String> {
+
+    Optional<Comment> findOneByCommendIdAnd(String commentId);
 
     List<Comment> findAllByArticleArticleId(String articleId);
 
