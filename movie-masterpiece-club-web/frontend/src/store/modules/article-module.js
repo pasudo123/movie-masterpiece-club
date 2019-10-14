@@ -24,7 +24,6 @@ const actions = {
         return new Promise((resolve, reject) => {
 
             request.post(uri, payload).then((response) => {
-                console.debug(response);
                 resolve();
             }).catch((error) => {
                 reject(error);

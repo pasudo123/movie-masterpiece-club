@@ -1,8 +1,9 @@
 
 import request from '@/request';
+import {convertDate2Hangul} from '@/utils/moment-util';
 
 const OneCommentState = {};
-const ListCommentState = {};
+const ListCommentState = [];
 
 const state = {
     OneCommentState,
@@ -10,7 +11,8 @@ const state = {
 };
 
 const getters = {
-
+    OneCommentState: (state) => state.OneCommentState,
+    ListCommentState: (state) => state.ListCommentState
 };
 
 const actions = {
@@ -25,19 +27,55 @@ const actions = {
         return new Promise((resolve, reject) => {
 
             request.post(uri, payload).then((response) => {
-                commit('setOneCommentState', response);
+                commit('addCommentOnListCommentState', response);
+                resolve();
             }).catch((error) => {
                 console.error(error.response);
+                reject(error);
             })
         })
+    },
 
-    }
+    fetchCommentList({commit}, params) {
+
+        const uri = `article/${params.articleId}/comment`;
+
+        return new Promise((resolve, reject) => {
+
+            request.get(uri).then((response) => {
+                commit('setListCommentState', response);
+                resolve();
+            }).catch((error) => {
+                console.error(error.response);
+                reject(error);
+            })
+        })
+    },
+
+
+
+
 };
 
 const mutations = {
 
-    setOneCommentState(state, response) {
-        console.debug(response);
+    addCommentOnListCommentState(state, response) {
+
+        let comment = response.data;
+        comment.registerDate = convertDate2Hangul(comment.registerDate);
+
+        state.ListCommentState.push(comment)
+    },
+
+    setListCommentState(state, response) {
+
+        state.ListCommentState = [];
+
+        response.data.commentList.forEach((element) => {
+
+            element.registerDate = convertDate2Hangul(element.registerDate);
+            state.ListCommentState.push(element);
+        });
     }
 };
 

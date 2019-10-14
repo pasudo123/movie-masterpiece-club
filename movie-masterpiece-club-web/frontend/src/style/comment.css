@@ -3,3 +3,44 @@
     display: flex;
     align-items: center;
 }
+
+.commentElement {
+    border-bottom: 1px solid gray;
+}
+
+.commentInfoWrapper {
+
+}
+
+.commentEtcWrapper {
+    display: flex;
+}
+
+/** 좋아요 버튼 **/
+.likeButton {
+    margin: 0 2vh 0 0;
+    display: inline;
+}
+
+.likeButton:hover {
+    cursor: pointer;
+}
+
+.likeButton:active {
+    color: dodgerblue;
+}
+
+
+/** 답글 버튼 **/
+.replyButton {
+    margin: 0 2vh 0 2vh;
+    display: inline;
+}
+
+.replyButton:hover {
+    cursor: pointer;
+}
+
+.replyButton:active {
+    color: dodgerblue;
+}

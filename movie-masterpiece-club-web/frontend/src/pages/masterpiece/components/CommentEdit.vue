@@ -42,14 +42,19 @@
                     return;
                 }
 
+                if (this.content === '') {
+                    return;
+                }
+
                 this.isCreate = true;
 
                 const params = {};
                 params.articleId = this.articleOneState.id;
                 params.content = this.content;
 
-                this.createCommentOnArticle(params).then((resposne) => {
+                this.createCommentOnArticle(params).then(() => {
                     this.isCreate = false;
+                    this.content = '';
                 });
             }
         }

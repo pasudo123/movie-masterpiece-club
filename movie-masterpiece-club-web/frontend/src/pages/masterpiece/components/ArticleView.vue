@@ -13,7 +13,7 @@
 
             <comment-edit />
 
-            <div>댓글 경계선</div>
+            <hr>
 
             <comment-list />
         </div>

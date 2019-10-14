@@ -1,11 +1,12 @@
 
 import moment from 'moment';
 
-function foo() {
-    return moment().format('YYYY-MM-DD hh:mm:ss a');
+function convertDate2Hangul(registerDate) {
+
+    let array = registerDate.split('-');
+    return `${array[0]}년 ${array[1]}월 ${array[2]}일`;
 }
 
-
 export {
-    foo
+    convertDate2Hangul
 }

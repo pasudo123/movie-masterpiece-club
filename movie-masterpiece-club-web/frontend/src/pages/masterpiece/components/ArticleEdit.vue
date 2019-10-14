@@ -76,10 +76,6 @@
                     this.isWrite = false;
                 })
             }
-        },
-        beforeUpdate() {
-            console.debug('=====================');
-            console.debug(this.content);
         }
     }
 </script>
