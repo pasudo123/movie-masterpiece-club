@@ -17,6 +17,9 @@
     const {
         mapActions: commentMapActions
     } = createNamespacedHelpers('commentModule');
+    const {
+        mapGetters: articleMapGetters
+    } = createNamespacedHelpers('articleModule');
 
     export default {
         name: "ReplyCommentEdit",
@@ -32,6 +35,9 @@
                 isCreate: false,
                 content: ''
             }
+        },
+        computed: {
+            ...articleMapGetters(['articleOneState'])
         },
         methods: {
 
@@ -50,8 +56,10 @@
                 this.isCreate = true;
 
                 const params = {};
-                params.commedId = this.commentId;
+                params.articleId = this.articleOneState.id;
+                params.commentId = this.commentId;
                 params.content = this.content;
+
 
                 this.createReplyOnComment(params).then(() => {
                     this.isCreate = false;

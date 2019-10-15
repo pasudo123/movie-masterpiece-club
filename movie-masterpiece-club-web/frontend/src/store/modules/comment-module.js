@@ -38,15 +38,17 @@ const actions = {
 
     createReplyOnComment({commit}, params) {
 
-        const uri = `comment/${params.commentId}`;
+        const uri = `article/${params.articleId}/comment/${params.commentId}/reply`;
 
         const payload = {};
         payload.content = params.content;
 
+        console.debug(payload);
+
         return new Promise((resolve, reject) => {
 
             request.post(uri, payload).then((response) => {
-                commit('', response);
+                commit('addReply', response);
                 resolve();
             }).catch((error) => {
                 console.error(error.response);
@@ -91,6 +93,10 @@ const mutations = {
             element.registerDate = convertDate2Hangul(element.registerDate);
             state.ListCommentState.push(element);
         });
+    },
+
+    addReply(state, response) {
+        console.debug(response.data);
     }
 };
 

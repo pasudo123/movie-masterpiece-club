@@ -56,25 +56,31 @@ public class CommentCreateServiceImpl implements CommentCreateService {
 
     @Override
     public CommentDto.OneResponse createChildComment(final User user,
+                                                     final String articleId,
                                                      final String commentId,
                                                      final CommentDto.CreateRequest dto) {
 
         log.debug("User ID : {}", user.getId());
+        log.debug("ARTICLE ID : {}", articleId);
         log.debug("Comment ID : {}", commentId);
         log.debug("Comment content : {}", dto.getContent());
 
-        Comment foundComment = commentRepository.findOneByCommendIdAnd(commentId)
+        Comment comment = commentRepository.findOneByCommendId(commentId)
                 .orElseThrow(() -> new EmptyResultException("Comment is Not Found."));
+
+        Article article = comment.getArticle();
 
         Comment reply = Comment.builder()
                 .commendId(commentIdGenerator.generateId())
                 .user(user)
                 .content(dto.getContent())
-                .article(foundComment.getArticle())
+                .article(article)
                 .build();
+
+        comment.addNewReply(reply);
 
         Comment savedReply = commentRepository.save(reply);
 
-        return null;
+        return new CommentDto.OneResponse(savedReply);
     }
 }

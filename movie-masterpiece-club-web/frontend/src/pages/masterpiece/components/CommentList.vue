@@ -19,11 +19,17 @@
                 <div class="replyButton" @click="toggleReplyComment(index)">답글</div>
             </div>
 
-            <reply-comment-edit v-if="isReplyEdit[index]" />
+            <reply-comment-edit
+                    v-bind:commentId="comment.id"
+                    v-if="isReplyEdit[index]" />
 
             <div class="replyCommentWrapper">
                 <div class="replyCommentShowButton" @click="toggleReplyShow(index)">답글보기 (개수)</div>
-                <reply-comment-list v-if="isReplyShow[index]" />
+
+                <reply-comment-list
+                        v-bind:isReplyShow="isReplyShow[index]"
+                        v-bind:commentId="comment.id"
+                        v-if="isReplyShow[index]" />
             </div>
         </div>
     </div>
@@ -83,6 +89,8 @@
 
             toggleReplyShow(index) {
                 this.$set(this.isReplyShow, index, !this.isReplyShow[index]);
+
+                /** 답글을 보여주는 기능. **/
             }
 
         },

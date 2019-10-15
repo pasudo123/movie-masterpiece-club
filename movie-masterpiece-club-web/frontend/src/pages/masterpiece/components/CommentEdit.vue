@@ -14,6 +14,7 @@
 <script>
 
     import {createNamespacedHelpers} from 'vuex';
+
     const {
         mapActions: commentMapActions
     } = createNamespacedHelpers('commentModule');

@@ -12,6 +12,6 @@ public interface CommentCreateService {
 
     CommentDto.OneResponse createParentComment(User user, String articleId, CommentDto.CreateRequest dto);
 
-    CommentDto.OneResponse createChildComment(User user, String commentId, CommentDto.CreateRequest dto);
+    CommentDto.OneResponse createChildComment(User user, String articleId, String commentId, CommentDto.CreateRequest dto);
 
 }

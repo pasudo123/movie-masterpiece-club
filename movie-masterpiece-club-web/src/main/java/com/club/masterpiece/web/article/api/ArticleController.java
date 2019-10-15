@@ -31,7 +31,6 @@ public class ArticleController {
 
     private final ArticleCreateService articleCreateService;
     private final ArticleFindService articleFindService;
-
     private final CommentCreateService commentCreateService;
     private final CommentFindService commentFindService;
 
@@ -60,6 +59,22 @@ public class ArticleController {
         }
 
         CommentDto.OneResponse response = commentCreateService.createParentComment(user.getUser(), articleId, dto);
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PostMapping("{articleId}/comment/{commentId}/reply")
+    public ResponseEntity<CommentDto.OneResponse> createReply(@AuthenticationPrincipal SecurityOAuth2User user,
+                                                              @PathVariable("articleId") String articleId,
+                                                              @PathVariable("commentId") String commentId,
+                                                              @RequestBody @Valid CommentDto.CreateRequest dto,
+                                                              BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()) {
+            throw new CustomValidationException("Valid Exception.", bindingResult);
+        }
+
+        CommentDto.OneResponse response = commentCreateService.createChildComment(user.getUser(), articleId, commentId, dto);
 
         return ResponseEntity.ok().body(response);
     }

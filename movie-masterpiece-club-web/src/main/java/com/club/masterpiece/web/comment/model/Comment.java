@@ -56,7 +56,7 @@ public class Comment {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL
     )
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> replyList = new ArrayList<>();
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",
@@ -84,8 +84,12 @@ public class Comment {
         this.article = article;
     }
 
-//    public void setParentComment(final Comment parentComment) {
-//        this.comment = parentComment;
-//        getComment().getComments().add(this);
-//    }
+    public void addNewReply(final Comment reply) {
+        reply.setParentComment(this);
+        replyList.add(reply);
+    }
+
+    public void setParentComment(final Comment parentComment) {
+        this.comment = parentComment;
+    }
 }
