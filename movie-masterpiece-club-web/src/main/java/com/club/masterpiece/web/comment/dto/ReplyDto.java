@@ -1,29 +1,18 @@
 package com.club.masterpiece.web.comment.dto;
 
 import com.club.masterpiece.web.comment.model.Comment;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by pasudo123 on 2019-10-13
+ * Created by pasudo123 on 2019-10-16
  * Blog: https://pasudo123.tistory.com/
  * Email: oraedoa@gmail.com
  **/
-public class CommentDto {
-
-    @Getter
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class CreateRequest {
-
-        @NotBlank(message = "Content Shouldnot be blank.")
-        private String content;
-    }
+public class ReplyDto {
 
     @Getter
     public static class OneResponse {
@@ -34,7 +23,6 @@ public class CommentDto {
         private String createdUserId;
         private String createdName;
         private String createdProfile;
-        private ReplyDto.ListResponse reply;
 
         @SuppressWarnings("Duplicates")
         public OneResponse(Comment comment) {
@@ -44,18 +32,17 @@ public class CommentDto {
             this.createdUserId = comment.getUser().getId();
             this.createdName = comment.getUser().getUsername();
             this.createdProfile = comment.getUser().getProfile();
-            this.reply = new ReplyDto.ListResponse(comment.getReplyList());
         }
     }
 
     @Getter
-    public static class ListResponse {
+    static class ListResponse{
 
-        List<CommentDto.OneResponse> commentList = new ArrayList<>();
+        List<ReplyDto.OneResponse> list = new ArrayList<>();
 
-        public ListResponse(List<Comment> commentList) {
+        ListResponse(List<Comment> commentList) {
             for(Comment comment : commentList) {
-                this.commentList.add(new CommentDto.OneResponse(comment));
+                this.list.add(new ReplyDto.OneResponse(comment));
             }
         }
     }

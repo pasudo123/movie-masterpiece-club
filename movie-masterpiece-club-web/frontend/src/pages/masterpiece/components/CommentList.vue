@@ -6,12 +6,15 @@
                 v-for="(comment, index) in this.ListCommentState" :key="comment.id">
 
             <div class="commentInfoWrapper">
-                <div>
-                    {{comment.createdProfile}}
-                    <span>{{comment.createdName}}</span>
+                <div class="createdInfo">
+                    <el-avatar :size="35">
+                        <img :src="comment.createdProfile"/>
+                    </el-avatar>
+                    <span class="nameInfo">{{comment.createdName}}</span>
                 </div>
-                <div>{{comment.comment}}</div>
-                <div>{{comment.registerDate}}</div>
+
+                <div class="commentInfo">{{comment.comment}}</div>
+                <div class="registerDateInfo">{{comment.registerDate}}</div>
             </div>
 
             <div class="commentEtcWrapper">
@@ -24,11 +27,17 @@
                     v-if="isReplyEdit[index]" />
 
             <div class="replyCommentWrapper">
-                <div class="replyCommentShowButton" @click="toggleReplyShow(index)">답글보기 (개수)</div>
+
+
+                <div
+                        v-if="comment.reply.list.length !== 0"
+                        class="replyCommentShowButton"
+                        @click="toggleReplyShow(index)">
+                    답글보기 ( {{comment.reply.list.length}} )
+                </div>
 
                 <reply-comment-list
-                        v-bind:isReplyShow="isReplyShow[index]"
-                        v-bind:commentId="comment.id"
+                        v-bind:reply="comment.reply.list"
                         v-if="isReplyShow[index]" />
             </div>
         </div>
@@ -57,15 +66,19 @@
             return {
                 comment: '',
                 isReplyEdit: [],
-                isReplyShow: []
+                isReplyShow: [],
+                isReplyLoading: [],
             }
         },
         computed: {
             ...articleMapGetters(['articleOneState']),
-            ...commentMapGetters(['ListCommentState'])
+            ...commentMapGetters(['ListCommentState']),
+            ...commentMapGetters(['ListReplyState']),
         },
         methods: {
+
             ...commentMapActions(['fetchCommentList']),
+            ...commentMapActions(['fetchReplyList']),
 
             fetchCommentListProcess() {
 
@@ -79,6 +92,7 @@
                         // this.$set(this.isReplyEdit, i, false);
                         this.isReplyEdit[i] = false;
                         this.isReplyShow[i] = false;
+                        this.isReplyLoading[i] = false;
                     }
                 })
             },
@@ -88,9 +102,24 @@
             },
 
             toggleReplyShow(index) {
+
                 this.$set(this.isReplyShow, index, !this.isReplyShow[index]);
 
-                /** 답글을 보여주는 기능. **/
+                if (!this.isReplyShow[index]) {
+                    return;
+                }
+
+
+
+                // this.isReplyLoading[index] = true;
+                //
+                // const params = {};
+                // params.commentId = this.ListCommentState[index].id;
+                //
+                // this.fetchReplyList(params).then(() => {
+                //     this.isReplyLoading[index] = false;
+                // });
+
             }
 
         },

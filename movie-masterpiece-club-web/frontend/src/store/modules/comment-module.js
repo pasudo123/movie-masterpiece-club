@@ -4,15 +4,18 @@ import {convertDate2Hangul} from '@/utils/moment-util';
 
 const OneCommentState = {};
 const ListCommentState = [];
+const ListReplyState = [];
 
 const state = {
     OneCommentState,
-    ListCommentState
+    ListCommentState,
+    ListReplyState
 };
 
 const getters = {
     OneCommentState: (state) => state.OneCommentState,
-    ListCommentState: (state) => state.ListCommentState
+    ListCommentState: (state) => state.ListCommentState,
+    ListReplyState: (state) => state.ListReplyState
 };
 
 const actions = {
@@ -64,6 +67,7 @@ const actions = {
         return new Promise((resolve, reject) => {
 
             request.get(uri).then((response) => {
+
                 commit('setListCommentState', response);
                 resolve();
             }).catch((error) => {
@@ -72,6 +76,28 @@ const actions = {
             })
         })
     },
+
+    fetchReplyList({commit}, params) {
+
+        const uri = `comment/${params.commentId}/reply`;
+
+        return new Promise((resolve, reject) => {
+
+            request.get(uri).then((response) => {
+
+                const mutationsParams = {};
+                mutationsParams.data = response.data;
+                mutationsParams.index = params.index;
+
+                commit('setListReplyState', mutationsParams);
+                resolve();
+            }).catch((error) => {
+                console.error(error.response);
+                reject(error);
+            })
+
+        });
+    }
 };
 
 const mutations = {
@@ -88,11 +114,18 @@ const mutations = {
 
         state.ListCommentState = [];
 
+        console.debug(response);
+
         response.data.commentList.forEach((element) => {
 
             element.registerDate = convertDate2Hangul(element.registerDate);
             state.ListCommentState.push(element);
         });
+    },
+
+    setListReplyState(state, params) {
+
+        console.debug(params);
     },
 
     addReply(state, response) {

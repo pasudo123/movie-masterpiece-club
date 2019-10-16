@@ -1,9 +1,11 @@
 package com.club.masterpiece.web.comment.service.impl;
 
+import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.comment.dto.CommentDto;
 import com.club.masterpiece.web.comment.model.Comment;
 import com.club.masterpiece.web.comment.repository.CommentRepository;
 import com.club.masterpiece.web.comment.service.CommentFindService;
+import com.club.masterpiece.web.exception.EmptyResultException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,5 +32,16 @@ public class CommentFindServiceImpl implements CommentFindService {
         List<Comment> commentList = commentRepository.findAllByArticleArticleId(articleId);
 
         return new CommentDto.ListResponse(commentList);
+    }
+
+    @Override
+    public CommentDto.ListResponse findAllReplyByCommentId(final String commentId) {
+
+        Comment comment = commentRepository.findOneByCommendId(commentId)
+                .orElseThrow(() -> new EmptyResultException("Comment is Not Found."));
+
+        List<Comment> replyList = comment.getReplyList();
+
+        return new CommentDto.ListResponse(replyList);
     }
 }

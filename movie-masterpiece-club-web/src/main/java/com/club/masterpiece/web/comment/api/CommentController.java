@@ -2,6 +2,7 @@ package com.club.masterpiece.web.comment.api;
 
 import com.club.masterpiece.web.comment.dto.CommentDto;
 import com.club.masterpiece.web.comment.service.CommentCreateService;
+import com.club.masterpiece.web.comment.service.CommentFindService;
 import com.club.masterpiece.web.config.security.SecurityOAuth2User;
 import com.club.masterpiece.web.exception.CustomValidationException;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,16 @@ import javax.validation.Valid;
 @Slf4j
 public class CommentController {
 
-
     private final CommentCreateService commentCreateService;
+    private final CommentFindService commentFindService;
+
+    @GetMapping("{commentId}/reply")
+    public ResponseEntity<CommentDto.ListResponse> getReplyByCommentId(@PathVariable("commentId") String commentId) {
+
+        CommentDto.ListResponse response = commentFindService.findAllReplyByCommentId(commentId);
+
+        return ResponseEntity.ok().body(response);
+    }
 
     @PutMapping("{commentId}")
     public ResponseEntity<Object> updateComment(@AuthenticationPrincipal SecurityOAuth2User user,

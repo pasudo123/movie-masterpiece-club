@@ -30,7 +30,7 @@ glob.sync('./src/pages/**/main.js').forEach(path => {
 });
 
 module.exports = {
-
+Vue
     devServer: {
 
         open: true,

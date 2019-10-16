@@ -20,6 +20,27 @@
     display: flex;
 }
 
+/** 작성자 정보 **/
+.createdInfo {
+    display: flex;
+    align-items: center;
+}
+
+.nameInfo {
+    padding: 0 1vh 0 1.5vh;
+}
+
+/** 댓글 정보 **/
+.commentInfo {
+    font-weight: bold;
+    padding: 1vh 0 1vh 1vh;
+}
+
+/** 등록 일자 **/
+.registerDateInfo{
+    padding: 0 0 1vh 1vh;
+}
+
 /** 좋아요 버튼 **/
 .likeButton {
     margin: 0 2vh 0 0;

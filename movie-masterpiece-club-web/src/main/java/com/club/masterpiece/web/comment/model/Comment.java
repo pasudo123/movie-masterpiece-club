@@ -2,6 +2,8 @@ package com.club.masterpiece.web.comment.model;
 
 import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.user.model.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

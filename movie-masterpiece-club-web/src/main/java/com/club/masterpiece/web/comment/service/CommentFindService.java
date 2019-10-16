@@ -11,4 +11,6 @@ public interface CommentFindService {
 
     CommentDto.ListResponse findAllByArticleId(String articleId);
 
+    CommentDto.ListResponse findAllReplyByCommentId(String commentId);
+
 }
