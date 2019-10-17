@@ -12,6 +12,11 @@
     border-bottom: 1px solid gray;
 }
 
+.replyElement {
+    margin: 1vh 0 1vh 3vh;
+
+}
+
 .commentInfoWrapper {
 
 }
@@ -31,7 +36,7 @@
 }
 
 /** 댓글 정보 **/
-.commentInfo {
+.commentInfo, .replyInfo {
     font-weight: bold;
     padding: 1vh 0 1vh 1vh;
 }

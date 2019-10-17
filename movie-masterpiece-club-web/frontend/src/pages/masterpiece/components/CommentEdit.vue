@@ -4,6 +4,7 @@
         <el-input
                 class="commentInputClass"
                 placeholder="댓글을 입력..."
+                @keyup.enter.native="writeCommentProcess"
                 v-model="content" />
 
         <el-button @click="writeCommentProcess">OK</el-button>
@@ -39,6 +40,7 @@
 
             writeCommentProcess() {
 
+                console.debug('asddsa');
                 if (this.isCreate) {
                     return;
                 }

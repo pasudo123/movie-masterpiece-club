@@ -30,7 +30,7 @@ const actions = {
         return new Promise((resolve, reject) => {
 
             request.post(uri, payload).then((response) => {
-                commit('addCommentOnListCommentState', response);
+                commit('addComment', response);
                 resolve();
             }).catch((error) => {
                 console.error(error.response);
@@ -46,12 +46,15 @@ const actions = {
         const payload = {};
         payload.content = params.content;
 
-        console.debug(payload);
-
         return new Promise((resolve, reject) => {
 
             request.post(uri, payload).then((response) => {
-                commit('addReply', response);
+
+                let replyValue = {};
+                replyValue.data = response.data;
+                replyValue.index = params.replyIndex;
+
+                commit('addReply', replyValue);
                 resolve();
             }).catch((error) => {
                 console.error(error.response);
@@ -67,7 +70,6 @@ const actions = {
         return new Promise((resolve, reject) => {
 
             request.get(uri).then((response) => {
-
                 commit('setListCommentState', response);
                 resolve();
             }).catch((error) => {
@@ -77,32 +79,31 @@ const actions = {
         })
     },
 
-    fetchReplyList({commit}, params) {
-
-        const uri = `comment/${params.commentId}/reply`;
-
-        return new Promise((resolve, reject) => {
-
-            request.get(uri).then((response) => {
-
-                const mutationsParams = {};
-                mutationsParams.data = response.data;
-                mutationsParams.index = params.index;
-
-                commit('setListReplyState', mutationsParams);
-                resolve();
-            }).catch((error) => {
-                console.error(error.response);
-                reject(error);
-            })
-
-        });
-    }
+    // fetchReplyList({commit}, params) {
+    //
+    //     const uri = `comment/${params.commentId}/reply`;
+    //
+    //     return new Promise((resolve, reject) => {
+    //
+    //         request.get(uri).then((response) => {
+    //
+    //             const mutationsParams = {};
+    //             mutationsParams.data = response.data;
+    //             mutationsParams.index = params.index;
+    //
+    //             commit('setListReplyState', mutationsParams);
+    //             resolve();
+    //         }).catch((error) => {
+    //             console.error(error.response);
+    //             reject(error);
+    //         })
+    //     });
+    // }
 };
 
 const mutations = {
 
-    addCommentOnListCommentState(state, response) {
+    addComment(state, response) {
 
         let comment = response.data;
         comment.registerDate = convertDate2Hangul(comment.registerDate);
@@ -114,22 +115,21 @@ const mutations = {
 
         state.ListCommentState = [];
 
-        console.debug(response);
+        response.data.commentList.forEach((comment) => {
 
-        response.data.commentList.forEach((element) => {
-
-            element.registerDate = convertDate2Hangul(element.registerDate);
-            state.ListCommentState.push(element);
+            comment.registerDate = convertDate2Hangul(comment.registerDate);
+            state.ListCommentState.push(comment);
         });
     },
 
-    setListReplyState(state, params) {
+    addReply(state, replyValue) {
 
-        console.debug(params);
-    },
+        let reply = replyValue.data;
+        let index = replyValue.index;
 
-    addReply(state, response) {
-        console.debug(response.data);
+        reply.registerDate = convertDate2Hangul(reply.registerDate);
+
+        state.ListCommentState[index].reply.list.push(reply);
     }
 };
 

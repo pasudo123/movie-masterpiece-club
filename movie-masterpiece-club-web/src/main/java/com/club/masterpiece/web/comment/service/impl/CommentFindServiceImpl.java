@@ -1,6 +1,5 @@
 package com.club.masterpiece.web.comment.service.impl;
 
-import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.comment.dto.CommentDto;
 import com.club.masterpiece.web.comment.model.Comment;
 import com.club.masterpiece.web.comment.repository.CommentRepository;
@@ -29,7 +28,7 @@ public class CommentFindServiceImpl implements CommentFindService {
     @Override
     public CommentDto.ListResponse findAllByArticleId(final String articleId) {
 
-        List<Comment> commentList = commentRepository.findAllByArticleArticleId(articleId);
+        List<Comment> commentList = commentRepository.findAllByArticleArticleIdAndCommentNull(articleId);
 
         return new CommentDto.ListResponse(commentList);
     }

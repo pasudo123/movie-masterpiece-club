@@ -23,7 +23,10 @@
             </div>
 
             <reply-comment-edit
+                    v-on:toggleReplyComment="toggleReplyComment"
+                    v-bind:doubleReply="false"
                     v-bind:commentId="comment.id"
+                    v-bind:replyIndex="index"
                     v-if="isReplyEdit[index]" />
 
             <div class="replyCommentWrapper">
@@ -37,6 +40,7 @@
                 </div>
 
                 <reply-comment-list
+                        v-bind:replyIndex="index"
                         v-bind:reply="comment.reply.list"
                         v-if="isReplyShow[index]" />
             </div>
@@ -78,7 +82,6 @@
         methods: {
 
             ...commentMapActions(['fetchCommentList']),
-            ...commentMapActions(['fetchReplyList']),
 
             fetchCommentListProcess() {
 
@@ -102,24 +105,7 @@
             },
 
             toggleReplyShow(index) {
-
                 this.$set(this.isReplyShow, index, !this.isReplyShow[index]);
-
-                if (!this.isReplyShow[index]) {
-                    return;
-                }
-
-
-
-                // this.isReplyLoading[index] = true;
-                //
-                // const params = {};
-                // params.commentId = this.ListCommentState[index].id;
-                //
-                // this.fetchReplyList(params).then(() => {
-                //     this.isReplyLoading[index] = false;
-                // });
-
             }
 
         },

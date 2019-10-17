@@ -2,6 +2,7 @@ package com.club.masterpiece.web.comment.dto;
 
 import com.club.masterpiece.web.comment.model.Comment;
 import lombok.Getter;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ReplyDto {
     @Getter
     public static class OneResponse {
 
+        private String parentId;
         private String id;
         private String comment;
         private LocalDate registerDate;
@@ -26,6 +28,7 @@ public class ReplyDto {
 
         @SuppressWarnings("Duplicates")
         public OneResponse(Comment comment) {
+            this.parentId = comment.getComment().getCommendId();
             this.id = comment.getCommendId();
             this.comment = comment.getContent();
             this.registerDate = comment.getRegDate().toLocalDate();
