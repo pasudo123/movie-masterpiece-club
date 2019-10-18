@@ -1,6 +1,7 @@
 package com.club.masterpiece.web.comment.service;
 
 import com.club.masterpiece.web.comment.dto.CommentDto;
+import com.club.masterpiece.web.comment.dto.ReplyDto;
 import com.club.masterpiece.web.user.model.User;
 
 /**
@@ -12,6 +13,6 @@ public interface CommentCreateService {
 
     CommentDto.OneResponse createParentComment(User user, String articleId, CommentDto.CreateRequest dto);
 
-    CommentDto.OneResponse createChildComment(User user, String articleId, String commentId, CommentDto.CreateRequest dto);
+    ReplyDto.OneResponse createChildComment(User user, String articleId, String commentId, CommentDto.CreateRequest dto);
 
 }

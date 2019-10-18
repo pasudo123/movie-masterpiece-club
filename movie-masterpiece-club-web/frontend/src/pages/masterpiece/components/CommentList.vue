@@ -24,9 +24,8 @@
 
             <reply-comment-edit
                     v-on:toggleReplyComment="toggleReplyComment"
-                    v-bind:doubleReply="false"
                     v-bind:commentId="comment.id"
-                    v-bind:replyIndex="index"
+                    v-bind:commentIndex="index"
                     v-if="isReplyEdit[index]" />
 
             <div class="replyCommentWrapper">
@@ -40,8 +39,8 @@
                 </div>
 
                 <reply-comment-list
-                        v-bind:replyIndex="index"
                         v-bind:reply="comment.reply.list"
+                        v-bind:commentIndex="index"
                         v-if="isReplyShow[index]" />
             </div>
         </div>
@@ -87,8 +86,6 @@
 
                 const params = {};
                 params.articleId = this.$route.params.articleId;
-
-                console.debug(params);
 
                 this.fetchCommentList(params).then(() => {
                     for (let i = 0; i < this.ListCommentState.length; i++) {

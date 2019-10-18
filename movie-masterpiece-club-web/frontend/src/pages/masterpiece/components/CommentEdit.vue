@@ -40,7 +40,6 @@
 
             writeCommentProcess() {
 
-                console.debug('asddsa');
                 if (this.isCreate) {
                     return;
                 }

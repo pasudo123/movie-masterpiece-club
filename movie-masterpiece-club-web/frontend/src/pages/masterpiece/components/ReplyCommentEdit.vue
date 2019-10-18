@@ -5,7 +5,7 @@
                 class="commentInputClass"
                 placeholder="답글을 입력..."
                 @keyup.enter.native="writeReplyProcess"
-                v-model="content" />
+                v-model="content"/>
 
         <el-button @click="writeReplyProcess">OK</el-button>
     </div>
@@ -25,25 +25,20 @@
     export default {
         name: "ReplyCommentEdit",
         props: {
-            doubleReply: {
-                type: Boolean,
-                required: false,
-                default: () => false
-            },
             commentId: {
                 type: String,
                 required: true,
                 default: () => ''
             },
-            doubleReplyIndex: {
+            commentIndex: {
                 type: Number,
-                required: false,
+                required: true,
                 default: () => 1
             },
             replyIndex: {
                 type: Number,
-                required: true,
-                default: () => 1
+                required: false,
+                default: () => -1
             }
         },
         data() {
@@ -61,7 +56,7 @@
 
             writeReplyProcess() {
 
-                if(this.isCreate) {
+                if (this.isCreate) {
                     return;
                 }
 
@@ -75,18 +70,19 @@
                 params.articleId = this.articleOneState.id;
                 params.commentId = this.commentId;
                 params.content = this.content;
-                params.replyIndex = this.replyIndex;
+                params.commentIndex = this.commentIndex;
 
 
                 this.createReplyOnComment(params).then(() => {
                     this.isCreate = false;
                     this.content = '';
 
-                    if (this.doubleReply) {
-                        this.$emit('toggleDoubleReplyComment', this.doubleReplyIndex)
-                    } else {
-                        this.$emit('toggleReplyComment', this.replyIndex)
+                    if (this.replyIndex !== -1) {
+                        this.$emit('toggleDoubleReplyComment', this.replyIndex);
+                        return;
                     }
+
+                    this.$emit('toggleReplyComment', this.commentIndex);
                 })
             }
         }

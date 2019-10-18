@@ -1,10 +1,10 @@
 package com.club.masterpiece.web.article.api;
 
 import com.club.masterpiece.web.article.dto.ArticleDto;
-import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
 import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.comment.dto.CommentDto;
+import com.club.masterpiece.web.comment.dto.ReplyDto;
 import com.club.masterpiece.web.comment.service.CommentCreateService;
 import com.club.masterpiece.web.comment.service.CommentFindService;
 import com.club.masterpiece.web.config.security.SecurityOAuth2User;
@@ -64,17 +64,17 @@ public class ArticleController {
     }
 
     @PostMapping("{articleId}/comment/{commentId}/reply")
-    public ResponseEntity<CommentDto.OneResponse> createReply(@AuthenticationPrincipal SecurityOAuth2User user,
-                                                              @PathVariable("articleId") String articleId,
-                                                              @PathVariable("commentId") String commentId,
-                                                              @RequestBody @Valid CommentDto.CreateRequest dto,
-                                                              BindingResult bindingResult){
+    public ResponseEntity<ReplyDto.OneResponse> createReply(@AuthenticationPrincipal SecurityOAuth2User user,
+                                                            @PathVariable("articleId") String articleId,
+                                                            @PathVariable("commentId") String commentId,
+                                                            @RequestBody @Valid CommentDto.CreateRequest dto,
+                                                            BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
             throw new CustomValidationException("Valid Exception.", bindingResult);
         }
 
-        CommentDto.OneResponse response = commentCreateService.createChildComment(user.getUser(), articleId, commentId, dto);
+        ReplyDto.OneResponse response = commentCreateService.createChildComment(user.getUser(), articleId, commentId, dto);
 
         return ResponseEntity.ok().body(response);
     }

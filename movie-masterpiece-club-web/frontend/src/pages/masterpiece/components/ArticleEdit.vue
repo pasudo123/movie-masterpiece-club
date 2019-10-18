@@ -57,6 +57,8 @@
 
             writeArticleProcess() {
 
+                console.debug('asasdas');
+
                 if (this.isWrite) {
                     return;
                 }
@@ -72,7 +74,7 @@
                     this.isWrite = false;
                     /** router 이동 **/
                     this.$router.push({name: 'articleList'}).then(() => {});
-                }).then(() => {
+                }).catch(() => {
                     this.isWrite = false;
                 })
             }

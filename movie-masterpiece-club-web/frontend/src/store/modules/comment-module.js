@@ -52,7 +52,7 @@ const actions = {
 
                 let replyValue = {};
                 replyValue.data = response.data;
-                replyValue.index = params.replyIndex;
+                replyValue.index = params.commentIndex;
 
                 commit('addReply', replyValue);
                 resolve();
@@ -120,6 +120,8 @@ const mutations = {
             comment.registerDate = convertDate2Hangul(comment.registerDate);
             state.ListCommentState.push(comment);
         });
+
+        console.debug(state.ListCommentState);
     },
 
     addReply(state, replyValue) {

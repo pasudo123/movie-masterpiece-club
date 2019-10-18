@@ -24,10 +24,9 @@
 
             <reply-comment-edit
                     v-on:toggleDoubleReplyComment="toggleDoubleReplyComment"
-                    v-bind:doubleReply="true"
                     v-bind:commentId="reply.parentId"
-                    v-bind:replyIndex="replyIndex"
-                    v-bind:doubleReplyIndex="index"
+                    v-bind:commentIndex="commentIndex"
+                    v-bind:replyIndex="index"
                     v-if="isDoubleReplyEdit[index]" />
 
         </div>
@@ -47,23 +46,15 @@
                 required: true,
                 default: () => []
             },
-            replyIndex: {
+            commentIndex: {
                 type: Number,
                 required: true,
-                default: () => '1'
+                default: () => 1
             }
         },
         data() {
             return {
                 isDoubleReplyEdit: []
-            }
-        },
-        watch: {
-            reply(newValue, oldValue) {
-                /** 값의 변경. **/
-                for (let i = 0; i < reply.length; i++) {
-                    this.isDoubleReplyEdit[i] = false;
-                }
             }
         },
         methods: {

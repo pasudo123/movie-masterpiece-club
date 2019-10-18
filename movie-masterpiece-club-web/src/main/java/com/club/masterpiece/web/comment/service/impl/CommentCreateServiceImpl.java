@@ -2,6 +2,7 @@ package com.club.masterpiece.web.comment.service.impl;
 
 import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.comment.dto.CommentDto;
+import com.club.masterpiece.web.comment.dto.ReplyDto;
 import com.club.masterpiece.web.comment.model.Comment;
 import com.club.masterpiece.web.comment.repository.CommentRepository;
 import com.club.masterpiece.web.comment.service.CommentCreateService;
@@ -55,7 +56,7 @@ public class CommentCreateServiceImpl implements CommentCreateService {
     }
 
     @Override
-    public CommentDto.OneResponse createChildComment(final User user,
+    public ReplyDto.OneResponse createChildComment(final User user,
                                                      final String articleId,
                                                      final String commentId,
                                                      final CommentDto.CreateRequest dto) {
@@ -81,6 +82,6 @@ public class CommentCreateServiceImpl implements CommentCreateService {
 
         Comment savedReply = commentRepository.save(reply);
 
-        return new CommentDto.OneResponse(savedReply);
+        return new ReplyDto.OneResponse(savedReply);
     }
 }
