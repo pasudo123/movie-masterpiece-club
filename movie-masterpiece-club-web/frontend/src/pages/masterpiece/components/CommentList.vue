@@ -11,6 +11,18 @@
                         <img :src="comment.createdProfile"/>
                     </el-avatar>
                     <span class="nameInfo">{{comment.createdName}}</span>
+
+                    <div class="dropDownWrapper">
+                        <el-dropdown trigger="click">
+                            <span class="el-dropdown-link">
+                                설정<i class="el-icon-arrow-down el-icon--right"></i>
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item>수정</el-dropdown-item>
+                                <el-dropdown-item @click="deleteCommentProcess(comment.id)">삭제</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </div>
                 </div>
 
                 <div class="commentInfo">{{comment.comment}}</div>
@@ -26,7 +38,7 @@
                     v-on:toggleReplyComment="toggleReplyComment"
                     v-bind:commentId="comment.id"
                     v-bind:commentIndex="index"
-                    v-if="isReplyEdit[index]" />
+                    v-if="isReplyEdit[index]"/>
 
             <div class="replyCommentWrapper">
 
@@ -41,8 +53,9 @@
                 <reply-comment-list
                         v-bind:reply="comment.reply.list"
                         v-bind:commentIndex="index"
-                        v-if="isReplyShow[index]" />
+                        v-if="isReplyShow[index]"/>
             </div>
+
         </div>
     </div>
 </template>
@@ -81,6 +94,7 @@
         methods: {
 
             ...commentMapActions(['fetchCommentList']),
+            ...commentMapActions(['deleteComment']),
 
             fetchCommentListProcess() {
 
@@ -95,6 +109,15 @@
                         this.isReplyLoading[i] = false;
                     }
                 })
+            },
+
+            deleteCommentProcess(commentId) {
+
+                const params = {};
+                params.commentId = commentId;
+
+                
+
             },
 
             toggleReplyComment(index) {

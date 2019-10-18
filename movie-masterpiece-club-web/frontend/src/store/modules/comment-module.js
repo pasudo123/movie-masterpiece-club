@@ -76,29 +76,24 @@ const actions = {
                 console.error(error.response);
                 reject(error);
             })
-        })
+        });
     },
 
-    // fetchReplyList({commit}, params) {
-    //
-    //     const uri = `comment/${params.commentId}/reply`;
-    //
-    //     return new Promise((resolve, reject) => {
-    //
-    //         request.get(uri).then((response) => {
-    //
-    //             const mutationsParams = {};
-    //             mutationsParams.data = response.data;
-    //             mutationsParams.index = params.index;
-    //
-    //             commit('setListReplyState', mutationsParams);
-    //             resolve();
-    //         }).catch((error) => {
-    //             console.error(error.response);
-    //             reject(error);
-    //         })
-    //     });
-    // }
+    deleteComment({commit}, params) {
+
+        const uri = `comment/${params.commentId}`;
+
+        return new Promise((resolve, reject) => {
+
+            request.put(uri).then((response) => {
+
+            }).catch((error) => {
+                console.error(error.response);
+                reject(error);
+            })
+
+        });
+    }
 };
 
 const mutations = {

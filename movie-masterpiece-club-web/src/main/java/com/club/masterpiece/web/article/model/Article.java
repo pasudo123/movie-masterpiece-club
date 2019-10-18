@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.article.model;
 
+import com.club.masterpiece.web.global.type.ActiveStatus;
 import com.club.masterpiece.web.user.model.User;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -49,6 +50,10 @@ public class Article {
     @LastModifiedDate
     @Column(name = "mod_date", nullable = false)
     private LocalDateTime modDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE') default 'ACTIVE'")
+    private ActiveStatus activeStatus = ActiveStatus.ACTIVE;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",

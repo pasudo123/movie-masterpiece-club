@@ -27,11 +27,12 @@ const actions = {
 
 const mutations = {
 
-    setCurrentAuth(state, response) {
-        state.currentAuthState.email = response.email;
-        state.currentAuthState.username = response.username;
-        state.currentAuthState.profile = response.profile;
-        state.currentAuthState.role = response.role;
+    setCurrentAuth(state, currentAuth) {
+        state.currentAuthState.id = currentAuth.id;
+        state.currentAuthState.email = currentAuth.email;
+        state.currentAuthState.username = currentAuth.username;
+        state.currentAuthState.profile = currentAuth.profile;
+        state.currentAuthState.role = currentAuth.role;
     }
 };
 

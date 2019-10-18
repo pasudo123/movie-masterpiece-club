@@ -7,6 +7,11 @@ import locale from 'element-ui/lib/locale/lang/ko';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'vue-material-design-icons/styles.css';
 
+// require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 Vue.config.productionTip = false;
 Vue.use(ElementUI, {locale});
 

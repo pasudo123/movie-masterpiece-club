@@ -1,6 +1,7 @@
 package com.club.masterpiece.web.comment.model;
 
 import com.club.masterpiece.web.article.model.Article;
+import com.club.masterpiece.web.global.type.ActiveStatus;
 import com.club.masterpiece.web.user.model.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -43,6 +44,10 @@ public class Comment {
     @LastModifiedDate
     @Column(name = "mod_date", nullable = false)
     private LocalDateTime modDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE') default 'ACTIVE'")
+    private ActiveStatus activeStatus = ActiveStatus.ACTIVE;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_comment_id",

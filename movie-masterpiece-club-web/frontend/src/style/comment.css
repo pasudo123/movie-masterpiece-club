@@ -29,10 +29,16 @@
 .createdInfo {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .nameInfo {
     padding: 0 1vh 0 1.5vh;
+}
+
+.dropDownWrapper{
+    position:absolute;
+    right: 1vw;
 }
 
 /** 댓글 정보 **/

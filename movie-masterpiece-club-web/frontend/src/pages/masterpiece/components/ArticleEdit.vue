@@ -26,11 +26,6 @@
     import {createNamespacedHelpers} from 'vuex';
     const {mapActions: articleMapActions} = createNamespacedHelpers('articleModule');
 
-    // require styles
-    import 'quill/dist/quill.core.css'
-    import 'quill/dist/quill.snow.css'
-    import 'quill/dist/quill.bubble.css'
-
     import {quillEditor} from 'vue-quill-editor'
 
     export default {
