@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,25 +36,23 @@ public class CommentRepoTest {
     private CommentRepository commentRepository;
 
     @Test
-    public void 답글_조회_테스트() {
+    public void 댓글_조회_테스트() {
 
-        Comment comment = commentRepository.findOneByCommendId("277989c57cac47e3aaeb3fa5ba380b8d")
-                .get();
+        /**
+         * reg_date 의 @OrderBy 를 확인한다.
+         */
 
-        LOGGER.info("Article Select");
-        comment.getArticle();
+        String articleId = "bbb4ee415bec4fbeb44a3c498f7d4d95";
 
-        LOGGER.info("Reply : getReplyList()");
-        List<Comment> replyList = comment.getReplyList();
+        List<Comment> commentList = commentRepository.findAllByArticleArticleIdAndCommentNullOrderByRegDateAsc(articleId);
 
-        LOGGER.info("Reply Size : size()");
-        int size = replyList.size();
-        LOGGER.info("Reply Size : {}", size);
+        for(Comment comment : commentList) {
+            LOGGER.info("comment : {} | {}", comment.getRegDate(), comment.getContent());
 
-
-        for(Comment reply : replyList) {
-            LOGGER.info("Reply : {}", reply);
-            reply.getReplyList();
+            comment.getReplyList();
+            for(Comment reply : comment.getReplyList()) {
+                LOGGER.info("reply : {} | {}", reply.getRegDate(), reply.getContent());
+            }
         }
     }
 }

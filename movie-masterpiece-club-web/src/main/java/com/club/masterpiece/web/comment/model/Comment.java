@@ -58,6 +58,7 @@ public class Comment {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL
     )
+    @OrderBy("reg_date asc")
     private List<Comment> replyList = new ArrayList<>();
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)

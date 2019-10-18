@@ -28,7 +28,7 @@ public class CommentFindServiceImpl implements CommentFindService {
     @Override
     public CommentDto.ListResponse findAllByArticleId(final String articleId) {
 
-        List<Comment> commentList = commentRepository.findAllByArticleArticleIdAndCommentNull(articleId);
+        List<Comment> commentList = commentRepository.findAllByArticleArticleIdAndCommentNullOrderByRegDateAsc(articleId);
 
         return new CommentDto.ListResponse(commentList);
     }

@@ -46,8 +46,6 @@ public class CommentController {
             throw new CustomValidationException("Valid Exception.", bindingResult);
         }
 
-//        commentCreateService.createChildComment(user.getUser(),commentId, dto);
-
         return null;
     }
 
