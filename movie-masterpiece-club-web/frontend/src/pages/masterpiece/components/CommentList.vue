@@ -31,8 +31,8 @@
                 <div v-else class="commentEditInfo">
                     <el-input
                             class="titleClass"
-                            v-model="comment.comment"/>
-                    <el-button @click="modifyCommentProcess(comment.id, comment.comment)">수정</el-button>
+                            v-model="modifyComment[index]"/>
+                    <el-button @click="modifyCommentProcess(index, comment.id, modifyComment[index])">수정</el-button>
                     <el-button @click="toggleModifyEdit(index)">취소</el-button>
                 </div>
 
@@ -98,6 +98,7 @@
                 isReplyShow: [],
                 isReplyLoading: [],
                 modifyEdit: [],
+                modifyComment: [],
                 isDelete: false,
             }
         },
@@ -124,24 +125,32 @@
                         this.isReplyShow[i] = false;
                         this.isReplyLoading[i] = false;
                         this.modifyEdit[i] = false;
+                        this.modifyComment[i] = this.ListCommentState[i].comment;
                     }
                 })
             },
 
             toggleModifyEdit(index) {
                 this.$set(this.modifyEdit, index, !this.modifyEdit[index]);
+
+                if (this.modifyEdit[index]) {
+                    return;
+                }
+
+                this.modifyComment[index] = this.ListCommentState[index].comment;
             },
 
-            modifyCommentProcess(commentId, updateComment) {
+            modifyCommentProcess(index, commentId, updateComment) {
 
                 const params = {};
                 params.commentId = commentId;
                 params.content = updateComment;
+                params.index = index;
 
                 this.updateComment(params).then((response) => {
-
+                    this.$set(this.modifyEdit, index, false);
                 }).catch((error) => {
-
+                    this.$set(this.modifyEdit, index, false);
                 });
             },
 

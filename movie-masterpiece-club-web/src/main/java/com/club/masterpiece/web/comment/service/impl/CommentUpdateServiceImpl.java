@@ -25,7 +25,7 @@ public class CommentUpdateServiceImpl implements CommentUpdateService {
     @Override
     public CommentDto.OneResponse updateCommentContent(final String commentId, final CommentDto.UpdateRequest dto) {
 
-        Comment comment = commentFindService.fineOneEntityByCommentId(commentId);
+        Comment comment = commentFindService.findOneEntityByCommentId(commentId);
         comment.updateContent(dto);
 
         return new CommentDto.OneResponse(comment);

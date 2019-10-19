@@ -1,6 +1,7 @@
 package com.club.masterpiece.web.comment.service;
 
 import com.club.masterpiece.web.comment.dto.CommentDto;
+import com.club.masterpiece.web.comment.dto.ReplyDto;
 
 /**
  * Created by pasudo123 on 2019-10-13
@@ -9,6 +10,8 @@ import com.club.masterpiece.web.comment.dto.CommentDto;
  **/
 public interface CommentDeleteService {
 
-    CommentDto.OneResponse updateStatusActiveToDelete(String commentId);
 
+    CommentDto.OneResponse updateCommentStatusActiveToDelete(String commentId);
+
+    ReplyDto.OneResponse updateReplyStatusActiveToDelete(String replyId);
 }

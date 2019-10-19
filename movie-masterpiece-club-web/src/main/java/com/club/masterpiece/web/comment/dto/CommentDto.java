@@ -53,7 +53,7 @@ public class CommentDto {
             this.createdUserId = comment.getUser().getId();
             this.createdName = comment.getUser().getUsername();
             this.createdProfile = comment.getUser().getProfile();
-            this.reply = new ReplyDto.ListResponse(comment.getReplyList());
+            this.reply = new ReplyDto.ListResponse(comment.getActiveReply());
         }
     }
 

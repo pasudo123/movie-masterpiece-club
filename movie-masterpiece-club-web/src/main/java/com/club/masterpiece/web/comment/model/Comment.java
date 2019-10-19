@@ -4,8 +4,6 @@ import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.comment.dto.CommentDto;
 import com.club.masterpiece.web.global.type.ActiveStatus;
 import com.club.masterpiece.web.user.model.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +16,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by pasudo123 on 2019-09-22
@@ -103,13 +103,24 @@ public class Comment {
         this.comment = parentComment;
     }
 
-    public void updateActive2Delete(){
+    public void updateCommentActive2Delete(){
         this.activeStatus = ActiveStatus.DELETE;
-        getReplyList().forEach(Comment::updateActive2Delete);
+        getReplyList().forEach(Comment::updateReplyActive2Delete);
+    }
+
+    public void updateReplyActive2Delete() {
+        this.activeStatus = ActiveStatus.DELETE;
     }
 
     public boolean isActive(){
         return (this.activeStatus == ActiveStatus.ACTIVE);
+    }
+
+    public List<Comment> getActiveReply() {
+        return getReplyList()
+                .stream()
+                .filter(Comment::isActive)
+                .collect(Collectors.toList());
     }
 
     public void updateContent(final CommentDto.UpdateRequest dto) {

@@ -19,7 +19,7 @@
                             </span>
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item>수정</el-dropdown-item>
-                                <el-dropdown-item @click="deleteReplyProcess(reply.id)">삭제</el-dropdown-item>
+                                <el-dropdown-item @click.native="deleteReplyProcess(reply.id)">삭제</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
                     </div>
@@ -52,6 +52,9 @@
     import {createNamespacedHelpers} from 'vuex';
 
     const {
+        mapActions: commentMapActions
+    } = createNamespacedHelpers('commentModule');
+    const {
         mapGetters: authMapGetters
     } = createNamespacedHelpers('auth');
 
@@ -72,19 +75,39 @@
         },
         data() {
             return {
-                isDoubleReplyEdit: []
+                isDoubleReplyEdit: [],
+                isDelete: false,
             }
         },
         computed: {
             ...authMapGetters(['currentAuthState'])
         },
         methods: {
+
+            ...commentMapActions(['deleteReply']),
+
             toggleDoubleReplyComment(index) {
                 this.$set(this.isDoubleReplyEdit, index, !this.isDoubleReplyEdit[index]);
             },
 
             deleteReplyProcess(replyId) {
 
+                if (this.isDelete) {
+                    return;
+                }
+
+                this.isDelete = true;
+
+                const params = {};
+                params.replyId = replyId;
+                params.commentIndex = this.commentIndex;
+
+                this.deleteReply(params).then(() => {
+                    console.debug('asdsad');
+                    this.isDelete = false;
+                }).catch(() => {
+                    this.isDelete= false;
+                })
             },
 
             isMine(createdUserId) {

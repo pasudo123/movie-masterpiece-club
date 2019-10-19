@@ -28,7 +28,7 @@ public class CommentFindServiceImpl implements CommentFindService {
 
 
     @Override
-    public Comment fineOneEntityByCommentId(final String commentId) {
+    public Comment findOneEntityByCommentId(final String commentId) {
 
         return commentRepository.findOneByCommendId(commentId)
                 .orElseThrow(() -> new EmptyResultException(String.format("Comment is Not Found. : %s", commentId)));
@@ -39,7 +39,8 @@ public class CommentFindServiceImpl implements CommentFindService {
 
         List<Comment> commentList = commentRepository.findAllByArticleArticleIdAndCommentNullOrderByRegDateAsc(articleId);
 
-        /** status : 'active' 추출 **/
+        /** comment status : 'active' 추출 **/
+        /** dto 내에서 reply status : 'active' 추출 **/
         return new CommentDto.ListResponse(commentList.stream()
                 .filter(Comment::isActive)
                 .collect(Collectors.toList()));

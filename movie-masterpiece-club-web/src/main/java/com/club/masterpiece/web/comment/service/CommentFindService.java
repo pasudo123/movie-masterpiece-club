@@ -10,7 +10,7 @@ import com.club.masterpiece.web.comment.model.Comment;
  **/
 public interface CommentFindService {
 
-    Comment fineOneEntityByCommentId(String commentId);
+    Comment findOneEntityByCommentId(String commentId);
 
     CommentDto.ListResponse findAllByArticleId(String articleId);
 

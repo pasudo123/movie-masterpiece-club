@@ -85,7 +85,13 @@ const actions = {
         return new Promise((resolve, reject) => {
 
             request.put(uri, payload).then((response) => {
-                console.debug(response);
+
+                let updateInfo = {};
+                updateInfo.index = params.index;
+                updateInfo.data = response.data;
+
+                commit('updateComment', updateInfo);
+                resolve();
             }).catch((error) => {
                 console.debug(error.response);
                 reject(error);
@@ -108,6 +114,27 @@ const actions = {
             })
 
         });
+    },
+
+    deleteReply({commit}, params) {
+
+        const uri = `comment/reply/${params.replyId}/status`;
+
+        return new Promise((resolve, reject) => {
+
+            request.put(uri).then((response) => {
+
+                let deleteInfo = {};
+                deleteInfo.commentIndex = params.commentIndex;
+                deleteInfo.data = response.data;
+
+                commit('deleteReply', deleteInfo);
+                resolve();
+            }).catch((error) => {
+                console.error(error.response);
+                reject(error);
+            })
+        });
     }
 };
 
@@ -119,6 +146,16 @@ const mutations = {
         comment.registerDate = convertDate2Hangul(comment.registerDate);
 
         state.ListCommentState.push(comment)
+    },
+
+    addReply(state, replyValue) {
+
+        let reply = replyValue.data;
+        let index = replyValue.index;
+
+        reply.registerDate = convertDate2Hangul(reply.registerDate);
+
+        state.ListCommentState[index].reply.list.push(reply);
     },
 
     setListCommentState(state, response) {
@@ -134,14 +171,8 @@ const mutations = {
         console.debug(state.ListCommentState);
     },
 
-    addReply(state, replyValue) {
-
-        let reply = replyValue.data;
-        let index = replyValue.index;
-
-        reply.registerDate = convertDate2Hangul(reply.registerDate);
-
-        state.ListCommentState[index].reply.list.push(reply);
+    updateComment(state, updateInfo) {
+        state.ListCommentState[updateInfo.index].comment = updateInfo.data.comment;
     },
 
     deleteComment(state, response) {
@@ -153,8 +184,13 @@ const mutations = {
         state.ListCommentState = newListCommentState;
     },
 
-    deleteReply(state, response) {
+    deleteReply(state, deleteInfo) {
 
+        let replyList = state.ListCommentState[deleteInfo.commentIndex].reply.list;
+        let newListReplyState = replyList.filter(element => element.id !== deleteInfo.data.id);
+
+        state.ListCommentState[deleteInfo.commentIndex].reply.list = [];
+        state.ListCommentState[deleteInfo.commentIndex].reply.list = newListReplyState;
     }
 };
 

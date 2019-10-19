@@ -1,6 +1,7 @@
 package com.club.masterpiece.web.comment.service.impl;
 
 import com.club.masterpiece.web.comment.dto.CommentDto;
+import com.club.masterpiece.web.comment.dto.ReplyDto;
 import com.club.masterpiece.web.comment.model.Comment;
 import com.club.masterpiece.web.comment.repository.CommentRepository;
 import com.club.masterpiece.web.comment.service.CommentDeleteService;
@@ -26,11 +27,20 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
     private final CommentRepository commentRepository;
 
     @Override
-    public CommentDto.OneResponse updateStatusActiveToDelete(final String commentId) {
+    public CommentDto.OneResponse updateCommentStatusActiveToDelete(final String commentId) {
 
-        Comment comment = commentFindService.fineOneEntityByCommentId(commentId);
-        comment.updateActive2Delete();
+        Comment comment = commentFindService.findOneEntityByCommentId(commentId);
+        comment.updateCommentActive2Delete();
 
         return new CommentDto.OneResponse(comment);
+    }
+
+    @Override
+    public ReplyDto.OneResponse updateReplyStatusActiveToDelete(final String replyId) {
+
+        Comment reply = commentFindService.findOneEntityByCommentId(replyId);
+        reply.updateReplyActive2Delete();
+
+        return new ReplyDto.OneResponse(reply);
     }
 }

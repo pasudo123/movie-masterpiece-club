@@ -1,6 +1,7 @@
 package com.club.masterpiece.web.comment.api;
 
 import com.club.masterpiece.web.comment.dto.CommentDto;
+import com.club.masterpiece.web.comment.dto.ReplyDto;
 import com.club.masterpiece.web.comment.service.CommentDeleteService;
 import com.club.masterpiece.web.comment.service.CommentFindService;
 import com.club.masterpiece.web.comment.service.CommentUpdateService;
@@ -49,6 +50,12 @@ public class CommentController {
     @PutMapping("{commentId}/status")
     public ResponseEntity<CommentDto.OneResponse> updateCommentStatus(@PathVariable("commentId") String commentId) {
 
-        return ResponseEntity.ok().body(commentDeleteService.updateStatusActiveToDelete(commentId));
+        return ResponseEntity.ok().body(commentDeleteService.updateCommentStatusActiveToDelete(commentId));
+    }
+
+    @PutMapping("reply/{replyId}/status")
+    public ResponseEntity<ReplyDto.OneResponse> updateReplyStatus(@PathVariable("replyId") String replyId) {
+
+        return ResponseEntity.ok().body(commentDeleteService.updateReplyStatusActiveToDelete(replyId));
     }
 }
