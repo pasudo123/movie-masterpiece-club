@@ -1,6 +1,7 @@
 package com.club.masterpiece.web.comment.model;
 
 import com.club.masterpiece.web.article.model.Article;
+import com.club.masterpiece.web.comment.dto.CommentDto;
 import com.club.masterpiece.web.global.type.ActiveStatus;
 import com.club.masterpiece.web.user.model.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -61,7 +62,8 @@ public class Comment {
             targetEntity = Comment.class,
             mappedBy = "comment",
             fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     @OrderBy("reg_date asc")
     private List<Comment> replyList = new ArrayList<>();
@@ -97,7 +99,20 @@ public class Comment {
         replyList.add(reply);
     }
 
-    public void setParentComment(final Comment parentComment) {
+    private void setParentComment(final Comment parentComment) {
         this.comment = parentComment;
+    }
+
+    public void updateActive2Delete(){
+        this.activeStatus = ActiveStatus.DELETE;
+        getReplyList().forEach(Comment::updateActive2Delete);
+    }
+
+    public boolean isActive(){
+        return (this.activeStatus == ActiveStatus.ACTIVE);
+    }
+
+    public void updateContent(final CommentDto.UpdateRequest dto) {
+        this.content = dto.getContent();
     }
 }

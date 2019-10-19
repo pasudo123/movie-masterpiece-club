@@ -1,14 +1,13 @@
 package com.club.masterpiece.web.comment.api;
 
 import com.club.masterpiece.web.comment.dto.CommentDto;
-import com.club.masterpiece.web.comment.service.CommentCreateService;
+import com.club.masterpiece.web.comment.service.CommentDeleteService;
 import com.club.masterpiece.web.comment.service.CommentFindService;
-import com.club.masterpiece.web.config.security.SecurityOAuth2User;
+import com.club.masterpiece.web.comment.service.CommentUpdateService;
 import com.club.masterpiece.web.exception.CustomValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,36 +24,31 @@ import javax.validation.Valid;
 @Slf4j
 public class CommentController {
 
-    private final CommentCreateService commentCreateService;
     private final CommentFindService commentFindService;
+    private final CommentUpdateService commentUpdateService;
+    private final CommentDeleteService commentDeleteService;
 
     @GetMapping("{commentId}/reply")
     public ResponseEntity<CommentDto.ListResponse> getReplyByCommentId(@PathVariable("commentId") String commentId) {
 
-        CommentDto.ListResponse response = commentFindService.findAllReplyByCommentId(commentId);
-
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.ok().body(commentFindService.findAllReplyByCommentId(commentId));
     }
 
     @PutMapping("{commentId}")
-    public ResponseEntity<Object> updateComment(@AuthenticationPrincipal SecurityOAuth2User user,
-                                                @PathVariable("commentId") String commentId,
-                                                @RequestBody @Valid CommentDto.CreateRequest dto,
-                                                BindingResult bindingResult) {
+    public ResponseEntity<CommentDto.OneResponse> updateCommentContent(@PathVariable("commentId") String commentId,
+                                                                       @RequestBody @Valid CommentDto.UpdateRequest dto,
+                                                                       BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
             throw new CustomValidationException("Valid Exception.", bindingResult);
         }
 
-        return null;
+        return ResponseEntity.ok().body(commentUpdateService.updateCommentContent(commentId, dto));
     }
 
-    @DeleteMapping("{commentId}")
-    public ResponseEntity<Object> deleteComment(@PathVariable("commentId") String commentId) {
+    @PutMapping("{commentId}/status")
+    public ResponseEntity<CommentDto.OneResponse> updateCommentStatus(@PathVariable("commentId") String commentId) {
 
-
-
-        return null;
+        return ResponseEntity.ok().body(commentDeleteService.updateStatusActiveToDelete(commentId));
     }
-
 }

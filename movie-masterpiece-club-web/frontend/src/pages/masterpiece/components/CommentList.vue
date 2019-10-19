@@ -12,20 +12,30 @@
                     </el-avatar>
                     <span class="nameInfo">{{comment.createdName}}</span>
 
-                    <div class="dropDownWrapper">
+                    <div v-if="isMine(comment.createdUserId)" class="dropDownWrapper">
                         <el-dropdown trigger="click">
                             <span class="el-dropdown-link">
                                 설정<i class="el-icon-arrow-down el-icon--right"></i>
                             </span>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item>수정</el-dropdown-item>
-                                <el-dropdown-item @click="deleteCommentProcess(comment.id)">삭제</el-dropdown-item>
+                                <el-dropdown-item @click.native="toggleModifyEdit(index)">수정</el-dropdown-item>
+                                <el-dropdown-item @click.native="deleteCommentProcess(comment.id)">삭제</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
                     </div>
                 </div>
 
-                <div class="commentInfo">{{comment.comment}}</div>
+                <div v-if="!modifyEdit[index]" class="commentInfo">
+                    {{comment.comment}}
+                </div>
+                <div v-else class="commentEditInfo">
+                    <el-input
+                            class="titleClass"
+                            v-model="comment.comment"/>
+                    <el-button @click="modifyCommentProcess(comment.id, comment.comment)">수정</el-button>
+                    <el-button @click="toggleModifyEdit(index)">취소</el-button>
+                </div>
+
                 <div class="registerDateInfo">{{comment.registerDate}}</div>
             </div>
 
@@ -74,6 +84,9 @@
     const {
         mapGetters: articleMapGetters
     } = createNamespacedHelpers('articleModule');
+    const {
+        mapGetters: authMapGetters
+    } = createNamespacedHelpers('auth');
 
     export default {
         name: "CommentList",
@@ -84,16 +97,20 @@
                 isReplyEdit: [],
                 isReplyShow: [],
                 isReplyLoading: [],
+                modifyEdit: [],
+                isDelete: false,
             }
         },
         computed: {
             ...articleMapGetters(['articleOneState']),
             ...commentMapGetters(['ListCommentState']),
             ...commentMapGetters(['ListReplyState']),
+            ...authMapGetters(['currentAuthState']),
         },
         methods: {
 
             ...commentMapActions(['fetchCommentList']),
+            ...commentMapActions(['updateComment']),
             ...commentMapActions(['deleteComment']),
 
             fetchCommentListProcess() {
@@ -103,21 +120,47 @@
 
                 this.fetchCommentList(params).then(() => {
                     for (let i = 0; i < this.ListCommentState.length; i++) {
-                        // this.$set(this.isReplyEdit, i, false);
                         this.isReplyEdit[i] = false;
                         this.isReplyShow[i] = false;
                         this.isReplyLoading[i] = false;
+                        this.modifyEdit[i] = false;
                     }
                 })
             },
 
+            toggleModifyEdit(index) {
+                this.$set(this.modifyEdit, index, !this.modifyEdit[index]);
+            },
+
+            modifyCommentProcess(commentId, updateComment) {
+
+                const params = {};
+                params.commentId = commentId;
+                params.content = updateComment;
+
+                this.updateComment(params).then((response) => {
+
+                }).catch((error) => {
+
+                });
+            },
+
             deleteCommentProcess(commentId) {
+
+                if (this.isDelete) {
+                    return;
+                }
+
+                this.isDelete = true;
 
                 const params = {};
                 params.commentId = commentId;
 
-                
-
+                this.deleteComment(params).then(() => {
+                    this.isDelete = false;
+                }).catch(() => {
+                    this.isDelete = false;
+                })
             },
 
             toggleReplyComment(index) {
@@ -126,6 +169,10 @@
 
             toggleReplyShow(index) {
                 this.$set(this.isReplyShow, index, !this.isReplyShow[index]);
+            },
+
+            isMine(createdUserId) {
+                return (this.currentAuthState.id === createdUserId);
             }
 
         },

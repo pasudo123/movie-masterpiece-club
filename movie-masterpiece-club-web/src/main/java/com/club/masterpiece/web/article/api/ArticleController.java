@@ -71,8 +71,7 @@ public class ArticleController {
                                                             BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
-            throw new CustomValidationException("Valid Exception.", bindingResult);
-        }
+            throw new CustomValidationException("Valid Exception.", bindingResult);        }
 
         ReplyDto.OneResponse response = commentCreateService.createChildComment(user.getUser(), articleId, commentId, dto);
 
@@ -80,7 +79,7 @@ public class ArticleController {
     }
 
     @GetMapping
-    public ResponseEntity<Object> findAll() {
+    public ResponseEntity<ArticleDto.ListResponse> findAll() {
 
         ArticleDto.ListResponse response = articleFindService.findAll();
 

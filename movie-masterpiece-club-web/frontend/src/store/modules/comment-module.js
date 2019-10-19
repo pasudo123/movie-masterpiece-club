@@ -1,21 +1,17 @@
-
 import request from '@/request';
 import {convertDate2Hangul} from '@/utils/moment-util';
 
 const OneCommentState = {};
 const ListCommentState = [];
-const ListReplyState = [];
 
 const state = {
     OneCommentState,
     ListCommentState,
-    ListReplyState
 };
 
 const getters = {
     OneCommentState: (state) => state.OneCommentState,
     ListCommentState: (state) => state.ListCommentState,
-    ListReplyState: (state) => state.ListReplyState
 };
 
 const actions = {
@@ -79,14 +75,33 @@ const actions = {
         });
     },
 
-    deleteComment({commit}, params) {
+    updateComment({commit}, params) {
 
         const uri = `comment/${params.commentId}`;
+
+        const payload = {};
+        payload.content = params.content;
+
+        return new Promise((resolve, reject) => {
+
+            request.put(uri, payload).then((response) => {
+                console.debug(response);
+            }).catch((error) => {
+                console.debug(error.response);
+                reject(error);
+            })
+        });
+    },
+
+    deleteComment({commit}, params) {
+
+        const uri = `comment/${params.commentId}/status`;
 
         return new Promise((resolve, reject) => {
 
             request.put(uri).then((response) => {
-
+                commit('deleteComment', response);
+                resolve();
             }).catch((error) => {
                 console.error(error.response);
                 reject(error);
@@ -127,6 +142,19 @@ const mutations = {
         reply.registerDate = convertDate2Hangul(reply.registerDate);
 
         state.ListCommentState[index].reply.list.push(reply);
+    },
+
+    deleteComment(state, response) {
+
+        let newListCommentState = [];
+        newListCommentState = state.ListCommentState.filter(element => element.id !== response.data.id);
+
+        state.ListCommentState = [];
+        state.ListCommentState = newListCommentState;
+    },
+
+    deleteReply(state, response) {
+
     }
 };
 

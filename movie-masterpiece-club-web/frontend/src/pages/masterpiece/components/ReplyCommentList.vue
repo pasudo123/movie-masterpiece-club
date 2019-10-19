@@ -11,6 +11,18 @@
                         <img :src="reply.createdProfile"/>
                     </el-avatar>
                     <span class="nameInfo">{{reply.createdName}}</span>
+
+                    <div v-if="isMine(reply.createdUserId)" class="dropDownWrapper">
+                        <el-dropdown trigger="click">
+                            <span class="el-dropdown-link">
+                                설정<i class="el-icon-arrow-down el-icon--right"></i>
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item>수정</el-dropdown-item>
+                                <el-dropdown-item @click="deleteReplyProcess(reply.id)">삭제</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </div>
                 </div>
 
                 <div class="replyInfo">{{reply.comment}}</div>
@@ -37,6 +49,12 @@
 
     import ReplyCommentEdit from '@/pages/masterpiece/components/ReplyCommentEdit';
 
+    import {createNamespacedHelpers} from 'vuex';
+
+    const {
+        mapGetters: authMapGetters
+    } = createNamespacedHelpers('auth');
+
     export default {
         name: "ReplyCommentList",
         components: {ReplyCommentEdit},
@@ -57,9 +75,20 @@
                 isDoubleReplyEdit: []
             }
         },
+        computed: {
+            ...authMapGetters(['currentAuthState'])
+        },
         methods: {
             toggleDoubleReplyComment(index) {
                 this.$set(this.isDoubleReplyEdit, index, !this.isDoubleReplyEdit[index]);
+            },
+
+            deleteReplyProcess(replyId) {
+
+            },
+
+            isMine(createdUserId) {
+                return (this.currentAuthState.id === createdUserId);
             }
         },
         created() {

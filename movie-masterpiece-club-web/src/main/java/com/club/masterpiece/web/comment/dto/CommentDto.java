@@ -21,8 +21,17 @@ public class CommentDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class CreateRequest {
 
-        @NotBlank(message = "Content Shouldnot be blank.")
+        @NotBlank(message = "Content Should not be blank.")
         private String content;
+    }
+
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class UpdateRequest {
+
+        @NotBlank(message = "Content Should not be blank.")
+        private String content;
+
     }
 
     @Getter

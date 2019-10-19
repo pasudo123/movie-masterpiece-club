@@ -47,6 +47,15 @@
     padding: 1vh 0 1vh 1vh;
 }
 
+/** 댓글 수정 정보 **/
+.titleClass >>> input {
+    border: none;
+}
+
+.titleClass {
+    border-bottom: 1px solid silver;
+}
+
 /** 등록 일자 **/
 .registerDateInfo{
     padding: 0 0 1vh 1vh;
@@ -91,5 +100,11 @@
 }
 
 .replyCommentShowButton:active {
+    color: dodgerblue;
+}
+
+/** 설정 드롭다운 버튼 **/
+.el-dropdown-link:hover{
+    cursor: pointer;
     color: dodgerblue;
 }
