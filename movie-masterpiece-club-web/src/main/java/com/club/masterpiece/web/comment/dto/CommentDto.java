@@ -21,6 +21,8 @@ public class CommentDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class CreateRequest {
 
+        /** 댓글 및 답글 생성 Dto **/
+
         @NotBlank(message = "Content Should not be blank.")
         private String content;
     }
@@ -28,6 +30,8 @@ public class CommentDto {
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class UpdateRequest {
+
+        /** 댓글 및 답글 수정 Dto **/
 
         @NotBlank(message = "Content Should not be blank.")
         private String content;

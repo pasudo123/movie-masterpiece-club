@@ -9,6 +9,6 @@ import com.club.masterpiece.web.comment.dto.CommentDto;
  **/
 public interface CommentUpdateService {
 
-    public CommentDto.OneResponse updateCommentContent(String commentId, CommentDto.UpdateRequest dto);
+    public CommentDto.OneResponse   updateContent(String commentId, CommentDto.UpdateRequest dto);
 
 }

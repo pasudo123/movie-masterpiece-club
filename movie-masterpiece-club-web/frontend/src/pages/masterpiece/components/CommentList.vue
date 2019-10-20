@@ -25,6 +25,7 @@
                     </div>
                 </div>
 
+                <!-- 댓글 수정 태그 -->
                 <div v-if="!modifyEdit[index]" class="commentInfo">
                     {{comment.comment}}
                 </div>
@@ -147,9 +148,9 @@
                 params.content = updateComment;
                 params.index = index;
 
-                this.updateComment(params).then((response) => {
+                this.updateComment(params).then(() => {
                     this.$set(this.modifyEdit, index, false);
-                }).catch((error) => {
+                }).catch(() => {
                     this.$set(this.modifyEdit, index, false);
                 });
             },

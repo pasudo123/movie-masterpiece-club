@@ -2,6 +2,7 @@ package com.club.masterpiece.web.comment.dto;
 
 import com.club.masterpiece.web.comment.model.Comment;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;

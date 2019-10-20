@@ -18,14 +18,22 @@
                                 설정<i class="el-icon-arrow-down el-icon--right"></i>
                             </span>
                             <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item>수정</el-dropdown-item>
+                                <el-dropdown-item @click.native="toggleModifyEdit(index)">수정</el-dropdown-item>
                                 <el-dropdown-item @click.native="deleteReplyProcess(reply.id)">삭제</el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
                     </div>
                 </div>
 
-                <div class="replyInfo">{{reply.comment}}</div>
+                <!-- 답글 수정 태그 -->
+                <div v-if="!modifyEdit[index]" class="replyInfo">{{reply.comment}}</div>
+                <div v-else class="commentEditInfo">
+                    <el-input
+                            class="titleClass"
+                            v-model="modifyReply[index]" />
+                    <el-button @click="modifyReplyProcess(index, reply.id, modifyReply[index])">수정</el-button>
+                    <el-button @click="toggleModifyEdit(index)">취소</el-button>
+                </div>
                 <div class="registerDateInfo">{{reply.registerDate}}</div>
             </div>
 
@@ -64,7 +72,7 @@
         props: {
             reply: {
                 type: Array,
-                required: true,
+                required: false,
                 default: () => []
             },
             commentIndex: {
@@ -76,7 +84,9 @@
         data() {
             return {
                 isDoubleReplyEdit: [],
-                isDelete: false,
+                modifyEdit: [],
+                modifyReply: [],
+                isDelete: false
             }
         },
         computed: {
@@ -84,10 +94,36 @@
         },
         methods: {
 
+            ...commentMapActions(['updateReply']),
             ...commentMapActions(['deleteReply']),
 
             toggleDoubleReplyComment(index) {
                 this.$set(this.isDoubleReplyEdit, index, !this.isDoubleReplyEdit[index]);
+            },
+
+            toggleModifyEdit(index) {
+                this.$set(this.modifyEdit, index, !this.modifyEdit[index]);
+
+                if (this.modifyEdit[index]) {
+                    return;
+                }
+
+                this.modifyReply[index] = this.reply[index].comment;
+            },
+
+            modifyReplyProcess(replyIndex, replyId, updateComment) {
+
+                const params = {};
+                params.commentIndex = this.commentIndex;
+                params.replyId = replyId;
+                params.replyIndex = replyIndex;
+                params.content = updateComment;
+
+                this.updateReply(params).then(() => {
+                    this.$set(this.modifyEdit, replyIndex, false);
+                }).catch(() => {
+                    this.$set(this.modifyEdit, replyIndex, false);
+                });
             },
 
             deleteReplyProcess(replyId) {
@@ -115,7 +151,10 @@
             }
         },
         created() {
-
+            for (let i = 0; i < this.reply.length; i++) {
+                this.modifyEdit[i] = false;
+                this.modifyReply[i] = this.reply[i].comment;
+            }
         }
     }
 </script>

@@ -99,6 +99,31 @@ const actions = {
         });
     },
 
+    updateReply({commit}, params) {
+
+        const uri = `comment/reply/${params.replyId}`;
+
+        const payload = {};
+        payload.content = params.content;
+
+        return new Promise((resolve, reject) => {
+
+            request.put(uri, payload).then((response) => {
+
+                let updateInfo = {};
+                updateInfo.commentIndex = params.commentIndex;
+                updateInfo.replyIndex = params.replyIndex;
+                updateInfo.data = response.data;
+
+                commit('updateReply', updateInfo);
+                resolve();
+            }).catch((error) => {
+                console.error(error.response);
+                reject(error);
+            })
+        });
+    },
+
     deleteComment({commit}, params) {
 
         const uri = `comment/${params.commentId}/status`;
@@ -173,6 +198,14 @@ const mutations = {
 
     updateComment(state, updateInfo) {
         state.ListCommentState[updateInfo.index].comment = updateInfo.data.comment;
+    },
+
+    updateReply(state, updateInfo) {
+
+        console.debug
+
+        state.ListCommentState[updateInfo.commentIndex]
+            .reply.list[updateInfo.replyIndex].comment = updateInfo.data.comment;
     },
 
     deleteComment(state, response) {

@@ -44,7 +44,19 @@ public class CommentController {
             throw new CustomValidationException("Valid Exception.", bindingResult);
         }
 
-        return ResponseEntity.ok().body(commentUpdateService.updateCommentContent(commentId, dto));
+        return ResponseEntity.ok().body(commentUpdateService.updateContent(commentId, dto));
+    }
+
+    @PutMapping("reply/{replyId}")
+    public ResponseEntity<CommentDto.OneResponse> updateReplyContent(@PathVariable("replyId") String replyId,
+                                                                     @RequestBody @Valid CommentDto.UpdateRequest dto,
+                                                                     BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            throw new CustomValidationException("Valid Exception.", bindingResult);
+        }
+
+        return ResponseEntity.ok().body(commentUpdateService.updateContent(replyId, dto));
     }
 
     @PutMapping("{commentId}/status")
