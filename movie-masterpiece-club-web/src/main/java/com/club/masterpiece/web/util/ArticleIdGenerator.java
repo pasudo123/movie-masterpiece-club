@@ -10,7 +10,6 @@ import java.util.UUID;
 public class ArticleIdGenerator {
 
     public String generateId() {
-
-        return UUID.randomUUID().toString().replace("-", "");
+        return (UUID.randomUUID().toString().replace("-", "")).substring(5, 16);
     }
 }

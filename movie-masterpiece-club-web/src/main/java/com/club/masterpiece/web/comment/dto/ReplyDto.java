@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ReplyDto {
         private String id;
         private String comment;
         private LocalDate registerDate;
+        private String registerTimeFormat;
         private String createdUserId;
         private String createdName;
         private String createdProfile;
@@ -33,6 +35,7 @@ public class ReplyDto {
             this.id = comment.getCommendId();
             this.comment = comment.getContent();
             this.registerDate = comment.getRegDate().toLocalDate();
+            this.registerTimeFormat = comment.getRegDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             this.createdUserId = comment.getUser().getId();
             this.createdName = comment.getUser().getUsername();
             this.createdProfile = comment.getUser().getProfile();

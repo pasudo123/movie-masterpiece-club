@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class ArticleDto {
         private String title;
         private String content;
         private LocalDate registerDate;
+        private String registerTimeFormat;
         private String createdUserId;
         private String createdName;
         private String createdProfile;
@@ -53,6 +55,7 @@ public class ArticleDto {
             this.title = article.getTitle();
             this.content = article.getContent();
             this.registerDate = article.getRegDate().toLocalDate();
+            this.registerTimeFormat = article.getRegDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             this.createdUserId = article.getUser().getId();
             this.createdName = article.getUser().getUsername();
             this.createdProfile = article.getUser().getProfile();

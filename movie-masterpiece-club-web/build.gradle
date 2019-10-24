@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.club.masterpiece'
-version = '0.1.0' + '-' + new Date().format("yyyyMMddHHmmss")
+version = '0.1.0' + '-' + new Date().format("yyyyMMdd-HHmmss")
 sourceCompatibility = '1.8'
 
 configurations {
