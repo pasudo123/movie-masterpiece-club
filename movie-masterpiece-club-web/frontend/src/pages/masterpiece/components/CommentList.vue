@@ -133,11 +133,6 @@
 
             toggleModifyEdit(index) {
                 this.$set(this.modifyEdit, index, !this.modifyEdit[index]);
-
-                if (this.modifyEdit[index]) {
-                    return;
-                }
-
                 this.modifyComment[index] = this.ListCommentState[index].comment;
             },
 
