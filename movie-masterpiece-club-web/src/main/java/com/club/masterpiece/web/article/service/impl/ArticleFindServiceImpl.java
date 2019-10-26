@@ -6,6 +6,7 @@ import com.club.masterpiece.web.article.repository.ArticleRepository;
 import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.exception.EmptyResultException;
 import com.club.masterpiece.web.user.model.User;
+import com.google.common.base.Strings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,11 +36,18 @@ public class ArticleFindServiceImpl implements ArticleFindService {
     }
 
     @Override
-    public ArticleDto.OneResponse findOneById(String articleId) {
+    public ArticleDto.OneResponse findOneById(final String articleId) {
 
         Article article = articleRepository.findOneByArticleId(articleId)
-                .orElseThrow(() -> new EmptyResultException("Article is Not Found."));
+                .orElseThrow(() -> new EmptyResultException(String.format("Article is Not Found. : %s", articleId)));
 
         return new ArticleDto.OneResponse(article);
+    }
+
+    @Override
+    public Article findEntityById(final String articleId) {
+
+        return articleRepository.findOneByArticleId(articleId)
+                .orElseThrow(() -> new EmptyResultException(String.format("Article is Not Found. : %s", articleId)));
     }
 }

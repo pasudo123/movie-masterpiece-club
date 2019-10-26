@@ -27,9 +27,7 @@ spring:
               - email
               - profile
 
-  freemarker:
-    template-loader-path: classpath:/static/templates
-    suffix: .ftl
+redirect-url: /masterpiece
 
 ## context path 가 있기 때문에 google redirect-uri 도 그에 따라 변경됨.
 server:

@@ -27,7 +27,7 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
     private final ArticleRepository articleRepository;
 
     @Override
-    public ArticleDto.OneResponse create(final User user, final ArticleDto.createRequest dto) {
+    public ArticleDto.OneResponse create(final User user, final ArticleDto.CreateRequest dto) {
 
         log.debug("article title : {}", dto.getTitle());
         log.debug("article content : {}", dto.getContent());

@@ -103,6 +103,11 @@ public class Comment {
         this.comment = parentComment;
     }
 
+    private void setComment(final Comment comment) {
+        this.comment = comment;
+        getArticle().addNewComment(this);
+    }
+
     public void updateCommentActive2Delete(){
         this.activeStatus = ActiveStatus.DELETE;
         getReplyList().forEach(Comment::updateReplyActive2Delete);

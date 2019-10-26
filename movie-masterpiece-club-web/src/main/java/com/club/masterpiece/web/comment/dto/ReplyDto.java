@@ -35,7 +35,7 @@ public class ReplyDto {
             this.id = comment.getCommendId();
             this.comment = comment.getContent();
             this.registerDate = comment.getRegDate().toLocalDate();
-            this.registerTimeFormat = comment.getRegDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            this.registerTimeFormat = comment.getRegDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
             this.createdUserId = comment.getUser().getId();
             this.createdName = comment.getUser().getUsername();
             this.createdProfile = comment.getUser().getProfile();

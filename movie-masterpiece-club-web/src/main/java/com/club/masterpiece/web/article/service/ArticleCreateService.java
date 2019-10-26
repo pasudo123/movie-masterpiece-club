@@ -10,6 +10,6 @@ import com.club.masterpiece.web.user.model.User;
  **/
 public interface ArticleCreateService {
 
-    ArticleDto.OneResponse create(User user, ArticleDto.createRequest dto);
+    ArticleDto.OneResponse create(User user, ArticleDto.CreateRequest dto);
 
 }

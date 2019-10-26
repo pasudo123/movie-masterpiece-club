@@ -1,17 +1,14 @@
 import request from '@/request';
 import {convertDate2Hangul} from '@/utils/moment-util';
 
-const OneCommentState = {};
-const ListCommentState = [];
+const listCommentState = [];
 
 const state = {
-    OneCommentState,
-    ListCommentState,
+    listCommentState,
 };
 
 const getters = {
-    OneCommentState: (state) => state.OneCommentState,
-    ListCommentState: (state) => state.ListCommentState,
+    listCommentState: (state) => state.listCommentState,
 };
 
 const actions = {
@@ -170,7 +167,7 @@ const mutations = {
         let comment = response.data;
         comment.registerDate = convertDate2Hangul(comment.registerDate);
 
-        state.ListCommentState.push(comment)
+        state.listCommentState.push(comment)
     },
 
     addReply(state, replyValue) {
@@ -180,50 +177,47 @@ const mutations = {
 
         reply.registerDate = convertDate2Hangul(reply.registerDate);
 
-        state.ListCommentState[index].reply.list.push(reply);
+        state.listCommentState[index].reply.list.push(reply);
     },
 
     setListCommentState(state, response) {
 
-        state.ListCommentState = [];
+        state.listCommentState = [];
 
         response.data.commentList.forEach((comment) => {
 
             comment.registerDate = convertDate2Hangul(comment.registerDate);
-            state.ListCommentState.push(comment);
+            console.debug(comment);
+            state.listCommentState.push(comment);
         });
-
-        console.debug(state.ListCommentState);
     },
 
     updateComment(state, updateInfo) {
-        state.ListCommentState[updateInfo.index].comment = updateInfo.data.comment;
+        state.listCommentState[updateInfo.index].comment = updateInfo.data.comment;
     },
 
     updateReply(state, updateInfo) {
 
-        console.debug
-
-        state.ListCommentState[updateInfo.commentIndex]
+        state.listCommentState[updateInfo.commentIndex]
             .reply.list[updateInfo.replyIndex].comment = updateInfo.data.comment;
     },
 
     deleteComment(state, response) {
 
         let newListCommentState = [];
-        newListCommentState = state.ListCommentState.filter(element => element.id !== response.data.id);
+        newListCommentState = state.listCommentState.filter(element => element.id !== response.data.id);
 
-        state.ListCommentState = [];
-        state.ListCommentState = newListCommentState;
+        state.listCommentState = [];
+        state.listCommentState = newListCommentState;
     },
 
     deleteReply(state, deleteInfo) {
 
-        let replyList = state.ListCommentState[deleteInfo.commentIndex].reply.list;
+        let replyList = state.listCommentState[deleteInfo.commentIndex].reply.list;
         let newListReplyState = replyList.filter(element => element.id !== deleteInfo.data.id);
 
-        state.ListCommentState[deleteInfo.commentIndex].reply.list = [];
-        state.ListCommentState[deleteInfo.commentIndex].reply.list = newListReplyState;
+        state.listCommentState[deleteInfo.commentIndex].reply.list = [];
+        state.listCommentState[deleteInfo.commentIndex].reply.list = newListReplyState;
     }
 };
 

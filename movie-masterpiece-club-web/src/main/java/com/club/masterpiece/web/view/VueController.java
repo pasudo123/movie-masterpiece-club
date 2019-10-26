@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.view;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  **/
 @Controller
 public class VueController {
+
+    @Value("${redirect-url}")
+    private String redirectUrl;
 
     @RequestMapping("/login")
     public String login() {
@@ -23,6 +27,6 @@ public class VueController {
 
     @RequestMapping("/login/success")
     public String loginSuccess() {
-        return "redirect:/masterpiece";
+        return "redirect:" + redirectUrl;
     }
 }

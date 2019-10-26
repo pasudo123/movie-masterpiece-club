@@ -27,9 +27,7 @@ spring:
               - email
               - profile
 
-  freemarker:
-    template-loader-path: classpath:/static/templates
-    suffix: .ftl
+redirect-url: http://localhost:8899/masterpiece
 
 server:
   port: 8080

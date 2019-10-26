@@ -1,5 +1,7 @@
 package com.club.masterpiece.web.article.model;
 
+import com.club.masterpiece.web.article.dto.ArticleDto;
+import com.club.masterpiece.web.comment.model.Comment;
 import com.club.masterpiece.web.global.type.ActiveStatus;
 import com.club.masterpiece.web.user.model.User;
 import lombok.AccessLevel;
@@ -12,6 +14,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pasudo123 on 2019-09-22
@@ -63,6 +67,15 @@ public class Article {
             foreignKey = @ForeignKey(name = "fk_article_user_idx"))
     private User user;
 
+    @OneToMany(
+            targetEntity = Comment.class,
+            mappedBy = "article",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Comment> commentList = new ArrayList<>();
+
     @Builder
     public Article(String articleId, String title, String content, ArticleType type, User user) {
         this.articleId = articleId;
@@ -70,5 +83,14 @@ public class Article {
         this.content = content;
         this.type = type;
         this.user = user;
+    }
+
+    public void updateArticle(final ArticleDto.UpdateRequest dto) {
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
+    }
+
+    public void addNewComment(final Comment comment) {
+        this.commentList.add(comment);
     }
 }

@@ -24,7 +24,7 @@ public class ArticleDto {
 
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class createRequest{
+    public static class CreateRequest{
 
         @NotBlank(message = "Article Title Should not be blank.")
         private String title;
@@ -34,7 +34,17 @@ public class ArticleDto {
 
         @NotNull(message = "Article Type Should not be null.")
         private ArticleType type;
+    }
 
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class UpdateRequest {
+
+        @NotBlank(message = "Article Title Should not be blank.")
+        private String title;
+
+        @NotBlank(message = "Article Content Should not be blank.")
+        private String content;
     }
 
     @Getter

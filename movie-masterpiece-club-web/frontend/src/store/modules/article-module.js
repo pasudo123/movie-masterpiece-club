@@ -57,6 +57,22 @@ const actions = {
                 resolve();
             })
         })
+    },
+
+    deleteOneArticle({commit}, params) {
+
+        const uri = `article/${params.articleId}`;
+
+        return new Promise((resolve, reject) => {
+
+            request.delete(uri).then((response) => {
+                console.debug(response.data);
+                // commit('setArticleListState', response);
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            })
+        });
     }
 };
 

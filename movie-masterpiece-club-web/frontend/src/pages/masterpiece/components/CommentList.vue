@@ -3,7 +3,7 @@
 
         <div
                 class="commentElement"
-                v-for="(comment, index) in this.ListCommentState" :key="comment.id">
+                v-for="(comment, index) in this.listCommentState" :key="comment.id">
 
             <div class="commentInfoWrapper">
                 <div class="createdInfo">
@@ -105,7 +105,7 @@
         },
         computed: {
             ...articleMapGetters(['articleOneState']),
-            ...commentMapGetters(['ListCommentState']),
+            ...commentMapGetters(['listCommentState']),
             ...commentMapGetters(['ListReplyState']),
             ...authMapGetters(['currentAuthState']),
         },
@@ -121,19 +121,19 @@
                 params.articleId = this.$route.params.articleId;
 
                 this.fetchCommentList(params).then(() => {
-                    for (let i = 0; i < this.ListCommentState.length; i++) {
+                    for (let i = 0; i < this.listCommentState.length; i++) {
                         this.isReplyEdit[i] = false;
                         this.isReplyShow[i] = false;
                         this.isReplyLoading[i] = false;
                         this.modifyEdit[i] = false;
-                        this.modifyComment[i] = this.ListCommentState[i].comment;
+                        this.modifyComment[i] = this.listCommentState[i].comment;
                     }
                 })
             },
 
             toggleModifyEdit(index) {
                 this.$set(this.modifyEdit, index, !this.modifyEdit[index]);
-                this.modifyComment[index] = this.ListCommentState[index].comment;
+                this.modifyComment[index] = this.listCommentState[index].comment;
             },
 
             modifyCommentProcess(index, commentId, updateComment) {

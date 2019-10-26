@@ -1,0 +1,37 @@
+
+#articleView{
+    margin: 3vh 0 0 0;
+}
+
+.titleWrapper{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.titleText {
+    height: 4vh;
+    font-size: 4vh;
+    padding: 1vh 0 2vh 0;
+    display: inline-block;
+}
+
+.articleRegDateText{
+    position: absolute;
+    right: 0;
+}
+
+.createdWrapper{
+    padding: 0.5vh 0 1vh 0;
+    border-bottom: 1px solid darkgray;
+}
+
+.modifyArticleText {
+    display: inline-block;
+    padding: 0 1vh 0 1vh;
+}
+
+.modifyText:hover {
+    cursor: pointer;
+    color: dodgerblue;
+}
