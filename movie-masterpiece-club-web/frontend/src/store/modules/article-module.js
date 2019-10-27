@@ -48,13 +48,33 @@ const actions = {
 
     fetchOneArticle({commit}, params) {
 
-        const uri = `article/${params.articleId}`
+        const uri = `article/${params.articleId}`;
 
         return new Promise((resolve, reject) => {
 
             request.get(uri).then((response) => {
                 commit('setArticleOneState', response);
                 resolve();
+            })
+        })
+    },
+
+    modifyArticle({commit}, params) {
+
+        const uri = `article/${params.articleId}`;
+
+        const payload = {};
+        payload.title = params.title;
+        payload.content = params.content;
+
+        return new Promise((resolve, reject) => {
+
+            request.put(uri, payload).then((response) => {
+                commit('updateArticleListState', response);
+                resolve();
+            }).catch((error) => {
+                console.error(error.response);
+                reject();
             })
         })
     },
@@ -104,6 +124,16 @@ const mutations = {
         oneArticle.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
 
         state.articleOneState = oneArticle;
+    },
+
+    updateArticleListState(state, response) {
+
+        articleListState.forEach(element => {
+          if (element.id === response.data.id) {
+              element.title = response.data.title;
+              element.content = response.data.content;
+          }
+        })
     }
 };
 

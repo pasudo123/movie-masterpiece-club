@@ -2,6 +2,7 @@ package com.club.masterpiece.web.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,10 +17,13 @@ import javax.servlet.ServletContext;
  **/
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(
+        // reference : https://www.baeldung.com/spring-security-method-security
+        prePostEnabled = true
+)
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final ServletContext servletContext;
     private final SecurityOAuth2UserService securityOAuth2UserService;
 
     @Override
@@ -34,20 +38,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/error", "/favicon.ico", "/**/*.jpg", "/**/*.png", "/**/*.css", "/**/*.js", "/**/*.map")
                 .permitAll()
-//                .antMatchers("/login/**", "/gulagbu-api/**", "/masterpiece/**")
                 .antMatchers("/login/**")
                 .permitAll();
 
         http.authorizeRequests()
                 .anyRequest().authenticated();
 
-        String contextPath = servletContext.getContextPath();
-        String baseUri = "/login/oauth2/callback/**";
-
         http.oauth2Login()
                 .loginPage("/login")
                 .redirectionEndpoint()
-                .baseUri(baseUri)
+                .baseUri("/login/oauth2/callback/**")
                 .and()
                 .userInfoEndpoint()
                 .userService(securityOAuth2UserService)

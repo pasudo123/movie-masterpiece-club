@@ -16,7 +16,8 @@
 
         <div class="buttonWrapper">
             <el-button @click="goHomePage">Cancel</el-button>
-            <el-button @click="writeArticleProcess">OK</el-button>
+            <el-button v-if="!this.isEdit" @click="writeArticleProcess">OK</el-button>
+            <el-button v-else @click="modifyArticleProcess">Modify</el-button>
         </div>
     </div>
 </template>
@@ -24,7 +25,10 @@
 <script>
 
     import {createNamespacedHelpers} from 'vuex';
-    const {mapActions: articleMapActions} = createNamespacedHelpers('articleModule');
+    const {
+        mapActions: articleMapActions,
+        mapGetters: articleMapGetters
+    } = createNamespacedHelpers('articleModule');
 
     import {quillEditor} from 'vue-quill-editor'
 
@@ -33,18 +37,41 @@
         components: {quillEditor},
         data() {
             return {
-                isWrite: false,
+                isWriteProcess: false,
+                isModifyProcess: false,
                 title: '',
                 content: '',
                 type: 'GENERAL',
                 editorOption: {
                     theme: 'snow'
+                },
+                isEdit: false
+            }
+        },
+        computed: {
+            ...articleMapGetters(['articleOneState'])
+        },
+        watch: {
+            '$route'(to, from) {
+
+                /** routing 이 되는 상태 **/
+                /** to 에 params 가 없는 경우 **/
+                if (Object.keys(to.params).length === 0) {
+                    this.noParamsProcess();
+                    return;
                 }
             }
         },
         methods: {
 
             ...articleMapActions(['writeArticle']),
+            ...articleMapActions(['modifyArticle']),
+
+            noParamsProcess() {
+                this.isEdit = false;
+                this.title = '';
+                this.content= '';
+            },
 
             goHomePage() {
                 this.$router.push({name: 'articleList'}).then(() => {});
@@ -52,13 +79,11 @@
 
             writeArticleProcess() {
 
-                console.debug('asasdas');
-
-                if (this.isWrite) {
+                if (this.isWriteProcess) {
                     return;
                 }
 
-                this.isWrite = true;
+                this.isWriteProcess = true;
 
                 const params = {};
                 params.title = this.title;
@@ -66,12 +91,56 @@
                 params.type = this.type;
 
                 this.writeArticle(params).then(() => {
-                    this.isWrite = false;
-                    /** router 이동 **/
+                    this.isWriteProcess = false;
                     this.$router.push({name: 'articleList'}).then(() => {});
                 }).catch(() => {
-                    this.isWrite = false;
+                    this.isWriteProcess = false;
                 })
+            },
+
+            modifyArticleProcess() {
+
+                if (this.isModifyProcess) {
+                    return;
+                }
+
+                this.isModifyProcess = true;
+
+                const params = {};
+                params.articleId = this.$route.params.articleId;
+                params.title = this.title;
+                params.content = this.content;
+                params.type = this.type;
+
+                this.modifyArticle(params).then(() => {
+                    this.isModifyProcess = false;
+                    this.$router.push({name: 'articleList'}).then(() => {});
+                }).catch(() => {
+                    this.isModifyProcess = false;
+                })
+            }
+        },
+        created() {
+
+            let articleId = this.$route.params.articleId;
+
+            /** no params **/
+            if (articleId === undefined) {
+                this.noParamsProcess();
+                return;
+            }
+
+            /** params => state 미존재 => 작성 **/
+            if (this.articleOneState.id === undefined) {
+                this.isEdit = false;
+                return;
+            }
+
+            /** params => state 존재 => 일치 **/
+            if (articleId === this.articleOneState.id) {
+                this.isEdit = true;
+                this.title = this.articleOneState.title;
+                this.content = this.articleOneState.content;
             }
         }
     }

@@ -81,27 +81,11 @@
                 this.$router.push({name: 'articleEdit'}).then(() => {});
             },
 
-            write() {
-                // console.debug(foo());
-                //
-                // const params = {};
-                // params.content = foo();
-                // params.type = 'GENERAL';
-                //
-                // this.writeArticle(params).then(() => {
-                // }).catch((error) => {
-                //     console.error(error);
-                // })
-            },
-
             logoutProcess() {
                 const ROOT_URI = process.env.VUE_APP_BASE_PATH;
                 window.location.href = `${ROOT_URI}/logout`;
             }
         },
-        created() {
-
-        }
     }
 </script>
 

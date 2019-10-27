@@ -13,6 +13,8 @@
             <span class="articleCreatedByText">
                 작성자 : {{articleOneState.createdName}}
             </span>
+
+            <!-- 해당 사용자에게 보여주기. -->
             <span class="modifyArticleText">
                 <span class="modifyText" @click="modifyArticleProcess(articleOneState)"> 수정하기 </span>
                 |
@@ -68,13 +70,13 @@
             ...articleMapActions(['deleteOneArticle']),
 
             modifyArticleProcess() {
-
+                this.$router.push({name: 'articleOneEdit', params:{articleId: this.articleOneState.id}}).then(() => {});
             },
 
             deleteArticleProcess() {
 
                 const params = {};
-                params.articleId = this.$route.params.articleId;
+                params.articleId = this.articleOneState.id;
 
                 this.deleteOneArticle(params).then(() => {
                     this.$router.push({name: 'articleList'}).then(() => {});

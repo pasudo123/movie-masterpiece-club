@@ -29,7 +29,15 @@ export default new VueRouter({
                 {
                     path: 'article-edit',
                     name: 'articleEdit',
-                    component: () => import('@/pages/masterpiece/components/ArticleEdit')
+                    component: () => import('@/pages/masterpiece/components/ArticleEdit'),
+                    children: [
+                        {
+                            path: ':articleId',
+                            name: 'articleOneEdit',
+                            component: () => import('@/pages/masterpiece/components/ArticleEdit'),
+                        }
+                    ]
+
                 },
                 {
                     path: 'article/:articleId',
