@@ -1,4 +1,14 @@
+
+# spring boot template : freemarker
 spring:
   freemarker:
     template-loader-path: classpath:/static/templates
     suffix: .ftl
+
+
+# logback setting
+logging:
+  level:
+    org.springframework.web: INFO
+    org.hibernate: ERROR
+  file: gulagbu.log
