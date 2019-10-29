@@ -30,7 +30,7 @@ public class ArticleFindServiceImpl implements ArticleFindService {
     @Override
     public ArticleDto.ListResponse findAll() {
 
-        List<Article> articleList = articleRepository.findAll();
+        List<Article> articleList = articleRepository.findAllByOrderByRegDateDesc();
 
         return new ArticleDto.ListResponse(articleList);
     }
