@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.article.service.impl;
 
+import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.article.dto.ArticleDto;
 import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.article.service.ArticleFindService;
@@ -22,6 +23,7 @@ public class ArticleUpdateServiceImpl implements ArticleUpdateService {
 
     private final ArticleFindService articleFindService;
 
+    @UpdatableState
     @Override
     public ArticleDto.OneResponse updateOneById(String articleId, ArticleDto.UpdateRequest dto) {
 

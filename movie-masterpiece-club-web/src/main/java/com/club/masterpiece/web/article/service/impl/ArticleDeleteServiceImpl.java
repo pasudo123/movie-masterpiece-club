@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.article.service.impl;
 
+import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.article.repository.ArticleRepository;
 import com.club.masterpiece.web.article.service.ArticleDeleteService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class ArticleDeleteServiceImpl implements ArticleDeleteService {
 
     private final ArticleRepository articleRepository;
 
+    @UpdatableState
     @Override
     public Map<String, Boolean> deleteOneById(final String articleId) {
 

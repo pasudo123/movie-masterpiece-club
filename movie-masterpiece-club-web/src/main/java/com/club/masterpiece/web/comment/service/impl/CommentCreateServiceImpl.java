@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.comment.service.impl;
 
+import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.comment.dto.CommentDto;
 import com.club.masterpiece.web.comment.dto.ReplyDto;
@@ -30,6 +31,7 @@ public class CommentCreateServiceImpl implements CommentCreateService {
     private final CommentRepository commentRepository;
     private final CommentFindService commentFindService;
 
+    @UpdatableState
     @Override
     public CommentDto.OneResponse createParentComment(final User user,
                                                       final String articleId,
@@ -55,6 +57,7 @@ public class CommentCreateServiceImpl implements CommentCreateService {
         return new CommentDto.OneResponse(savedComment);
     }
 
+    @UpdatableState
     @Override
     public ReplyDto.OneResponse createChildComment(final User user,
                                                      final String articleId,

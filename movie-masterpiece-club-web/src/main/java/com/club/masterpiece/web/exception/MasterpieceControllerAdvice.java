@@ -3,6 +3,7 @@ package com.club.masterpiece.web.exception;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,6 +24,9 @@ import java.util.List;
 @Slf4j
 public class MasterpieceControllerAdvice {
 
+    /**
+     * @RequestBody 유효성 검사 실패.
+     */
     @ExceptionHandler(CustomValidationException.class)
     public ResponseEntity<ErrorResponse> handleValidationException(CustomValidationException exception, WebRequest webRequest){
 
@@ -48,6 +52,9 @@ public class MasterpieceControllerAdvice {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Database 조회 시 빈 값.
+     */
     @ExceptionHandler(EmptyResultException.class)
     public ResponseEntity<ErrorResponse> handleEmptyResultException(EmptyResultException exception, WebRequest webRequest) {
 
@@ -62,4 +69,24 @@ public class MasterpieceControllerAdvice {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * 요청 권한 불일치.
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleAccessDeniedException(AccessDeniedException exception, WebRequest webRequest) {
+
+        /**
+         * https://www.baeldung.com/spring-security-custom-voter ??
+         */
+
+        log.error(exception.getMessage());
+        ErrorResponse response = ErrorResponse.builder()
+                .errorTimestamp(LocalDateTime.now())
+                .status(HttpStatus.FORBIDDEN)
+                .details(Collections.singletonList(exception.getMessage()))
+                .requestUri(webRequest.getDescription(false))
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
 }

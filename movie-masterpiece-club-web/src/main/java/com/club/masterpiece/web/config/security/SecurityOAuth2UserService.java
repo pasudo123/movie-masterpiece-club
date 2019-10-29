@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.config.security;
 
+import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.user.model.User;
 import com.club.masterpiece.web.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,7 @@ public class SecurityOAuth2UserService implements OAuth2UserService<OAuth2UserRe
                 .build();
     }
 
+    @UpdatableState
     private User saveOrUpdate(CustomOAuthAttributes attributes) {
 
         Optional<User> optional = userRepository.findOneById(attributes.getUserRegistrationId());

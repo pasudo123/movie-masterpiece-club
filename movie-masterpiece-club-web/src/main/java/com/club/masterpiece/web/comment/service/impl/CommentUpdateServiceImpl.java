@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.comment.service.impl;
 
+import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.comment.dto.CommentDto;
 import com.club.masterpiece.web.comment.model.Comment;
 import com.club.masterpiece.web.comment.repository.CommentRepository;
@@ -22,6 +23,7 @@ public class CommentUpdateServiceImpl implements CommentUpdateService {
     private final CommentFindService commentFindService;
     private final CommentRepository commentRepository;
 
+    @UpdatableState
     @Override
     public CommentDto.OneResponse updateContent(final String commentId, final CommentDto.UpdateRequest dto) {
 

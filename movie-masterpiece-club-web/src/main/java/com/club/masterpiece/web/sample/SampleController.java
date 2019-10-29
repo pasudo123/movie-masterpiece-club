@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.sample;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -11,21 +12,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sample")
 public class SampleController {
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public String post(){
         return "post";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("{id}")
     public String get() {
         return "get";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("{id}")
     public String put() {
         return "put";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{id}")
     public String delete() {
         return "delete";

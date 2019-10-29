@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.article.service.impl;
 
+import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.article.dto.ArticleDto;
 import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.article.repository.ArticleRepository;
@@ -26,6 +27,7 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
     private final ArticleIdGenerator articleIdGenerator;
     private final ArticleRepository articleRepository;
 
+    @UpdatableState
     @Override
     public ArticleDto.OneResponse create(final User user, final ArticleDto.CreateRequest dto) {
 

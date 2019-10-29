@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.comment.service.impl;
 
+import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.comment.dto.CommentDto;
 import com.club.masterpiece.web.comment.dto.ReplyDto;
 import com.club.masterpiece.web.comment.model.Comment;
@@ -26,6 +27,7 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
     private final CommentFindService commentFindService;
     private final CommentRepository commentRepository;
 
+    @UpdatableState
     @Override
     public CommentDto.OneResponse updateCommentStatusActiveToDelete(final String commentId) {
 
@@ -35,6 +37,7 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
         return new CommentDto.OneResponse(comment);
     }
 
+    @UpdatableState
     @Override
     public ReplyDto.OneResponse updateReplyStatusActiveToDelete(final String replyId) {
 
