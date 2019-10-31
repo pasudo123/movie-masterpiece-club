@@ -73,8 +73,8 @@ target/
 # End of https://www.gitignore.io/api/java,java-web,code-java
 
 ### 뷰 웹팩 번들링 제외
-src/main/resources/static/
+movie-masterpiece-club-web/src/main/resources/static/
 
 ### application.yml 설정 파일 제외
-src/**/application-prod.yml
-src/**/application-dev.yml
+movie-masterpiece-club-web/src/**/application-prod.yml
+movie-masterpiece-club-web/src/**/application-dev.yml
