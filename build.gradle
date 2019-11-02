@@ -14,6 +14,10 @@ configurations {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 subprojects {
 
     apply plugin: 'java'
@@ -40,8 +44,10 @@ subprojects {
 
         runtimeOnly 'com.h2database:h2'
         runtimeOnly 'mysql:mysql-connector-java'
+
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
         annotationProcessor 'org.projectlombok:lombok'
+
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.springframework.security:spring-security-test'
 
@@ -54,9 +60,15 @@ subprojects {
         /** swagger end **/
     }
 
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
+//    configurations {
+//        compileOnly {
+//            extendsFrom annotationProcessor
+//        }
+//    }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE")
         }
     }
 }
@@ -65,7 +77,7 @@ subprojects {
 //bootJar{
 //    mainClassName = 'com.club.masterpiece.web.WebApplication'
 //}
-//
+
 ///** 빌드 하지 않고 실행할 수 있다. **/
 //bootRun {
 //    main = 'com.club.masterpiece.web.WebApplication'
