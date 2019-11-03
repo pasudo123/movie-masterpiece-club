@@ -11,12 +11,15 @@ import com.club.masterpiece.web.comment.service.CommentCreateService;
 import com.club.masterpiece.web.comment.service.CommentFindService;
 import com.club.masterpiece.web.config.security.SecurityOAuth2User;
 import com.club.masterpiece.web.exception.CustomValidationException;
+import com.club.masterpiece.web.global.pojo.PageRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import sun.rmi.transport.ObjectTable;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -85,10 +88,18 @@ public class ArticleController {
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping
-    public ResponseEntity<ArticleDto.ListResponse> findAll() {
+//    @GetMapping
+//    public ResponseEntity<ArticleDto.ListResponse> findAll() {
+//
+//        ArticleDto.ListResponse response = articleFindService.findAll();
+//
+//        return ResponseEntity.ok().body(response);
+//    }
 
-        ArticleDto.ListResponse response = articleFindService.findAll();
+    @GetMapping
+    public ResponseEntity<Page<ArticleDto.OneResponse>> findPartialByPage(final PageRequestDto dto) {
+
+        Page<ArticleDto.OneResponse> response = articleFindService.findPartialByPage(dto);
 
         return ResponseEntity.ok().body(response);
     }

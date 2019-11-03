@@ -1,0 +1,19 @@
+//
+//buildscript {
+//    dependencies {
+//        classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
+//    }
+//}
+//
+//task npmBuild(type: NpmTask, dependsOn: npmInstall) {
+//    group = 'node'
+//    args = ['run', 'build']
+//}
+//
+//jar.dependsOn npmBuild
+//
+////调用npm run dev
+//task npmDev(type: NpmTask, dependsOn: npmInstall) {
+//    group = 'node'
+//    args = ['run', 'dev']
+//}

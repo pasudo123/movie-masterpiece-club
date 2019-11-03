@@ -9,6 +9,10 @@
     align-items: center;
 }
 
+.loadingWrapper{
+    height: 70vh;
+}
+
 .titleText {
     height: 4vh;
     font-size: 4vh;

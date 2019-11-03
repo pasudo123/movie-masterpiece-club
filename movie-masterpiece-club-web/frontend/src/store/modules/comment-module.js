@@ -180,6 +180,10 @@ const mutations = {
         state.listCommentState[index].reply.list.push(reply);
     },
 
+    initListCommentState(state) {
+        state.listCommentState = [];
+    },
+
     setListCommentState(state, response) {
 
         state.listCommentState = [];
