@@ -1,4 +1,3 @@
-
 import request from '@/request';
 
 
@@ -38,7 +37,27 @@ const actions = {
         return new Promise((resolve, reject) => {
 
             request.get(uri).then((response) => {
-                commit('setArticleListState', response);
+                commit('setArticleListStateByFindAll', response);
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    },
+
+    fetchPartialArticle({commit}, params) {
+
+        const uri = 'article';
+
+        const queryParam = {};
+        queryParam.page = params.page;
+        queryParam.size = 5;
+        queryParam.direction = 'DESC';
+
+        return new Promise((resolve, reject) => {
+
+            request.get(uri, {params: queryParam}).then((response) => {
+                commit('setArticleListStateByFindPartial', response);
                 resolve();
             }).catch((error) => {
                 reject(error);
@@ -98,9 +117,25 @@ const actions = {
 
 const mutations = {
 
-    setArticleListState(state, response){
+    setArticleListStateByFindAll(state, response) {
 
         let articleList = response.data.articleList;
+
+        state.articleListState = [];
+
+        articleList.forEach(element => {
+
+            let date = element.registerDate;
+            let array = date.split('-');
+            element.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
+
+            state.articleListState.push(element);
+        })
+    },
+
+    setArticleListStateByFindPartial(state, response) {
+
+        let articleList = response.data.content;
 
         state.articleListState = [];
 
@@ -129,10 +164,10 @@ const mutations = {
     updateArticleListState(state, response) {
 
         articleListState.forEach(element => {
-          if (element.id === response.data.id) {
-              element.title = response.data.title;
-              element.content = response.data.content;
-          }
+            if (element.id === response.data.id) {
+                element.title = response.data.title;
+                element.content = response.data.content;
+            }
         })
     }
 };

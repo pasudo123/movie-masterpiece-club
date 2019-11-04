@@ -37,12 +37,21 @@ public class ArticleFindServiceImpl implements ArticleFindService {
         return new ArticleDto.ListResponse(articleList);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Long getCount() {
+
+        return articleRepository.count();
+    }
+
+    @Transactional(readOnly = true)
     @Override
     public Page<ArticleDto.OneResponse> findPartialByPage(PageRequestDto dto) {
 
         return articleRepository.findAll(dto.of()).map(ArticleDto.OneResponse::new);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public ArticleDto.OneResponse findOneById(final String articleId) {
 
@@ -52,6 +61,7 @@ public class ArticleFindServiceImpl implements ArticleFindService {
         return new ArticleDto.OneResponse(article);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Article findEntityById(final String articleId) {
 

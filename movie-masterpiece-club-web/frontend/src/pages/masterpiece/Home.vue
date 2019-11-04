@@ -86,6 +86,9 @@
                 window.location.href = `${ROOT_URI}/logout`;
             }
         },
+        created() {
+            console.debug('created');
+        }
     }
 </script>
 

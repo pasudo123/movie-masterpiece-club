@@ -31,7 +31,10 @@
 
     import {createNamespacedHelpers} from 'vuex';
 
-    const {mapActions, mapGetters} = createNamespacedHelpers('articleModule');
+    const {
+        mapActions: articleMapActions,
+        mapGetters: articleMapGetters
+    } = createNamespacedHelpers('articleModule');
 
     export default {
         name: "ArticleList",
@@ -41,11 +44,12 @@
             }
         },
         computed: {
-            ...mapGetters(['articleListState'])
+            ...articleMapGetters(['articleListState'])
         },
         methods: {
 
-            ...mapActions(['fetchAllArticle']),
+            ...articleMapActions(['fetchAllArticle']),
+            ...articleMapActions(['fetchPartialArticle']),
 
             goArticleViewPage(articleId) {
                 this.$router.push({name: 'articleView', params:{articleId: articleId}}).then(() => {});
@@ -55,12 +59,15 @@
 
             this.isLoading = true;
 
-            this.fetchAllArticle().then((response) => {
+            const params = {};
+            params.page = 1;
+
+            this.fetchPartialArticle(params).then(() => {
                 this.isLoading = false;
             }).catch((error) => {
                 console.error(error.response);
                 this.isLoading = false;
-            })
+            });
         }
     }
 </script>

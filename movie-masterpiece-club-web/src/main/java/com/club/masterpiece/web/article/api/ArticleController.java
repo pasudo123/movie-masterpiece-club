@@ -88,13 +88,18 @@ public class ArticleController {
         return ResponseEntity.ok().body(response);
     }
 
-//    @GetMapping
-//    public ResponseEntity<ArticleDto.ListResponse> findAll() {
-//
-//        ArticleDto.ListResponse response = articleFindService.findAll();
-//
-//        return ResponseEntity.ok().body(response);
-//    }
+    @GetMapping("all")
+    public ResponseEntity<ArticleDto.ListResponse> findAll() {
+
+        ArticleDto.ListResponse response = articleFindService.findAll();
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("count")
+    public ResponseEntity<Long> getCount() {
+        return ResponseEntity.ok().body(articleFindService.getCount());
+    }
 
     @GetMapping
     public ResponseEntity<Page<ArticleDto.OneResponse>> findPartialByPage(final PageRequestDto dto) {

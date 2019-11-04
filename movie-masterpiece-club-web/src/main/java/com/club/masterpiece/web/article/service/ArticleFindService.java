@@ -14,6 +14,8 @@ public interface ArticleFindService {
 
     ArticleDto.ListResponse findAll();
 
+    Long getCount();
+
     Page<ArticleDto.OneResponse> findPartialByPage(PageRequestDto dto);
 
     ArticleDto.OneResponse findOneById(String articleId);

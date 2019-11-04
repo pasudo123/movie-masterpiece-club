@@ -5,11 +5,13 @@ import lombok.Setter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+
 /**
  * Created by pasudo123 on 2019-11-03
  * Email: oraedoa@gmail.com
  **/
 @Getter
+@Setter
 public class PageRequestDto {
 
     private int page;
@@ -34,6 +36,6 @@ public class PageRequestDto {
 
     public PageRequest of(){
         /** 페이지는 0 부터 시작한다. **/
-        return PageRequest.of(page - 1, size, direction, "reg_date");
+        return PageRequest.of(page - 1, size, direction, "regDate");
     }
 }
