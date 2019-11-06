@@ -24,6 +24,14 @@
             <el-divider><i class="el-icon-star-on"></i></el-divider>
         </div>
 
+        <el-pagination
+                layout="prev, pager, next"
+                @current-change="pageMove"
+                :page-size="pageSize"
+                :current-page="currentPage"
+                :total="articleAllCountState">
+        </el-pagination>
+
     </div>
 </template>
 
@@ -40,19 +48,27 @@
         name: "ArticleList",
         data() {
             return {
-                isLoading: false
+                isLoading: false,
+                currentPage: 1,
+                pageSize: 5,
             }
         },
         computed: {
+            ...articleMapGetters(['articleAllCountState']),
             ...articleMapGetters(['articleListState'])
         },
         methods: {
 
+            ...articleMapActions(['fetchAllArticleCount']),
             ...articleMapActions(['fetchAllArticle']),
             ...articleMapActions(['fetchPartialArticle']),
 
             goArticleViewPage(articleId) {
                 this.$router.push({name: 'articleView', params:{articleId: articleId}}).then(() => {});
+            },
+
+            pageMove(currentPage) {
+                console.debug("currentPage : ", currentPage);
             }
         },
         created() {
@@ -62,10 +78,14 @@
             const params = {};
             params.page = 1;
 
-            this.fetchPartialArticle(params).then(() => {
-                this.isLoading = false;
-            }).catch((error) => {
-                console.error(error.response);
+            Promise.all([
+                this.fetchAllArticleCount().catch(error => { return error }),
+                this.fetchPartialArticle(params).catch(error => { return error })
+            ]).then((returnValue) => {
+                /**
+                 * 정상적 메시지이면 정상
+                 * 오류면 오류로 값이 리턴.
+                 *  **/
                 this.isLoading = false;
             });
         }

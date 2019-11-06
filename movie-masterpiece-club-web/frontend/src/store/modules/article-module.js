@@ -1,10 +1,11 @@
 import request from '@/request';
 
-
+let articleAllCountState = 0;
 const articleListState = [];
 const articleOneState = {};
 
 const state = {
+    articleAllCountState,
     articleListState,
     articleOneState
 };
@@ -25,6 +26,22 @@ const actions = {
             request.post(uri, payload).then((response) => {
                 resolve();
             }).catch((error) => {
+                reject(error);
+            })
+        });
+    },
+
+    fetchAllArticleCount({commit}) {
+
+        const uri = 'article/count';
+
+        return new Promise((resolve, reject) => {
+
+            request.get(uri).then((response) => {
+                commit('setArticleAllCountState', response);
+                resolve();
+            }).catch((error) => {
+                console.debug('asddsa');
                 reject(error);
             })
         });
@@ -117,6 +134,10 @@ const actions = {
 
 const mutations = {
 
+    setArticleAllCountState(state, response) {
+        state.articleAllCountState = response.data;
+    },
+
     setArticleListStateByFindAll(state, response) {
 
         let articleList = response.data.articleList;
@@ -173,6 +194,7 @@ const mutations = {
 };
 
 const getters = {
+    articleAllCountState: (state) => state.articleAllCountState,
     articleListState: (state) => state.articleListState,
     articleOneState: (state) => state.articleOneState
 
