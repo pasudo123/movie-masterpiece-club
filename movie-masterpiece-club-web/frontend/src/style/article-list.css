@@ -1,4 +1,8 @@
 
+.loadingWrapper{
+    height: 70vh;
+}
+
 .articleElement {
     margin: 5vh 0 5vh 0;
 }
@@ -7,7 +11,6 @@
     width:100%;
     display: flex;
     align-items: center;
-    border: 1px solid red;
 }
 
 .contentArea {
@@ -17,4 +20,9 @@
 
 .listTitleArea{
     font-size: 3vh;
+}
+
+.pagination{
+    text-align: center;
+    padding: 2vh 0 4vh 0;
 }

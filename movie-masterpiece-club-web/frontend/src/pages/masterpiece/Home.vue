@@ -87,7 +87,6 @@
             }
         },
         created() {
-            console.debug('created');
         }
     }
 </script>
