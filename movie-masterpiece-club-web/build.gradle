@@ -1,30 +1,5 @@
 dependencies {
 
     implementation project(':movie-masterpiece-club-common')
-    
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-
-    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'mysql:mysql-connector-java'
-
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-
-    compile 'org.springframework.boot:spring-boot-starter-freemarker'
-
-    /** swagger **/
-    /** https://www.tutorialspoint.com/spring_boot/spring_boot_enabling_swagger2 **/
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
-    /** swagger end **/
-    
 }
