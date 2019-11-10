@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Ubuntu&display=swap');
+
+/**
+- main.js 적용.
+ */
+
+html, body {
+    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+#app {
+    font-family: 'Roboto', sans-serif;
+}

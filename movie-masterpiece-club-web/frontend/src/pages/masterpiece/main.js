@@ -6,6 +6,7 @@ import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ko';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'vue-material-design-icons/styles.css';
+import '@/style/global.css'
 
 // require styles
 import 'quill/dist/quill.core.css'

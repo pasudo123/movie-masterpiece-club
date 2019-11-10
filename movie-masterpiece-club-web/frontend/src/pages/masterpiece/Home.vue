@@ -4,12 +4,10 @@
         <div class="header">
             <div class="centerHeader">
                 <div class="meeting-icon-wrapper">
-                    <movie-icon class="c-movie-icon"/>
-
                     <span
                             @click="goServiceMainPage"
                             class="serviceTitle">
-                        Masterpiece Club
+                        Gulagbu
                     </span>
                 </div>
 
