@@ -5,6 +5,7 @@ import org.apache.catalina.Executor;
 import org.apache.catalina.connector.Connector;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextClosedEvent;
 
 import java.util.concurrent.ThreadPoolExecutor;
@@ -20,8 +21,9 @@ import java.util.concurrent.TimeUnit;
  * Created by pasudo123 on 2019-11-12
  * Email: oraedoa@gmail.com
  **/
+@Configuration
 @Slf4j
-public class GracefulShutdown implements TomcatConnectorCustomizer, ApplicationListener<ContextClosedEvent> {
+public class GracefulShutdownConfiguration implements TomcatConnectorCustomizer, ApplicationListener<ContextClosedEvent> {
 
     private static final int TIMEOUT = 30;
 
