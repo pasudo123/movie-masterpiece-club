@@ -58,7 +58,8 @@ module.exports = {
         },
     },
 
-    publicPath: process.env.NODE_ENV === 'production'
+    publicPath: (process.env.NODE_ENV === 'staging'
+        || process.env.NODE_ENV === 'production')
         ? process.env.VUE_APP_PUBLIC_PATH
         : '/',
     outputDir: '../src/main/resources/static/',
