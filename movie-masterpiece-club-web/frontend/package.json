@@ -1,10 +1,12 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "author" : "pasudo123",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode development",
-    "build": "vue-cli-service build --no-clean --mode production",
+    "build:prod": "vue-cli-service build --mode production",
+    "build:stage": "vue-cli-service build --mode staging",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
