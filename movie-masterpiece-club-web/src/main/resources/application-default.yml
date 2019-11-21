@@ -14,6 +14,11 @@ logging:
     org.hibernate: ERROR
 #  file: gulagbu.log
 
+# GCP
+cloud:
+  storage:
+    google-bucket: doubler-72002954.appspot.com
+
 # default
 table:
   user: user
