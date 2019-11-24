@@ -1,7 +1,7 @@
 package com.club.masterpiece.web.article.service;
 
-import com.club.masterpiece.web.article.dto.ArticleDto;
-import com.club.masterpiece.web.user.model.User;
+import com.club.masterpiece.common.article.dto.ArticleDto;
+import com.club.masterpiece.common.user.model.User;
 
 /**
  * Created by pasudo123 on 2019-09-23

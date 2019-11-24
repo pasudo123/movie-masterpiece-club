@@ -1,6 +1,6 @@
 package com.club.masterpiece.web.config.security;
 
-import com.club.masterpiece.web.user.model.User;
+import com.club.masterpiece.common.user.model.User;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;

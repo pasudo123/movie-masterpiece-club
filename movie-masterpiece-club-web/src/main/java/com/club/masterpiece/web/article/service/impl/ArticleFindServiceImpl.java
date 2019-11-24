@@ -1,13 +1,11 @@
 package com.club.masterpiece.web.article.service.impl;
 
-import com.club.masterpiece.web.article.dto.ArticleDto;
-import com.club.masterpiece.web.article.model.Article;
-import com.club.masterpiece.web.article.repository.ArticleRepository;
+import com.club.masterpiece.common.article.dto.ArticleDto;
+import com.club.masterpiece.common.article.model.Article;
+import com.club.masterpiece.common.article.repository.ArticleRepository;
 import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.exception.EmptyResultException;
 import com.club.masterpiece.web.global.pojo.PageRequestDto;
-import com.club.masterpiece.web.user.model.User;
-import com.google.common.base.Strings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

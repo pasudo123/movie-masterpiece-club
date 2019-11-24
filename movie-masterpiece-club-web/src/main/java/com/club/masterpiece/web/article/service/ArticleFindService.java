@@ -1,7 +1,7 @@
 package com.club.masterpiece.web.article.service;
 
-import com.club.masterpiece.web.article.dto.ArticleDto;
-import com.club.masterpiece.web.article.model.Article;
+import com.club.masterpiece.common.article.dto.ArticleDto;
+import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.web.global.pojo.PageRequestDto;
 import org.springframework.data.domain.Page;
 

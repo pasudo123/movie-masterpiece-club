@@ -5,4 +5,9 @@ package com.club.masterpiece.common.global.type;
  * Email: oraedoa@gmail.com
  **/
 public enum ActiveStatus {
+
+    ACTIVE,     // 활성
+    PENDING,    // 보류
+    DELETE      // 삭제
+
 }

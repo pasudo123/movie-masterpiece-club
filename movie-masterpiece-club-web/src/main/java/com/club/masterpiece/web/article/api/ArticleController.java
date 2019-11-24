@@ -1,12 +1,12 @@
 package com.club.masterpiece.web.article.api;
 
-import com.club.masterpiece.web.article.dto.ArticleDto;
+import com.club.masterpiece.common.article.dto.ArticleDto;
+import com.club.masterpiece.common.comment.dto.CommentDto;
+import com.club.masterpiece.common.comment.dto.ReplyDto;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
 import com.club.masterpiece.web.article.service.ArticleDeleteService;
 import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.article.service.ArticleUpdateService;
-import com.club.masterpiece.web.comment.dto.CommentDto;
-import com.club.masterpiece.web.comment.dto.ReplyDto;
 import com.club.masterpiece.web.comment.service.CommentCreateService;
 import com.club.masterpiece.web.comment.service.CommentFindService;
 import com.club.masterpiece.web.config.security.SecurityOAuth2User;

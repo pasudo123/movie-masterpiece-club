@@ -1,7 +1,7 @@
 package com.club.masterpiece.web.config.security;
 
-import com.club.masterpiece.web.user.model.Role;
-import com.club.masterpiece.web.user.model.User;
+import com.club.masterpiece.common.user.model.Role;
+import com.club.masterpiece.common.user.model.User;
 import lombok.Builder;
 import lombok.Getter;
 

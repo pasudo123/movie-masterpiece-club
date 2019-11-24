@@ -1,8 +1,8 @@
 package com.club.masterpiece.web.config.security;
 
+import com.club.masterpiece.common.user.model.User;
+import com.club.masterpiece.common.user.repository.UserRepository;
 import com.club.masterpiece.web.annotation.UpdatableState;
-import com.club.masterpiece.web.user.model.User;
-import com.club.masterpiece.web.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

@@ -1,8 +1,8 @@
 package com.club.masterpiece.web.article.service.impl;
 
+import com.club.masterpiece.common.article.dto.ArticleDto;
+import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.web.annotation.UpdatableState;
-import com.club.masterpiece.web.article.dto.ArticleDto;
-import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.article.service.ArticleUpdateService;
 import lombok.RequiredArgsConstructor;

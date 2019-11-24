@@ -1,6 +1,6 @@
 package com.club.masterpiece.web.article.service;
 
-import com.club.masterpiece.web.article.dto.ArticleDto;
+import com.club.masterpiece.common.article.dto.ArticleDto;
 
 /**
  * Created by pasudo123 on 2019-10-26

@@ -1,7 +1,7 @@
 package com.club.masterpiece.web.comment.service;
 
-import com.club.masterpiece.web.comment.dto.CommentDto;
-import com.club.masterpiece.web.comment.dto.ReplyDto;
+import com.club.masterpiece.common.comment.dto.CommentDto;
+import com.club.masterpiece.common.comment.dto.ReplyDto;
 
 /**
  * Created by pasudo123 on 2019-10-13

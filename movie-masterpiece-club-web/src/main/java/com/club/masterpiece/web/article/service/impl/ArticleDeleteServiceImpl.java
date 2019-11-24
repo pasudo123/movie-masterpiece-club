@@ -1,7 +1,7 @@
 package com.club.masterpiece.web.article.service.impl;
 
+import com.club.masterpiece.common.article.repository.ArticleRepository;
 import com.club.masterpiece.web.annotation.UpdatableState;
-import com.club.masterpiece.web.article.repository.ArticleRepository;
 import com.club.masterpiece.web.article.service.ArticleDeleteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

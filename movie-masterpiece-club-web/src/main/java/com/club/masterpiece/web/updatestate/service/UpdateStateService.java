@@ -1,7 +1,7 @@
 package com.club.masterpiece.web.updatestate.service;
 
-import com.club.masterpiece.web.updatestate.model.UpdateState;
-import com.club.masterpiece.web.updatestate.repository.UpdateStateRepository;
+import com.club.masterpiece.common.updatestate.model.UpdateState;
+import com.club.masterpiece.common.updatestate.repository.UpdateStateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,5 @@
 package com.club.masterpiece.web.model;
 
-import com.club.masterpiece.web.article.model.Article;
 import com.club.masterpiece.web.article.model.ArticleType;
 import com.club.masterpiece.web.article.repository.ArticleRepository;
 import com.club.masterpiece.web.user.model.Role;

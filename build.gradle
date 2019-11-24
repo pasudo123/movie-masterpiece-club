@@ -33,9 +33,9 @@ subprojects {
 
     dependencies {
 
-        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-
         compileOnly 'org.projectlombok:lombok'
+
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
         annotationProcessor 'org.projectlombok:lombok'
 
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -56,7 +56,6 @@ subprojects {
 
 project(':movie-masterpiece-club-common') {
     dependencies {
-
     }
 }
 
@@ -71,13 +70,3 @@ project(':movie-masterpiece-club-admin') {
         compile project(':movie-masterpiece-club-common')
     }
 }
-
-///** 빌드 시 명령어 **/
-//bootJar{
-//    mainClassName = 'com.club.masterpiece.web.WebApplication'
-//}
-
-///** 빌드 하지 않고 실행할 수 있다. **/
-//bootRun {
-//    main = 'com.club.masterpiece.web.WebApplication'
-//}

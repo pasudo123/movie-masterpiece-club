@@ -1,8 +1,8 @@
 package com.club.masterpiece.web.user.service.impl;
 
+import com.club.masterpiece.common.user.model.User;
+import com.club.masterpiece.common.user.repository.UserRepository;
 import com.club.masterpiece.web.exception.EmptyResultException;
-import com.club.masterpiece.web.user.model.User;
-import com.club.masterpiece.web.user.repository.UserRepository;
 import com.club.masterpiece.web.user.service.UserFindService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

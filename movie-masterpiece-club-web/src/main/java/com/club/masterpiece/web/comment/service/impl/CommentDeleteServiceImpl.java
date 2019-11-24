@@ -1,13 +1,12 @@
 package com.club.masterpiece.web.comment.service.impl;
 
+import com.club.masterpiece.common.comment.dto.CommentDto;
+import com.club.masterpiece.common.comment.dto.ReplyDto;
+import com.club.masterpiece.common.comment.model.Comment;
+import com.club.masterpiece.common.comment.repository.CommentRepository;
 import com.club.masterpiece.web.annotation.UpdatableState;
-import com.club.masterpiece.web.comment.dto.CommentDto;
-import com.club.masterpiece.web.comment.dto.ReplyDto;
-import com.club.masterpiece.web.comment.model.Comment;
-import com.club.masterpiece.web.comment.repository.CommentRepository;
 import com.club.masterpiece.web.comment.service.CommentDeleteService;
 import com.club.masterpiece.web.comment.service.CommentFindService;
-import com.club.masterpiece.web.exception.EmptyResultException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

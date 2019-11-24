@@ -1,7 +1,7 @@
 package com.club.masterpiece.web.comment.api;
 
-import com.club.masterpiece.web.comment.dto.CommentDto;
-import com.club.masterpiece.web.comment.dto.ReplyDto;
+import com.club.masterpiece.common.comment.dto.CommentDto;
+import com.club.masterpiece.common.comment.dto.ReplyDto;
 import com.club.masterpiece.web.comment.service.CommentDeleteService;
 import com.club.masterpiece.web.comment.service.CommentFindService;
 import com.club.masterpiece.web.comment.service.CommentUpdateService;

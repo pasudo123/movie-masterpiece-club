@@ -1,8 +1,7 @@
 package com.club.masterpiece.web.auth.api;
 
-import com.club.masterpiece.web.auth.dto.AuthDto;
+import com.club.masterpiece.common.auth.dto.AuthDto;
 import com.club.masterpiece.web.config.security.SecurityOAuth2User;
-import com.club.masterpiece.web.user.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
