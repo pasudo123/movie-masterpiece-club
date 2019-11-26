@@ -4,11 +4,10 @@
         <div class="header">
             <div class="centerHeader">
                 <div class="meeting-icon-wrapper">
-                    <span
-                            @click="goServiceMainPage"
-                            class="serviceTitle">
-                        Gulagbu
-                    </span>
+        <span
+                @click="goServiceMainPage"
+                class="serviceTitle">Gulagbu
+        </span>
                 </div>
 
                 <div class="meeting-title">
@@ -39,7 +38,6 @@
             </el-button>
         </div>
 
-
         <div class="body">
             <router-view></router-view>
         </div>
@@ -49,20 +47,20 @@
 <script>
 
     import {createNamespacedHelpers} from 'vuex';
+    import ArticleList from '@/pages/masterpiece/components/ArticleList'
 
     const {mapActions: articleMapActions} = createNamespacedHelpers('articleModule');
     const {mapGetters: authMapGetters} = createNamespacedHelpers('auth');
 
-    import {foo} from '@/utils/moment-util';
-    import MovieIcon from 'icons/MovieOpen'
-    import ArticleList from '@/pages/masterpiece/components/ArticleList'
-
     export default {
         name: "index",
-        components: {MovieIcon, ArticleList},
+        components: {
+            ArticleList,
+        },
         data() {
             return {
                 userProfileSize: 35,
+                backgroundColor: '#F5DEB3'
             }
         },
         computed: {
@@ -72,11 +70,16 @@
             ...articleMapActions(['writeArticle']),
 
             goServiceMainPage() {
-                this.$router.push({name: 'articleList'}).then(() => {});
+
+                // console.debug(this.$route.path);
+
+                this.$router.push({name: 'articleList'}).then(() => {
+                });
             },
 
             goArticleEditPage() {
-                this.$router.push({name: 'articleEdit'}).then(() => {});
+                this.$router.push({name: 'articleEdit'}).then(() => {
+                });
             },
 
             logoutProcess() {
@@ -88,6 +91,12 @@
         }
     }
 </script>
+
+<style>
+    .navbar {
+        padding: 8px 240px 8px 240px;
+    }
+</style>
 
 <style scoped src="@/style/article.css">
 

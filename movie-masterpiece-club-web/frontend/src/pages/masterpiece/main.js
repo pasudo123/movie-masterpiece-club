@@ -6,6 +6,8 @@ import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ko';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'vue-material-design-icons/styles.css';
+import 'bootstrap-css-only/css/bootstrap.min.css'
+import 'mdbvue/lib/css/mdb.min.css'
 import '@/style/global.css'
 
 // require styles

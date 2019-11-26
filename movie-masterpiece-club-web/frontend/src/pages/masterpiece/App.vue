@@ -6,8 +6,6 @@
 
 <script>
 
-    import {foo} from '@/utils/moment-util';
-
     export default {
         name: "App",
     }

@@ -28,6 +28,7 @@ spring:
               - profile
 
 redirect-url: /masterpiece
+logout-success-url: /login
 
 ## context path 가 있기 때문에 google redirect-uri 도 그에 따라 변경됨.
 server:

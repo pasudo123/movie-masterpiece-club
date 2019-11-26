@@ -1,21 +1,11 @@
 #login {
     margin: 0 auto;
-    width: 960px;
-    padding:140px;
+    width: 540px;
+    padding-top: 12vh;
     height: auto;
     text-align: center;
 }
 
 div.whiteSpaceLine {
-    margin: 40px 0 40px 0;
+    margin: 4vh 0 4vh 0;
 }
-
-/*#login > div {*/
-    /*margin: 0 auto;*/
-    /*width: 80vw;*/
-/*}*/
-
-/*.googleLoginButton {*/
-    /*padding: 5vh 0 5vh 0;*/
-    /*font-size: 3vh;*/
-/*}*/

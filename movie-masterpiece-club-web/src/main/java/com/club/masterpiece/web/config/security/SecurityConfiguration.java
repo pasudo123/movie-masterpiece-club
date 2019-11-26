@@ -1,8 +1,10 @@
 package com.club.masterpiece.web.config.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -28,6 +30,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 )
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Value("${logout-success-url}")
+    private String logoutSuccessUrl;
 
     private final SecurityOAuth2UserService securityOAuth2UserService;
 
@@ -68,7 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/login/success");
 
         http.logout()
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl(logoutSuccessUrl)
                 .clearAuthentication(true);
     }
 
