@@ -1,14 +1,16 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
 
 /**
-- main.js 적용.
+- main.js 에 적용. (폰트)
  */
 
 html, body {
-    font-family: 'Ubuntu', sans-serif;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Slab', 'Roboto', 'Nanum Gothic', sans-serif;
 }
 
 #app {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Slab', 'Roboto', 'Nanum Gothic', sans-serif;
 }
+
