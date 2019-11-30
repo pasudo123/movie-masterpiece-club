@@ -2,40 +2,51 @@
     <div id="articleIndex">
 
         <div class="header">
-            <div class="centerHeader">
-                <div class="meeting-icon-wrapper">
-        <span
-                @click="goServiceMainPage"
-                class="serviceTitle">Gulagbu
-        </span>
-                </div>
+            <el-menu :default-active="activeIndex"
+                     class="el-menu-demo"
+                     mode="horizontal">
 
-                <div class="meeting-title">
-                    <el-button
-                            @click="goArticleEditPage"
-                            class="writeButton"
-                            type="text">
-                        Write a article
-                    </el-button>
-                    <el-button class="scheduleButton" type="text">Schedule</el-button>
-                </div>
+                <el-menu-item class="titleWrapper">
+                    <h3 class="titleText">Gulagbu</h3>
+                </el-menu-item>
 
-                <div class="user-info-wrapper">
-                    <span class="userEmailText">{{this.currentAuthState.email}}</span>
-                    <el-avatar
+                <el-menu-item
+                        @click="goServiceMainPage"
+                        class="homeLinkText"
+                        index="1">
+                    Home
+                </el-menu-item>
+
+                <el-menu-item
+                        @click="goArticleEditPage"
+                        class="writeArticleText"
+                        index="2">
+                    Write a article
+                </el-menu-item>
+
+                <el-menu-item
+                        class="scheduleText"
+                        index="3">
+                    Schedule
+                </el-menu-item>
+
+                <el-submenu class="userInfoText" index="4">
+                    <template slot="title">
+                        <el-avatar
                             class="userAvatar"
                             :fit="'cover'"
                             :size="userProfileSize"
-                            :src="currentAuthState.profile"></el-avatar>
-                </div>
-            </div>
-
-            <el-button
-                    @click="logoutProcess"
-                    class="LogoutButton"
-                    type="text">
-                Logout
-            </el-button>
+                            :src="currentAuthState.profile"/>
+                        {{this.currentAuthState.email}}
+                    </template>
+                    <el-menu-item index="4-1">Profile</el-menu-item>
+                    <el-menu-item
+                            @click="logoutProcess"
+                            index="4-2">
+                        Logout
+                    </el-menu-item>
+                </el-submenu>
+            </el-menu>
         </div>
 
         <div class="body">
@@ -60,7 +71,7 @@
         data() {
             return {
                 userProfileSize: 35,
-                backgroundColor: '#F5DEB3'
+                activeIndex: '1'
             }
         },
         computed: {
@@ -71,8 +82,10 @@
 
             goServiceMainPage() {
 
-                // console.debug(this.$route.path);
-
+                if (this.$route.path === '/masterpiece') {
+                    return;
+                }
+                
                 this.$router.push({name: 'articleList'}).then(() => {
                 });
             },
@@ -85,16 +98,24 @@
             logoutProcess() {
                 const ROOT_URI = process.env.VUE_APP_BASE_PATH;
                 window.location.href = `${ROOT_URI}/logout`;
-            }
-        },
-        created() {
+            },
         }
     }
 </script>
 
 <style>
-    .navbar {
-        padding: 8px 240px 8px 240px;
+    .el-menu-item:not(.is-disabled):hover {
+        color: #212422 !important;
+    }
+
+    .el-menu--horizontal > .el-menu-item.is-active {
+        border-bottom: 1px solid transparent !important;
+        color: #303133;
+    }
+
+    .el-menu--horizontal>.el-submenu.is-active .el-submenu__title {
+        border-bottom: 1px solid transparent !important;
+        color: #303133;
     }
 </style>
 

@@ -4,96 +4,34 @@
     padding: 0;
 }
 
-.header{
-    background: #f0f0f0;
-    width: 100%;
-    height: auto;
+.titleWrapper{
+    font-weight: bold;
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 0 0 0 120px;
+    color: #212422;
 }
 
+.titleText {
+    padding: 5px 0 0 0;
+}
 
-.header > .centerHeader {
-    margin:0 auto;
-    width: 70vw;
-    display: flex;
-    padding: 2vh 0 2vh 0;
-    border: 1px solid red;
+.homeLinkText {
+    margin: 0 0 0 30px;
+}
+
+.userInfoText{
+    position: absolute;
+    right: 35px;
+}
+
+.userAvatar {
+    position: relative;
+    right: 10px;
 }
 
 .body{
     margin:0 auto;
     width: 60vw;
-}
-
-.centerHeader > .meeting-icon-wrapper {
-    position: relative;
-    left: 1vw;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-}
-
-.material-design-icon.c-movie-icon {
-    width: 2vw;
-    height: 6vh;
-}
-
-.material-design-icon.c-movie-icon > .material-design-icon__svg {
-    width: 2vw;
-    height: 8vh;
-}
-
-.serviceTitle{
-    position: relative;
-    left: 1vw;
-    font-weight: bold;
-    font-size: 2.5vh;
-}
-
-.serviceTitle:hover{
-    cursor: pointer;
-    color: dodgerblue;
-}
-
-.centerHeader > .meeting-title {
-    flex-grow: 4;
-    font-size: 1.1vw;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.writeButton {
-    position: relative;
-    left: 10vw;
-    font-size: 2vh;
-}
-
-.scheduleButton {
-    position: relative;
-    left: 12vw;
-    font-size: 2vh;
-}
-
-.centerHeader > .user-info-wrapper {
-    flex-grow: 2;
-    font-size: 2vh;
-    display:flex;
-    align-items: center;
-    position: relative;
-    left: 16vh;
-}
-
-.userEmailText {}
-
-.userAvatar {
-    position: relative;
-    left: 1vw;
-}
-
-.LogoutButton{
-    position: absolute;
-    right: 4vh;
 }
