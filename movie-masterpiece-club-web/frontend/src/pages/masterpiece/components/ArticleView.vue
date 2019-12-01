@@ -23,9 +23,10 @@
                 <!-- 해당 사용자에게 보여주기. -->
                 <span class="modifyArticleText">
                     <span class="modifyText" @click="modifyArticleProcess(articleOneState)"> 수정하기 </span>
-                    |
                     <span class="modifyText" @click="deleteArticleProcess(articleOneState.id)"> 삭제하기 </span>
                 </span>
+
+                <span class="goToListText" @click="goServiceMainPage">목록가기</span>
             </div>
 
 
@@ -99,6 +100,11 @@
 
             closeLoading() {
                 this.loading = false;
+            },
+
+            goServiceMainPage() {
+                this.$router.push({name: 'articleList'}).then(() => {
+                });
             }
         },
         created() {

@@ -3,38 +3,38 @@
 
         <div class="header">
             <el-menu
-                    :router="true"
-                    :default-active="activePath"
                      class="el-menu-demo"
                      mode="horizontal">
 
-                <el-menu-item class="titleWrapper">
+                <el-menu-item index="1" class="titleWrapper">
                     <h3 class="titleText">Gulagbu</h3>
                 </el-menu-item>
 
+                        <!--:route="{name: 'articleList'}"-->
                 <el-menu-item
+                        index="2"
                         @click="goServiceMainPage"
-                        class="homeLinkText"
-                        index="/masterpiece/">
+                        class="homeLinkText">
                     Home
                 </el-menu-item>
 
+                        <!--:route="{name: 'articleEdit'}"-->
                 <el-menu-item
+                        index="3"
                         @click="goArticleEditPage"
-                        class="writeArticleText"
-                        index="/masterpiece/article-edit">
+                        class="writeArticleText">
                     Write a article
                 </el-menu-item>
 
                 <el-menu-item
-                        class="scheduleText"
-                        index="3">
+                        index="4"
+                        class="scheduleText">
                     Schedule
                 </el-menu-item>
 
                 <el-submenu
-                        class="userInfoText"
-                        index="4">
+                        index="5"
+                        class="userInfoText">
                     <template slot="title">
                         <el-avatar
                             class="userAvatar"
@@ -75,23 +75,18 @@
         data() {
             return {
                 userProfileSize: 35,
-                activePath: '/masterpiece/'
             }
         },
         computed: {
             ...authMapGetters(['currentAuthState'])
-        },
-        watch: {
-            $route(to, from) {
-                this.activePath = to.path;
-            }
         },
         methods: {
             ...articleMapActions(['writeArticle']),
 
             goServiceMainPage() {
 
-                if (this.$route.path === '/masterpiece') {
+
+                if (this.$router.currentRoute.name === 'articleList') {
                     return;
                 }
                 
@@ -100,6 +95,11 @@
             },
 
             goArticleEditPage() {
+
+                if (this.$router.currentRoute.name === 'articleEdit') {
+                    return;
+                }
+
                 this.$router.push({name: 'articleEdit'}).then(() => {
                 });
             },
@@ -110,7 +110,7 @@
             },
         },
         created(){
-            this.activePath = this.$router.currentRoute.path;
+            // this.activePath = this.$router.currentRoute.path;
         }
     }
 </script>

@@ -74,6 +74,12 @@
             },
 
             goHomePage() {
+
+                if (this.isEdit) {
+                    this.$router.go(-1);
+                    return;
+                }
+
                 this.$router.push({name: 'articleList'}).then(() => {});
             },
 
