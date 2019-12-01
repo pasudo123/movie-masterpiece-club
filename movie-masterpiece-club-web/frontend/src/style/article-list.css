@@ -1,28 +1,15 @@
 
-.loadingWrapper{
-    height: 70vh;
+#articleList{
+    margin: 0 auto;
 }
 
-.articleElement {
-    margin: 5vh 0 5vh 0;
+.dataTableWrapper{
+    margin: 40px 0 0 0;
 }
 
-.articleElement > .element{
-    width:100%;
+.pageWrapper{
+    margin: 20px 0 0 0;
+    width: 100%;
     display: flex;
-    align-items: center;
-}
-
-.contentArea {
-    cursor: pointer;
-    margin: 0 0 0 3vh;
-}
-
-.listTitleArea{
-    font-size: 3vh;
-}
-
-.pagination{
-    text-align: center;
-    padding: 2vh 0 4vh 0;
+    justify-content: center;
 }

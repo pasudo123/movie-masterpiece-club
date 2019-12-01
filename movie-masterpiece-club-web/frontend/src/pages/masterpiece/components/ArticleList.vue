@@ -1,41 +1,75 @@
 <template>
     <div id="articleList">
 
-        <div class=loadingWrapper v-if="isLoading" v-loading="isLoading"></div>
-        <div v-else>
-            <div
-                    class="articleElement"
-                    v-for="item in articleListState"
-                    :key="item.id">
+        <div class="dataTableWrapper"
+             v-loading="isLoading">
+            <el-table
+                    header-cell-class-name="headerCellName"
+                    cell-class-name="dataCellName"
+                    :data="articleListState"
+                    @row-click="enterArticleProcess"
+                    style="width: 100%">
 
-                <div class="element">
-                    <el-avatar
-                            class="userProfile"
-                            shape="circle"
-                            :size="60"
-                            :fit="'cover'"
-                            :src="item.createdProfile"></el-avatar>
+                <el-table-column
+                        label="Title">
+                    <template slot-scope="scope">
+                        {{ scope.row.title }}
+                    </template>
+                </el-table-column>
 
-                    <div
-                            @click="goArticleViewPage(item.id)"
-                            class="contentArea">
-                        <div class="listRegisterDateArea">{{item.registerDate}}</div>
-                        <div class="listTitleArea">{{item.title}}</div>
-                    </div>
-                </div>
+                <el-table-column
+                        label="Writer"
+                        width="160">
+                    <template slot-scope="scope">
+                        {{ scope.row.createdName }}
+                    </template>
+                </el-table-column>
 
-                <el-divider><i class="el-icon-star-on"></i></el-divider>
+                <el-table-column
+                        label="Register Date"
+                        width="160">
+                    <template slot-scope="scope">
+                        {{ scope.row.registerDate }}
+                    </template>
+                </el-table-column>
+            </el-table>
+
+            <div class="pageWrapper">
+                <el-pagination
+                        class="pagination"
+                        layout="prev, pager, next"
+                        @current-change="pageMove"
+                        :page-size="pageSize"
+                        :current-page="currentPage"
+                        :total="articleAllCountState">
+                </el-pagination>
             </div>
-
-            <el-pagination
-                    class="pagination"
-                    layout="prev, pager, next"
-                    @current-change="pageMove"
-                    :page-size="pageSize"
-                    :current-page="currentPage"
-                    :total="articleAllCountState">
-            </el-pagination>
         </div>
+
+        <!--<div v-else>-->
+        <!--<div-->
+        <!--class="articleElement"-->
+        <!--v-for="item in articleListState"-->
+        <!--:key="item.id">-->
+
+        <!--<div class="element">-->
+        <!--<el-avatar-->
+        <!--class="userProfile"-->
+        <!--shape="circle"-->
+        <!--:size="60"-->
+        <!--:fit="'cover'"-->
+        <!--:src="item.createdProfile"></el-avatar>-->
+
+        <!--<div-->
+        <!--@click="goArticleViewPage(item.id)"-->
+        <!--class="contentArea">-->
+        <!--<div class="listRegisterDateArea">{{item.registerDate}}</div>-->
+        <!--<div class="listTitleArea">{{item.title}}</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<el-divider><i class="el-icon-star-on"></i></el-divider>-->
+        <!--</div>-->
 
     </div>
 </template>
@@ -55,7 +89,7 @@
             return {
                 isLoading: false,
                 currentPage: 1,
-                pageSize: 5,
+                pageSize: 5
             }
         },
         computed: {
@@ -79,9 +113,10 @@
             ...articleMapActions(['fetchAllArticle']),
             ...articleMapActions(['fetchPartialArticle']),
 
-            goArticleViewPage(articleId) {
-                this.$router.push({name: 'articleView', params: {articleId: articleId}}).then(() => {
-                });
+            enterArticleProcess(row) {
+                this.$router.push({name: 'articleView', params: {articleId: row.id}})
+                    .then(() => {
+                    });
             },
 
             renderArticleListPage(page) {
@@ -97,6 +132,7 @@
                     })
                 ]).then((returnValue) => {
                     /**
+                     * [ promise all ]
                      * 정상적 메시지이면 정상
                      * 오류면 오류로 값이 리턴.
                      *  **/
@@ -114,6 +150,25 @@
         }
     }
 </script>
+
+<style>
+    .el-table .headerCellName {
+        text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: 1px;
+        color: black;
+    }
+
+    .el-table .dataCellName {
+        text-align: center;
+    }
+
+    .el-table .dataCellName:hover {
+        cursor: pointer;
+    }
+
+</style>
 
 <style scoped src="@/style/article-list.css">
 

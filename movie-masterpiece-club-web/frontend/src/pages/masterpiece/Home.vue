@@ -2,7 +2,9 @@
     <div id="articleIndex">
 
         <div class="header">
-            <el-menu :default-active="activeIndex"
+            <el-menu
+                    :router="true"
+                    :default-active="activePath"
                      class="el-menu-demo"
                      mode="horizontal">
 
@@ -13,14 +15,14 @@
                 <el-menu-item
                         @click="goServiceMainPage"
                         class="homeLinkText"
-                        index="1">
+                        index="/masterpiece/">
                     Home
                 </el-menu-item>
 
                 <el-menu-item
                         @click="goArticleEditPage"
                         class="writeArticleText"
-                        index="2">
+                        index="/masterpiece/article-edit">
                     Write a article
                 </el-menu-item>
 
@@ -30,7 +32,9 @@
                     Schedule
                 </el-menu-item>
 
-                <el-submenu class="userInfoText" index="4">
+                <el-submenu
+                        class="userInfoText"
+                        index="4">
                     <template slot="title">
                         <el-avatar
                             class="userAvatar"
@@ -71,11 +75,16 @@
         data() {
             return {
                 userProfileSize: 35,
-                activeIndex: '1'
+                activePath: '/masterpiece/'
             }
         },
         computed: {
             ...authMapGetters(['currentAuthState'])
+        },
+        watch: {
+            $route(to, from) {
+                this.activePath = to.path;
+            }
         },
         methods: {
             ...articleMapActions(['writeArticle']),
@@ -99,6 +108,9 @@
                 const ROOT_URI = process.env.VUE_APP_BASE_PATH;
                 window.location.href = `${ROOT_URI}/logout`;
             },
+        },
+        created(){
+            this.activePath = this.$router.currentRoute.path;
         }
     }
 </script>
