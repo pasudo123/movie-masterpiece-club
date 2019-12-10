@@ -4,22 +4,25 @@
     padding: 0;
 }
 
-.titleWrapper{
+.titleText{
+    margin: 0 80px 0 100px;
+    display:inline-block;
+    float: left;
+    position: relative;
     font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 0 120px;
-    color: #212422;
+    top: 12px;
+    outline: none;
 }
 
-.titleText {
-    padding: 5px 0 0 0;
+.titleText:hover{
+    cursor: pointer;
 }
 
-.homeLinkText {
-    margin: 0 0 0 30px;
+.titleText:active{
+    border: none;
 }
+
+.homeLinkText {}
 
 .userInfoText{
     position: absolute;

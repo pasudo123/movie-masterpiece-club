@@ -18,9 +18,6 @@ import 'quill/dist/quill.bubble.css'
 Vue.config.productionTip = false;
 Vue.use(ElementUI, {locale});
 
-// router.push('/masterpiece/articleList').catch(error => {});
-// router.push('/masterpiece/articleEdit').catch(error => {});
-
 router.beforeEach((to, from, next) => {
     store.dispatch('auth/currentAuth').then((response) => {
         next();

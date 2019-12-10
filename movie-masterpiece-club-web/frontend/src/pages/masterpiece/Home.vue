@@ -2,51 +2,50 @@
     <div id="articleIndex">
 
         <div class="header">
+
+
             <el-menu
-                     class="el-menu-demo"
-                     mode="horizontal">
+                    class="el-menu-demo"
+                    mode="horizontal">
 
-                <el-menu-item index="1" class="titleWrapper">
-                    <h3 class="titleText">Gulagbu</h3>
-                </el-menu-item>
+                <h3 class="titleText">Gulagbu</h3>
 
-                        <!--:route="{name: 'articleList'}"-->
                 <el-menu-item
-                        index="2"
+                        index="1"
                         @click="goServiceMainPage"
                         class="homeLinkText">
                     Home
                 </el-menu-item>
 
-                        <!--:route="{name: 'articleEdit'}"-->
+
                 <el-menu-item
-                        index="3"
+                        index="2"
                         @click="goArticleEditPage"
                         class="writeArticleText">
                     Write a article
                 </el-menu-item>
 
                 <el-menu-item
-                        index="4"
+                        index="3"
                         class="scheduleText">
                     Schedule
                 </el-menu-item>
 
                 <el-submenu
-                        index="5"
+                        index="4"
                         class="userInfoText">
                     <template slot="title">
                         <el-avatar
-                            class="userAvatar"
-                            :fit="'cover'"
-                            :size="userProfileSize"
-                            :src="currentAuthState.profile"/>
+                                class="userAvatar"
+                                :fit="'cover'"
+                                :size="userProfileSize"
+                                :src="currentAuthState.profile"/>
                         {{this.currentAuthState.email}}
                     </template>
-                    <el-menu-item index="4-1">Profile</el-menu-item>
+                    <el-menu-item index="5-1">Profile</el-menu-item>
                     <el-menu-item
                             @click="logoutProcess"
-                            index="4-2">
+                            index="5-2">
                         Logout
                     </el-menu-item>
                 </el-submenu>
@@ -89,7 +88,7 @@
                 if (this.$router.currentRoute.name === 'articleList') {
                     return;
                 }
-                
+
                 this.$router.push({name: 'articleList'}).then(() => {
                 });
             },
@@ -109,7 +108,7 @@
                 window.location.href = `${ROOT_URI}/logout`;
             },
         },
-        created(){
+        created() {
             // this.activePath = this.$router.currentRoute.path;
         }
     }
@@ -117,7 +116,7 @@
 
 <style>
     .el-menu-item:not(.is-disabled):hover {
-        color: #212422 !important;
+        /*color: #212422 !important;*/
     }
 
     .el-menu--horizontal > .el-menu-item.is-active {
@@ -125,7 +124,7 @@
         color: #303133;
     }
 
-    .el-menu--horizontal>.el-submenu.is-active .el-submenu__title {
+    .el-menu--horizontal > .el-submenu.is-active .el-submenu__title {
         border-bottom: 1px solid transparent !important;
         color: #303133;
     }
