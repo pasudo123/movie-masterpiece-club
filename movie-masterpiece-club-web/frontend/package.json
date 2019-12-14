@@ -17,6 +17,8 @@
     "glob": "^7.1.4",
     "mdbvue": "^6.0.1",
     "moment": "^2.24.0",
+    "quill-image-drop-module": "^1.0.3",
+    "quill-image-resize-module": "^3.0.0",
     "vue": "^2.6.10",
     "vue-material-design-icons": "^4.1.0",
     "vue-quill-editor": "^3.0.6",
