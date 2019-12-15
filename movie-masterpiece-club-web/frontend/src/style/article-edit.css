@@ -4,8 +4,7 @@
 }
 
 .titleClass >>> input {
-    padding: 1vh 0 1vh 0;
-    height: 4vh;
+    padding: 10px 10px 10px 10px;
     font-size: 4vh;
     border: none;
 }

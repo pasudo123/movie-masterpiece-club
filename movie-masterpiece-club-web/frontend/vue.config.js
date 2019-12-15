@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 
 function resolve(dir) {
@@ -56,6 +57,13 @@ module.exports = {
                 '.vue'
             ]
         },
+
+        plugins: [
+            new webpack.ProvidePlugin({
+                'window.Quill': 'quill/dist/quill.js',
+                'Quill': 'quill/dist/quill.js'
+            }),
+        ]
     },
 
     publicPath: (process.env.NODE_ENV === 'staging'

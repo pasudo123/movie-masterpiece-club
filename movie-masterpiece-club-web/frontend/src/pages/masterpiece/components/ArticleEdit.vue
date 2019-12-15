@@ -4,7 +4,7 @@
         <div class="titleWrapper">
             <el-input
                     class="titleClass"
-                    placeholder="제목을 입력하세요."
+                    placeholder="Enter a title..."
                     v-model="title"/>
         </div>
 
@@ -24,13 +24,30 @@
 
 <script>
 
+
+
     import {createNamespacedHelpers} from 'vuex';
     const {
         mapActions: articleMapActions,
         mapGetters: articleMapGetters
     } = createNamespacedHelpers('articleModule');
 
+    import Quill from 'quill'
+    import { ImageDrop } from 'quill-image-drop-module'
+    import ImageResize from 'quill-image-resize-module'
+    Quill.register('modules/imageDrop', ImageDrop);
+    Quill.register('modules/imageResize', ImageResize);
+
     import {quillEditor} from 'vue-quill-editor'
+
+    var toolbarOptions = [
+        [{ 'header': [2, 3, 4, 5, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{'align': [] }],
+        [{'list': 'ordered'}, {'list': 'bullet' }],
+        ['link', 'image'],
+        [{'color': []}, {'background': []}],
+    ];
 
     export default {
         name: "ArticleEdit",
@@ -43,6 +60,11 @@
                 content: '',
                 type: 'GENERAL',
                 editorOption: {
+                    modules: {
+                        toolbar: toolbarOptions,
+                        imageDrop: true,
+                        imageResize: true,
+                    },
                     theme: 'snow'
                 },
                 isEdit: false
