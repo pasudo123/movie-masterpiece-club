@@ -1,8 +1,8 @@
 package com.club.masterpiece.web.model;
 
-import com.club.masterpiece.web.user.model.Role;
-import com.club.masterpiece.web.user.model.User;
-import com.club.masterpiece.web.user.repository.UserRepository;
+import com.club.masterpiece.common.user.model.Role;
+import com.club.masterpiece.common.user.model.User;
+import com.club.masterpiece.common.user.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,9 +6,12 @@ import com.club.masterpiece.common.article.repository.ArticleRepository;
 import com.club.masterpiece.common.user.model.User;
 import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
+import com.club.masterpiece.web.image.service.ImageSaveService;
 import com.club.masterpiece.web.util.ArticleIdGenerator;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class ArticleCreateServiceImpl implements ArticleCreateService {
 
+    @Qualifier(value = "ImageLocalSaveServiceImpl") @NonNull
+    private final ImageSaveService imageSaveService;
     private final ArticleIdGenerator articleIdGenerator;
     private final ArticleRepository articleRepository;
 
@@ -33,6 +38,9 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
         log.debug("article title : {}", dto.getTitle());
         log.debug("article content : {}", dto.getContent());
         log.debug("article type : {}", dto.getType());
+
+        /** 이미지랑 글이랑 분리하는 작업이 필요. **/
+        imageSaveService.saveImage(user, dto);
 
         Article article = Article.builder()
                 .articleId(articleIdGenerator.generateId())

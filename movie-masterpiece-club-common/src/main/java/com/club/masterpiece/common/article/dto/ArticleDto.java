@@ -4,6 +4,7 @@ import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.common.article.model.ArticleType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,6 +34,13 @@ public class ArticleDto {
 
         @NotNull(message = "Article Type Should not be null.")
         private ArticleType type;
+
+        @Builder
+        public CreateRequest(String title, String content, ArticleType type) {
+            this.title = title;
+            this.content = content;
+            this.type = type;
+        }
     }
 
     @Getter

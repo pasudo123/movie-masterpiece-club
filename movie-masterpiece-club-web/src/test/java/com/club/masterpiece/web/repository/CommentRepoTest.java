@@ -1,7 +1,7 @@
 package com.club.masterpiece.web.repository;
 
-import com.club.masterpiece.web.comment.model.Comment;
-import com.club.masterpiece.web.comment.repository.CommentRepository;
+import com.club.masterpiece.common.comment.model.Comment;
+import com.club.masterpiece.common.comment.repository.CommentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

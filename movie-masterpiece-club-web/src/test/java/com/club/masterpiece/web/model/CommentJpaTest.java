@@ -1,10 +1,11 @@
 package com.club.masterpiece.web.model;
 
-import com.club.masterpiece.web.article.model.ArticleType;
-import com.club.masterpiece.web.comment.model.Comment;
-import com.club.masterpiece.web.comment.repository.CommentRepository;
-import com.club.masterpiece.web.user.model.Role;
-import com.club.masterpiece.web.user.model.User;
+import com.club.masterpiece.common.article.model.Article;
+import com.club.masterpiece.common.article.model.ArticleType;
+import com.club.masterpiece.common.comment.model.Comment;
+import com.club.masterpiece.common.comment.repository.CommentRepository;
+import com.club.masterpiece.common.user.model.Role;
+import com.club.masterpiece.common.user.model.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
