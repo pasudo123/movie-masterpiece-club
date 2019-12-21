@@ -1,15 +1,20 @@
 package com.club.masterpiece.web.image.service.impl;
 
 import com.club.masterpiece.common.article.dto.ArticleDto;
-import com.club.masterpiece.common.user.model.User;
-import com.club.masterpiece.web.global.pojo.ImageExtractElement;
+import com.club.masterpiece.common.article.model.Article;
+import com.club.masterpiece.common.attachment.dto.ImageDto;
+import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
+import com.club.masterpiece.common.attachment.model.Attachment;
+import com.club.masterpiece.common.attachment.repository.AttachmentRepository;
 import com.club.masterpiece.web.image.service.ImageSaveService;
-import com.club.masterpiece.web.util.ImageDataExtractor;
+import com.club.masterpiece.web.util.ImageDataPreProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import sun.security.x509.OIDMap;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,6 +35,7 @@ import java.util.UUID;
 @Service
 @Qualifier("ImageLocalSaveServiceImpl")
 @RequiredArgsConstructor
+@Transactional
 public class ImageLocalSaveServiceImpl implements ImageSaveService {
 
     @Value("${image.root-path}")
@@ -39,29 +45,38 @@ public class ImageLocalSaveServiceImpl implements ImageSaveService {
     private static final String DATE_TIME_FORMAT = "yyyyMMddHHmmss";
     private static final String PNG = ".png";
 
-    private final ImageDataExtractor imageDataExtractor;
+    private final ImageDataPreProcessor imageDataPreProcessor;
+    private final AttachmentRepository attachmentRepository;
 
     @Override
-    public List<String> saveImage(User user, ArticleDto.CreateRequest dto) {
+    public List<Attachment> save(final ArticleDto.CreateRequest dto) {
 
         log.info("Local Image Save Start");
 
-        final List<ImageExtractElement> elements = imageDataExtractor.extract(dto.getContent());
-        final List<byte[]> images = new ArrayList<>();
+        final List<ImageExtractElement> elements = imageDataPreProcessor.extract(dto.getContent());
+        final List<Attachment> attachmentList = new ArrayList<>();
 
         for (ImageExtractElement element : elements) {
-            images.add(
-                    base64Decode(element.getImageSrc())
-            );
+
+            final byte[] decodeData = this.base64Decode(element.getImageSrc());
+            final String size = String.valueOf(decodeData.length);
+            final String fileName = this.saveImageInLocalEnv(decodeData);
+
+            final ImageDto.CreateInfo createInfo = ImageDto.CreateInfo
+                    .builder()
+                    .name(fileName)
+                    .url(rootPath + fileName)
+                    .properties(element.getProperties())
+                    .size(size)
+                    .build();
+
+            final Attachment savedAttachment = attachmentRepository.save(
+                    new Attachment(createInfo));
+
+            attachmentList.add(savedAttachment);
         }
 
-        final List<String> imagePaths = new ArrayList<>();
-
-        for (byte[] image : images) {
-            imagePaths.add(save(image));
-        }
-
-        return imagePaths;
+        return attachmentList;
     }
 
     private byte[] base64Decode(String imageSrc) {
@@ -69,7 +84,7 @@ public class ImageLocalSaveServiceImpl implements ImageSaveService {
                 .decode(imageSrc);
     }
 
-    private String save(final byte[] image) {
+    private String saveImageInLocalEnv(final byte[] image) {
 
         final String fileName = getFileName(image) + PNG;
         final Path folder = Paths.get(rootPath);
@@ -79,7 +94,8 @@ public class ImageLocalSaveServiceImpl implements ImageSaveService {
             if (!Files.exists(folder)) {
                 Files.createDirectory(folder);
             }
-            Files.write(Paths.get(fileName), image);
+
+            Files.write(Paths.get(rootPath + fileName), image);
 
         } catch (IOException e) {
 
@@ -95,6 +111,6 @@ public class ImageLocalSaveServiceImpl implements ImageSaveService {
         String uuid = UUID.nameUUIDFromBytes(image).toString().replaceAll(HYPHEN, SPACE);
         String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
 
-        return (rootPath + uuid + now);
+        return (uuid + now);
     }
 }

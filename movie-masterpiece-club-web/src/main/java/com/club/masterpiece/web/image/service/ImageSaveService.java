@@ -1,7 +1,12 @@
 package com.club.masterpiece.web.image.service;
 
 import com.club.masterpiece.common.article.dto.ArticleDto;
+import com.club.masterpiece.common.article.model.Article;
+import com.club.masterpiece.common.attachment.dto.ImageDto;
+import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.common.user.model.User;
+
+import java.util.List;
 
 /**
  * Created by pasudo123 on 2019-12-11
@@ -9,5 +14,5 @@ import com.club.masterpiece.common.user.model.User;
  **/
 public interface ImageSaveService {
 
-    public Object saveImage(User user, ArticleDto.CreateRequest dto);
+    public List<Attachment> save(ArticleDto.CreateRequest dto);
 }

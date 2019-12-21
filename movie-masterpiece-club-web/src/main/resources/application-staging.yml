@@ -40,3 +40,6 @@ logging:
   path: /etc/log/
   file:
     max-history: 3
+
+image:
+  root-path: D:\gulagbu-images\

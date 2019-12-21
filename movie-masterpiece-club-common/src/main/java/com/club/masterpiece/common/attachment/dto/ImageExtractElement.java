@@ -1,4 +1,4 @@
-package com.club.masterpiece.web.global.pojo;
+package com.club.masterpiece.common.attachment.dto;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -18,12 +18,14 @@ public final class ImageExtractElement {
     private String src;
     @Getter private String style;
     @Getter private String width;
+    @Getter private String properties;
 
     @Builder
-    public ImageExtractElement(String src, String style, String width) {
+    public ImageExtractElement(String src, String style, String width, String properties) {
         this.src = src;
         this.style = style;
         this.width = width;
+        this.properties = properties;
     }
 
     public String getImageSrc(){

@@ -1,9 +1,11 @@
 package com.club.masterpiece.common.article.model;
 
 import com.club.masterpiece.common.article.dto.ArticleDto;
+import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.common.comment.model.Comment;
 import com.club.masterpiece.common.global.type.ActiveStatus;
 import com.club.masterpiece.common.user.model.User;
+import com.sun.xml.internal.ws.api.message.AttachmentEx;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -44,6 +46,10 @@ public class Article {
     @Column(name = "article_type", columnDefinition = "ENUM('GENERAL', 'OFFICIAL')", nullable = false)
     private ArticleType type;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE') default 'ACTIVE'", nullable = false)
+    private ActiveStatus activeStatus = ActiveStatus.ACTIVE;
+
     @CreatedDate
     @Column(name = "reg_date", nullable = false, updatable = false)
     private LocalDateTime regDate;
@@ -51,10 +57,6 @@ public class Article {
     @LastModifiedDate
     @Column(name = "mod_date", nullable = false)
     private LocalDateTime modDate;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE') default 'ACTIVE'")
-    private ActiveStatus activeStatus = ActiveStatus.ACTIVE;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",
@@ -73,6 +75,15 @@ public class Article {
     )
     private List<Comment> commentList = new ArrayList<>();
 
+    @OneToMany(
+        targetEntity = Attachment.class,
+        mappedBy = "article",
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Attachment> attachmentList = new ArrayList<>();
+
     @Builder
     public Article(String articleId, String title, String content, ArticleType type, User user) {
         this.articleId = articleId;
@@ -89,5 +100,10 @@ public class Article {
 
     public void addNewComment(final Comment comment) {
         this.commentList.add(comment);
+    }
+
+    public void addNewAttachment(final Attachment attachment) {
+        this.attachmentList.add(attachment);
+        attachment.setArticle(this);
     }
 }

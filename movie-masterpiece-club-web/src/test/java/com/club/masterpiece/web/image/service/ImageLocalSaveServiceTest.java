@@ -6,7 +6,7 @@ import com.club.masterpiece.common.user.model.Role;
 import com.club.masterpiece.common.user.model.User;
 import com.club.masterpiece.web.global.pojo.ImageExtractElement;
 import com.club.masterpiece.web.image.service.impl.ImageLocalSaveServiceImpl;
-import com.club.masterpiece.web.util.ImageDataExtractor;
+import com.club.masterpiece.web.util.ImageDataPreProcessor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
  **/
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {
-        ImageDataExtractor.class,
+        ImageDataPreProcessor.class,
         ImageSaveService.class,
         ImageLocalSaveServiceImpl.class
 })
@@ -37,7 +37,7 @@ import static org.mockito.Mockito.when;
 public class ImageLocalSaveServiceTest {
 
     @MockBean
-    private ImageDataExtractor imageDataExtractor;
+    private ImageDataPreProcessor imageDataPreProcessor;
 
     @Qualifier("ImageLocalSaveServiceImpl")
     @Autowired
@@ -78,11 +78,11 @@ public class ImageLocalSaveServiceTest {
 
         List<ImageExtractElement> imageExtractElements = Collections.singletonList(imageExtractElement);
 
-        when(imageDataExtractor.extract(dto.getContent()))
+        when(imageDataPreProcessor.extract(dto.getContent()))
                 .thenReturn(imageExtractElements);
 
         // when
-        imageSaveService.saveImage(user, dto);
+        imageSaveService.save(dto);
 
         // then
 

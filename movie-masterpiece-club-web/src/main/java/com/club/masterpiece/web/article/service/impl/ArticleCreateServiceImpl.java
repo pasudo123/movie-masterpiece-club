@@ -3,6 +3,8 @@ package com.club.masterpiece.web.article.service.impl;
 import com.club.masterpiece.common.article.dto.ArticleDto;
 import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.common.article.repository.ArticleRepository;
+import com.club.masterpiece.common.attachment.dto.ImageDto;
+import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.common.user.model.User;
 import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
@@ -14,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by pasudo123 on 2019-09-23
@@ -36,11 +40,10 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
     public ArticleDto.OneResponse create(final User user, final ArticleDto.CreateRequest dto) {
 
         log.debug("article title : {}", dto.getTitle());
-        log.debug("article content : {}", dto.getContent());
         log.debug("article type : {}", dto.getType());
 
-        /** 이미지랑 글이랑 분리하는 작업이 필요. **/
-        imageSaveService.saveImage(user, dto);
+        // 게시글에서 이미지 추출
+        final List<Attachment> attachmentList = imageSaveService.save(dto);
 
         Article article = Article.builder()
                 .articleId(articleIdGenerator.generateId())
@@ -50,7 +53,11 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
                 .user(user)
                 .build();
 
-        Article savedArticle = articleRepository.save(article);
+        final Article savedArticle = articleRepository.save(article);
+
+        for(Attachment attachment : attachmentList) {
+            article.addNewAttachment(attachment);
+        }
 
         return new ArticleDto.OneResponse(savedArticle);
     }
