@@ -3,6 +3,7 @@ package com.club.masterpiece.common.attachment.model;
 import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
+import com.club.masterpiece.common.global.type.ActiveStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,7 +33,8 @@ public class Attachment {
     @Column(name = "attachment_id", nullable = false)
     private Long id;
 
-    @Column(name = "type", columnDefinition = "ENUM('ARTICLE', 'PROFILE') '첨부파일 타입 선정(게시글, 프로필)'", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", columnDefinition = "ENUM('IMAGE', 'VIDEO') '첨부파일 타입 선정(이미지, 동영상)'", nullable = false)
     private AttachmentType type;
 
     @Column(name = "name", columnDefinition = "VARCHAR(60) '이름'", length = 60, nullable = false)
@@ -61,7 +63,12 @@ public class Attachment {
     )
     private Article article;
 
-    public Attachment(final ImageDto.CreateInfo createInfo) {
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE') default 'ACTIVE'", nullable = false)
+    private ActiveStatus activeStatus = ActiveStatus.ACTIVE;
+
+    public Attachment(final Article article, final ImageDto.CreateInfo createInfo) {
+        this.article = article;
         this.type = createInfo.getType();
         this.name = createInfo.getName();
         this.url = createInfo.getUrl();

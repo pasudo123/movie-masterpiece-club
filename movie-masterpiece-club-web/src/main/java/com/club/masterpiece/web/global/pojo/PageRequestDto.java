@@ -1,7 +1,6 @@
 package com.club.masterpiece.web.global.pojo;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
@@ -11,7 +10,6 @@ import org.springframework.data.domain.Sort;
  * Email: oraedoa@gmail.com
  **/
 @Getter
-@Setter
 public class PageRequestDto {
 
     private int page;

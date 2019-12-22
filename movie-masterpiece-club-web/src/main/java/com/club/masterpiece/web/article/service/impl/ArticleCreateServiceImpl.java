@@ -7,6 +7,7 @@ import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.common.user.model.User;
 import com.club.masterpiece.web.annotation.UpdatableState;
+import com.club.masterpiece.web.article.service.ArticleCommonService;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
 import com.club.masterpiece.web.image.service.ImageSaveService;
 import com.club.masterpiece.web.util.ArticleIdGenerator;
@@ -32,6 +33,7 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
 
     @Qualifier(value = "ImageLocalSaveServiceImpl") @NonNull
     private final ImageSaveService imageSaveService;
+    private final ArticleCommonService articleCommonService;
     private final ArticleIdGenerator articleIdGenerator;
     private final ArticleRepository articleRepository;
 
@@ -42,22 +44,21 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
         log.debug("article title : {}", dto.getTitle());
         log.debug("article type : {}", dto.getType());
 
-        // 게시글에서 이미지 추출
-        final List<Attachment> attachmentList = imageSaveService.save(dto);
-
-        Article article = Article.builder()
-                .articleId(articleIdGenerator.generateId())
+        final Article article = Article.builder()
+                .articleId(articleIdGenerator
+                        .generateId())
                 .title(dto.getTitle())
-                .content(dto.getContent())
+                .content(articleCommonService
+                        .convertImageTagToKeywordOnContent(dto))
                 .type(dto.getType())
                 .user(user)
                 .build();
 
         final Article savedArticle = articleRepository.save(article);
 
-        for(Attachment attachment : attachmentList) {
-            article.addNewAttachment(attachment);
-        }
+        final List<Attachment> attachmentList = imageSaveService.save(savedArticle, dto.getContent());
+
+        savedArticle.createAttachmentList(attachmentList);
 
         return new ArticleDto.OneResponse(savedArticle);
     }

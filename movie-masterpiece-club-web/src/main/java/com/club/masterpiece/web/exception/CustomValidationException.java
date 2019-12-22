@@ -1,6 +1,5 @@
 package com.club.masterpiece.web.exception;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.validation.BindingResult;
 
@@ -10,10 +9,13 @@ import org.springframework.validation.BindingResult;
  * Email: oraedoa@gmail.com
  **/
 @Getter
-@AllArgsConstructor
 public class CustomValidationException extends RuntimeException{
 
     private final String message;
     private final BindingResult bindingResult;
 
+    public CustomValidationException(final String message, final BindingResult bindingResult) {
+        this.message = message;
+        this.bindingResult = bindingResult;
+    }
 }

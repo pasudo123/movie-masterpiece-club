@@ -13,6 +13,10 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter-freemarker'
 
+    /** 아파치 파일 입출력 공통 모듈 **/
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
     /** swagger **/
     /** https://www.tutorialspoint.com/spring_boot/spring_boot_enabling_swagger2 **/
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'

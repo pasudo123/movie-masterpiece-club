@@ -24,3 +24,6 @@ table:
   user: user
   article: article
   comment: comment
+
+keyword:
+  image: '@GULAGBU_IMAGE'

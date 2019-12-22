@@ -93,6 +93,14 @@ public class Article {
         this.user = user;
     }
 
+    public void createAttachmentList(final List<Attachment> attachmentList) {
+        this.attachmentList = attachmentList;
+
+        for(Attachment attachment : getAttachmentList()) {
+            attachment.setArticle(this);
+        }
+    }
+
     public void updateArticle(final ArticleDto.UpdateRequest dto) {
         this.title = dto.getTitle();
         this.content = dto.getContent();
@@ -100,10 +108,5 @@ public class Article {
 
     public void addNewComment(final Comment comment) {
         this.commentList.add(comment);
-    }
-
-    public void addNewAttachment(final Attachment attachment) {
-        this.attachmentList.add(attachment);
-        attachment.setArticle(this);
     }
 }

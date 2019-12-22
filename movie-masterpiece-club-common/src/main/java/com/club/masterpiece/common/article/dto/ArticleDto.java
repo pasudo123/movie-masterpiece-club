@@ -77,6 +77,10 @@ public class ArticleDto {
             this.createdName = article.getUser().getUsername();
             this.createdProfile = article.getUser().getProfile();
         }
+
+        public void changeImageIncludeContent(final String content) {
+            this.content = content;
+        }
     }
 
     @Getter

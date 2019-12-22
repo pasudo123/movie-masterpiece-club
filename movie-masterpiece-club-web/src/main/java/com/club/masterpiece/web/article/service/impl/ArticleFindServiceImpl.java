@@ -3,6 +3,8 @@ package com.club.masterpiece.web.article.service.impl;
 import com.club.masterpiece.common.article.dto.ArticleDto;
 import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.common.article.repository.ArticleRepository;
+import com.club.masterpiece.common.attachment.model.Attachment;
+import com.club.masterpiece.web.article.service.ArticleCommonService;
 import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.exception.EmptyResultException;
 import com.club.masterpiece.web.global.pojo.PageRequestDto;
@@ -25,6 +27,7 @@ import java.util.List;
 @Slf4j
 public class ArticleFindServiceImpl implements ArticleFindService {
 
+    private final ArticleCommonService articleCommonService;
     private final ArticleRepository articleRepository;
 
     @Override
@@ -56,7 +59,15 @@ public class ArticleFindServiceImpl implements ArticleFindService {
         Article article = articleRepository.findOneByArticleId(articleId)
                 .orElseThrow(() -> new EmptyResultException(String.format("Article is Not Found. : %s", articleId)));
 
-        return new ArticleDto.OneResponse(article);
+        /** 첨부파일 미존재 **/
+        if(article.getAttachmentList().size() == 0) {
+            return new ArticleDto.OneResponse(article);
+        }
+
+        /** 첨부파일 존재 **/
+        final ArticleDto.OneResponse dto = new ArticleDto.OneResponse(article);
+
+        return articleCommonService.convertKeywordToImageTagOnContent(dto, article.getAttachmentList());
     }
 
     @Transactional(readOnly = true)

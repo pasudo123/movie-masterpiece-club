@@ -3,16 +3,16 @@ package com.club.masterpiece.web.exception;
 import lombok.Getter;
 
 /**
- * Created by pasudo123 on 2019-09-29
- * Blog: https://pasudo123.tistory.com/
+ * Created by pasudo123 on 2019-12-22
  * Email: oraedoa@gmail.com
  **/
 @Getter
-public class EmptyResultException extends RuntimeException {
+public class BusinessException extends RuntimeException{
 
     private final String message;
 
-    public EmptyResultException(String message) {
+    public BusinessException(String message) {
         this.message = message;
     }
+
 }

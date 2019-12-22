@@ -33,6 +33,7 @@ public class MasterpieceControllerAdvice {
         BindingResult bindingResult = exception.getBindingResult();
 
         log.error(exception.getMessage());
+
         bindingResult.getFieldErrors()
                 .forEach(f -> log.error("field : {}, message : {}", f.getField(), f.getDefaultMessage()));
 
@@ -59,6 +60,7 @@ public class MasterpieceControllerAdvice {
     public ResponseEntity<ErrorResponse> handleEmptyResultException(EmptyResultException exception, WebRequest webRequest) {
 
         log.error(exception.getMessage());
+
         ErrorResponse response = ErrorResponse.builder()
                 .errorTimestamp(LocalDateTime.now())
                 .status(HttpStatus.NOT_FOUND)
@@ -80,9 +82,25 @@ public class MasterpieceControllerAdvice {
          */
 
         log.error(exception.getMessage());
+
         ErrorResponse response = ErrorResponse.builder()
                 .errorTimestamp(LocalDateTime.now())
                 .status(HttpStatus.FORBIDDEN)
+                .details(Collections.singletonList(exception.getMessage()))
+                .requestUri(webRequest.getDescription(false))
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException exception, WebRequest webRequest) {
+
+        log.error(exception.getMessage());
+
+        ErrorResponse response = ErrorResponse.builder()
+                .errorTimestamp(LocalDateTime.now())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .details(Collections.singletonList(exception.getMessage()))
                 .requestUri(webRequest.getDescription(false))
                 .build();

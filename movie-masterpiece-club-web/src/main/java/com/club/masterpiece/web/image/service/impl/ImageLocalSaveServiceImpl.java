@@ -1,6 +1,5 @@
 package com.club.masterpiece.web.image.service.impl;
 
-import com.club.masterpiece.common.article.dto.ArticleDto;
 import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.security.x509.OIDMap;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -49,11 +47,11 @@ public class ImageLocalSaveServiceImpl implements ImageSaveService {
     private final AttachmentRepository attachmentRepository;
 
     @Override
-    public List<Attachment> save(final ArticleDto.CreateRequest dto) {
+    public List<Attachment> save(final Article article, final String content) {
 
-        log.info("Local Image Save Start");
+        log.debug("Local Image Save Start");
 
-        final List<ImageExtractElement> elements = imageDataPreProcessor.extract(dto.getContent());
+        final List<ImageExtractElement> elements = imageDataPreProcessor.extract(content);
         final List<Attachment> attachmentList = new ArrayList<>();
 
         for (ImageExtractElement element : elements) {
@@ -71,7 +69,7 @@ public class ImageLocalSaveServiceImpl implements ImageSaveService {
                     .build();
 
             final Attachment savedAttachment = attachmentRepository.save(
-                    new Attachment(createInfo));
+                    new Attachment(article, createInfo));
 
             attachmentList.add(savedAttachment);
         }
@@ -111,6 +109,6 @@ public class ImageLocalSaveServiceImpl implements ImageSaveService {
         String uuid = UUID.nameUUIDFromBytes(image).toString().replaceAll(HYPHEN, SPACE);
         String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
 
-        return (uuid + now);
+        return (uuid + HYPHEN + now);
     }
 }

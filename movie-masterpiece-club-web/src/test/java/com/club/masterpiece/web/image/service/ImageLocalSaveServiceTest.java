@@ -1,10 +1,11 @@
 package com.club.masterpiece.web.image.service;
 
 import com.club.masterpiece.common.article.dto.ArticleDto;
+import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.common.article.model.ArticleType;
+import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
 import com.club.masterpiece.common.user.model.Role;
 import com.club.masterpiece.common.user.model.User;
-import com.club.masterpiece.web.global.pojo.ImageExtractElement;
 import com.club.masterpiece.web.image.service.impl.ImageLocalSaveServiceImpl;
 import com.club.masterpiece.web.util.ImageDataPreProcessor;
 import org.junit.Before;
@@ -82,7 +83,7 @@ public class ImageLocalSaveServiceTest {
                 .thenReturn(imageExtractElements);
 
         // when
-        imageSaveService.save(dto);
+        imageSaveService.save(Article.builder().build(), dto.getContent());
 
         // then
 
