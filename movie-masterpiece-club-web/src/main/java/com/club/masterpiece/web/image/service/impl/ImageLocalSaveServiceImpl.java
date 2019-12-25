@@ -9,8 +9,10 @@ import com.club.masterpiece.web.image.service.ImageSaveService;
 import com.club.masterpiece.web.util.ImageDataPreProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.bind.annotation.FieldProxy;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,9 +33,9 @@ import java.util.UUID;
  **/
 @Slf4j
 @Service
-@Qualifier("ImageLocalSaveServiceImpl")
 @RequiredArgsConstructor
 @Transactional
+@Profile({"dev", "staging"})
 public class ImageLocalSaveServiceImpl implements ImageSaveService {
 
     @Value("${image.root-path}")

@@ -79,4 +79,12 @@ public class Attachment {
     public void setArticle(final Article article) {
         this.article = article;
     }
+
+    public void updateActiveToDelete() {
+        this.activeStatus = ActiveStatus.DELETE;
+    }
+
+    public boolean isDelete() {
+        return (this.activeStatus == ActiveStatus.DELETE);
+    }
 }

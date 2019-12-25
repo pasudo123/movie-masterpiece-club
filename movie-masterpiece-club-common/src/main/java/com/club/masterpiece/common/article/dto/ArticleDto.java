@@ -52,6 +52,12 @@ public class ArticleDto {
 
         @NotBlank(message = "Article Content Should not be blank.")
         private String content;
+
+        @Builder
+        public UpdateRequest(String title, String content) {
+            this.title = title;
+            this.content = content;
+        }
     }
 
     @Getter

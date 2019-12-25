@@ -2,6 +2,7 @@
 # spring boot template : freemarker
 spring:
   freemarker:
+    check-template-location: false
     template-loader-path: classpath:/static/templates
     suffix: .ftl
 
@@ -26,4 +27,5 @@ table:
   comment: comment
 
 keyword:
-  image: '@GULAGBU_IMAGE'
+  image: '@@GULAGBU_IMAGE'
+  video: '@@GULAGBU_VIDEO'

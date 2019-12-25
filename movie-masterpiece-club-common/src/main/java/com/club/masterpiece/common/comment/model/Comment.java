@@ -107,12 +107,12 @@ public class Comment {
         getArticle().addNewComment(this);
     }
 
-    public void updateCommentActive2Delete(){
+    public void updateCommentActiveToDelete(){
         this.activeStatus = ActiveStatus.DELETE;
-        getReplyList().forEach(Comment::updateReplyActive2Delete);
+        getReplyList().forEach(Comment::updateReplyActiveToDelete);
     }
 
-    public void updateReplyActive2Delete() {
+    public void updateReplyActiveToDelete() {
         this.activeStatus = ActiveStatus.DELETE;
     }
 

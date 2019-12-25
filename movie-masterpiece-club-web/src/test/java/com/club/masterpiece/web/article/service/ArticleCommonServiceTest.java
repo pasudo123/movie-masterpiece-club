@@ -6,7 +6,6 @@ import com.club.masterpiece.common.article.model.ArticleType;
 import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.common.user.model.User;
-import com.club.masterpiece.web.article.service.impl.ArticleCommonServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

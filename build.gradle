@@ -63,6 +63,17 @@ project(':movie-masterpiece-club-web') {
     dependencies {
         compile project(':movie-masterpiece-club-common')
     }
+
+//    /** 그래들 빌드시, npm run build:prod 수행 **/
+//    task buildWebFrontEnd(type: Exec) {
+//        workingDir("./movie-masterpiece-club-web/frontend")
+//
+//        if(System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//            commandLine('npm', 'run', 'build:prod')
+//        }
+//    }
+//
+//    build.dependsOn 'buildWebFrontEnd'
 }
 
 project(':movie-masterpiece-club-admin') {

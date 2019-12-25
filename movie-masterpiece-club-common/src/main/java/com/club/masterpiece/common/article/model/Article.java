@@ -5,8 +5,10 @@ import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.common.comment.model.Comment;
 import com.club.masterpiece.common.global.type.ActiveStatus;
 import com.club.masterpiece.common.user.model.User;
-import com.sun.xml.internal.ws.api.message.AttachmentEx;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -95,10 +97,11 @@ public class Article {
 
     public void createAttachmentList(final List<Attachment> attachmentList) {
         this.attachmentList = attachmentList;
+    }
 
-        for(Attachment attachment : getAttachmentList()) {
-            attachment.setArticle(this);
-        }
+    public void updateAttachmentList(final List<Attachment> attachmentList) {
+        getAttachmentList().forEach(Attachment::updateActiveToDelete);
+        getAttachmentList().addAll(attachmentList);
     }
 
     public void updateArticle(final ArticleDto.UpdateRequest dto) {

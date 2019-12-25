@@ -24,14 +24,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentDeleteServiceImpl implements CommentDeleteService {
 
     private final CommentFindService commentFindService;
-    private final CommentRepository commentRepository;
 
     @UpdatableState
     @Override
     public CommentDto.OneResponse updateCommentStatusActiveToDelete(final String commentId) {
 
         Comment comment = commentFindService.findOneEntityByCommentId(commentId);
-        comment.updateCommentActive2Delete();
+        comment.updateCommentActiveToDelete();
 
         return new CommentDto.OneResponse(comment);
     }
@@ -41,7 +40,7 @@ public class CommentDeleteServiceImpl implements CommentDeleteService {
     public ReplyDto.OneResponse updateReplyStatusActiveToDelete(final String replyId) {
 
         Comment reply = commentFindService.findOneEntityByCommentId(replyId);
-        reply.updateReplyActive2Delete();
+        reply.updateReplyActiveToDelete();
 
         return new ReplyDto.OneResponse(reply);
     }
