@@ -99,9 +99,12 @@ public class Article {
         this.attachmentList = attachmentList;
     }
 
+    public void changeDeleteOnAttachmentList(){
+        this.attachmentList.forEach(Attachment::updateActiveToDelete);
+    }
+
     public void updateAttachmentList(final List<Attachment> attachmentList) {
-        getAttachmentList().forEach(Attachment::updateActiveToDelete);
-        getAttachmentList().addAll(attachmentList);
+        this.attachmentList.addAll(attachmentList);
     }
 
     public void updateArticle(final ArticleDto.UpdateRequest dto) {

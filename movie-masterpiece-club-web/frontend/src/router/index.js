@@ -7,9 +7,9 @@ export default new VueRouter({
 
     mode: 'history',
 
-    base: (process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production')
-        ? process.env.VUE_APP_ROUTER_PATH
-        : '/',
+    // base: (process.env.NODE_ENV === 'production')
+    //     ? process.env.VUE_APP_ROUTER_PATH
+    //     : '/',
 
     routes: [
         {

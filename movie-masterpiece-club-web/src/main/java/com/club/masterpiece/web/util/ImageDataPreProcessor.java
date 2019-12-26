@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class ImageDataPreProcessor {
     private final ObjectMapper mapper;
     private static final String STYLE = "style";
     private static final String WIDTH = "width";
+    private static final String ONE_HUNDRED_PERCENT = "100%";
 
     public List<ImageExtractElement> extract(final String articleContent) {
 
@@ -69,9 +71,10 @@ public class ImageDataPreProcessor {
      */
     private String changeImagePropsToJson(final String styleValue, final String widthValue) {
 
+        // widthValue 가 empty 면 디폴트로 100% 삽입.
         ObjectNode node = mapper.createObjectNode();
         node.put(STYLE, styleValue);
-        node.put(WIDTH, widthValue);
+        node.put(WIDTH, (StringUtils.isEmpty(widthValue)) ? ONE_HUNDRED_PERCENT : widthValue);
 
         return node.toString();
     }

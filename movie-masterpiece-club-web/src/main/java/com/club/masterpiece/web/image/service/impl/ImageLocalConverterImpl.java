@@ -76,6 +76,10 @@ public class ImageLocalConverterImpl implements ImageConverter {
             }
         }
 
+        if(convertContentList.size() == 0) {
+            throw new BusinessException("이미지가 있음에도 불구하고 이미지를 가져오지 못하였습니다.");
+        }
+
         final String[] partialContents = dto.getContent().split(imageKeyword);
 
         StringBuilder sb = new StringBuilder();

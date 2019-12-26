@@ -76,10 +76,6 @@ public class Attachment {
         this.size = createInfo.getSize();
     }
 
-    public void setArticle(final Article article) {
-        this.article = article;
-    }
-
     public void updateActiveToDelete() {
         this.activeStatus = ActiveStatus.DELETE;
     }

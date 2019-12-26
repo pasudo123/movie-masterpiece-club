@@ -19,9 +19,9 @@
 
                 <el-table-column
                         label="Writer"
-                        width="160">
+                        width="200">
                     <template slot-scope="scope">
-                        {{ scope.row.createdName }}
+                        <span class="writerText">{{ scope.row.createdName }}</span>
                     </template>
                 </el-table-column>
 

@@ -13,3 +13,9 @@
     display: flex;
     justify-content: center;
 }
+
+.writerText{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
