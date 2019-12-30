@@ -6,11 +6,9 @@ import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
 import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.common.attachment.repository.AttachmentRepository;
 import com.club.masterpiece.web.image.service.ImageSaveService;
-import com.club.masterpiece.web.util.ImageDataPreProcessor;
+import com.club.masterpiece.web.util.image.ImageDataPreProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.implementation.bind.annotation.FieldProxy;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -35,15 +33,10 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Transactional
-@Profile({"dev", "staging"})
-public class ImageLocalSaveServiceImpl implements ImageSaveService {
+public class ImageSaveServiceImpl implements ImageSaveService {
 
     @Value("${image.root-path}")
     private String rootPath;
-    private static final String HYPHEN = "-";
-    private static final String SPACE = "";
-    private static final String DATE_TIME_FORMAT = "yyyyMMddHHmmss";
-    private static final String PNG = ".png";
 
     private final ImageDataPreProcessor imageDataPreProcessor;
     private final AttachmentRepository attachmentRepository;
@@ -51,7 +44,7 @@ public class ImageLocalSaveServiceImpl implements ImageSaveService {
     @Override
     public List<Attachment> save(final Article article, final String content) {
 
-        log.debug("Local Image Save Start");
+        log.debug("Image Save Start");
 
         final List<ImageExtractElement> elements = imageDataPreProcessor.extract(content);
         final List<Attachment> attachmentList = new ArrayList<>();

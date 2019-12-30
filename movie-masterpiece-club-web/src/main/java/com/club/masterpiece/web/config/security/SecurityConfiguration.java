@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -46,7 +47,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .frameOptions().disable();
 
         http.authorizeRequests()
-                .antMatchers("/error", "/favicon.ico", "/**/*.jpg", "/**/*.png", "/**/*.css", "/**/*.js", "/**/*.map")
+                .antMatchers(
+                        "/error",
+                        "/favicon.ico",
+                        "/**/*.jpg",
+                        "/**/*.png",
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/**/*.map",
+                        "/web-resources/**")
                     .permitAll()
                 .antMatchers(HttpMethod.GET,"/actuator/health")
                     .permitAll()
@@ -77,21 +86,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true);
     }
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password(passwordEncoder().encode("adminpass"))
-                .roles("ADMIN");
-
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder().encode("userpass"))
-                .roles("USER");
-    }
-
     @Bean
+    @Profile("dev")
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

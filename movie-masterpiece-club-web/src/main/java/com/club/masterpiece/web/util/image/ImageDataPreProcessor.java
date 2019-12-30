@@ -1,4 +1,4 @@
-package com.club.masterpiece.web.util;
+package com.club.masterpiece.web.util.image;
 
 import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
 import com.fasterxml.jackson.databind.ObjectMapper;

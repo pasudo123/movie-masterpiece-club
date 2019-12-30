@@ -11,6 +11,8 @@ export default new VueRouter({
     //     ? process.env.VUE_APP_ROUTER_PATH
     //     : '/',
 
+    base: '/',
+
     routes: [
         {
             path: '/login',

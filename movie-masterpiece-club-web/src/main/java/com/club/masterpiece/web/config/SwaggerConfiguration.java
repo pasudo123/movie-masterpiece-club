@@ -24,5 +24,4 @@ public class SwaggerConfiguration {
                 .apis(RequestHandlerSelectors.basePackage("com.club.masterpiece.web"))
                 .build();
     }
-
 }

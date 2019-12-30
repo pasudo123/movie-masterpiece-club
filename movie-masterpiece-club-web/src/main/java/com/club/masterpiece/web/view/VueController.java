@@ -1,5 +1,6 @@
 package com.club.masterpiece.web.view;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Email: oraedoa@gmail.com
  **/
 @Controller
+@Slf4j
 public class VueController {
 
     @Value("${redirect-url}")
@@ -17,16 +19,19 @@ public class VueController {
 
     @RequestMapping("/login")
     public String login() {
+        log.info("로그인 페이지");
         return "login";
     }
 
     @RequestMapping("/masterpiece")
     public String masterpiece() {
+        log.info("메인 페이지");
         return "masterpiece";
     }
 
     @RequestMapping("/login/success")
     public String loginSuccess() {
+        log.info("로그인 성공");
         return "redirect:" + redirectUrl;
     }
 }

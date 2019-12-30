@@ -1,6 +1,7 @@
 package com.club.masterpiece.web.util;
 
 import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
+import com.club.masterpiece.web.util.image.ImageDataPreProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;

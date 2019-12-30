@@ -6,8 +6,8 @@ import com.club.masterpiece.common.article.model.ArticleType;
 import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
 import com.club.masterpiece.common.user.model.Role;
 import com.club.masterpiece.common.user.model.User;
-import com.club.masterpiece.web.image.service.impl.ImageLocalSaveServiceImpl;
-import com.club.masterpiece.web.util.ImageDataPreProcessor;
+import com.club.masterpiece.web.image.service.impl.ImageSaveServiceImpl;
+import com.club.masterpiece.web.util.image.ImageDataPreProcessor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = {
         ImageDataPreProcessor.class,
         ImageSaveService.class,
-        ImageLocalSaveServiceImpl.class
+        ImageSaveServiceImpl.class
 })
 @ActiveProfiles("dev")
 public class ImageLocalSaveServiceTest {
