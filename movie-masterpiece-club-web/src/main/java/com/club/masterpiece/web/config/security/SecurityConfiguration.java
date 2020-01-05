@@ -32,6 +32,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Value("${default-success-url}")
+    private String defaultSuccessUrl;
+
     @Value("${logout-success-url}")
     private String logoutSuccessUrl;
 
@@ -54,8 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/**/*.png",
                         "/**/*.css",
                         "/**/*.js",
-                        "/**/*.map",
-                        "/web-resources/**")
+                        "/**/*.map")
                     .permitAll()
                 .antMatchers(HttpMethod.GET,"/actuator/health")
                     .permitAll()
@@ -69,17 +71,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/login/success");
+                .defaultSuccessUrl(defaultSuccessUrl);
 
         http.oauth2Login()
                 .loginPage("/login")
                 .redirectionEndpoint()
                 .baseUri("/login/oauth2/callback/**")
-                .and()
+                    .and()
                 .userInfoEndpoint()
                 .userService(securityOAuth2UserService)
-                .and()
-                .defaultSuccessUrl("/login/success");
+                    .and()
+                .defaultSuccessUrl(defaultSuccessUrl);
 
         http.logout()
                 .logoutSuccessUrl(logoutSuccessUrl)

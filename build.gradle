@@ -1,15 +1,20 @@
 buildscript {
     ext {
         springBootVersion = '2.1.8.RELEASE'
+        mooworkVersion = '1.2.0'
     }
 
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE"
+        classpath("com.moowork.gradle:gradle-node-plugin:${mooworkVersion}")
     }
 }
 
@@ -26,6 +31,7 @@ subprojects {
 
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.moowork.node'
 
     repositories {
         mavenCentral()
@@ -64,16 +70,24 @@ project(':movie-masterpiece-club-web') {
         compile project(':movie-masterpiece-club-common')
     }
 
-//    /** 그래들 빌드시, npm run build:prod 수행 **/
-//    task buildWebFrontEnd(type: Exec) {
-//        workingDir("./movie-masterpiece-club-web/frontend")
-//
-//        if(System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-//            commandLine('npm', 'run', 'build:prod')
-//        }
-//    }
-//
-//    build.dependsOn 'buildWebFrontEnd'
+    node {
+        download = true
+        nodeModulesDir = file("./movie-masterpiece-club-web/frontend")
+    }
+
+    task setup(type: NpmTask) {
+        description = "install node.js packages."
+        args = ['install']
+        inputs.files file ('package.json')
+        outputs.files file ('node_modules')
+    }   
+
+    task buildFrontEnd(type: NpmTask, dependsOn: setup) {
+        description = "bulid vue.js production mode"
+        args = ['run', 'build:prod']
+    }
+
+    processResources.dependsOn 'buildWebFrontEnd'
 }
 
 project(':movie-masterpiece-club-admin') {

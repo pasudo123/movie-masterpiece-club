@@ -19,19 +19,16 @@ public class VueController {
 
     @RequestMapping("/login")
     public String login() {
-        log.info("로그인 페이지");
         return "login";
     }
 
     @RequestMapping("/masterpiece")
     public String masterpiece() {
-        log.info("메인 페이지");
         return "masterpiece";
     }
 
     @RequestMapping("/login/success")
     public String loginSuccess() {
-        log.info("로그인 성공");
         return "redirect:" + redirectUrl;
     }
 }

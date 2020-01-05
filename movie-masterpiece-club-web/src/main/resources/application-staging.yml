@@ -30,6 +30,7 @@ spring:
 # staging env
 redirect-url: /masterpiece
 logout-success-url: /login
+default-success-url: /login/success
 
 server:
   port: 8080
