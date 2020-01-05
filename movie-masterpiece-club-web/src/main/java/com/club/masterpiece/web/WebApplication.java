@@ -9,12 +9,4 @@ public class WebApplication {
     public static void main(String[] args) {
         SpringApplication.run(WebApplication.class, args);
     }
-    //    @Bean
-//    public ConfigurableServletWebServerFactory webServerFactory(final GracefulShutdownConfiguration shutdownConfiguration) {
-//
-//        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
-//        factory.addConnectorCustomizers(shutdownConfiguration);
-//
-//        return factory;
-//    }
 }

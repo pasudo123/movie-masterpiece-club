@@ -19,6 +19,8 @@ spring:
     oauth2:
       client:
         registration:
+
+
           google:
             client-id: 763371632947-j0qd1ij5jqivvf5nq5q1p3dd1ss7u6ku.apps.googleusercontent.com
             client-secret: FpBYQ2-dUuZjg1vfIs4iZRNA
@@ -27,15 +29,21 @@ spring:
               - email
               - profile
 
-# staging env
-redirect-url: /masterpiece
-logout-success-url: /login
-default-success-url: /login/success
-
 server:
   port: 8080
 
+# staging env
+redirect-url: /masterpiece
+security-oauth2-redirect-uri: '/login/oauth2/callback/**'
+logout-success-url: /login
+default-success-url: /login/success
+domain: http://localhost:8080
+
 logging:
+  level:
+    com.club.masterpiece.web.*: debug
+    org.springframework.security.*: debug
+    org.springframework.web.*: debug
   path: /etc/log/
   file:
     max-history: 3
