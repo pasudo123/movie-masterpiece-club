@@ -1,13 +1,13 @@
 package com.club.masterpiece.common;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class CommonApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
-
-}
+//@SpringBootTest
+//class CommonApplicationTests {
+//
+//    @Test
+//    void contextLoads() {
+//    }
+//
+//}
