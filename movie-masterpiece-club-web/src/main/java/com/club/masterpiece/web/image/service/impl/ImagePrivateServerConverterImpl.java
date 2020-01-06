@@ -29,6 +29,12 @@ public class ImagePrivateServerConverterImpl implements ImageConverter {
     private final ImageDataPostProcessor imageDataPostProcessor;
     private final ObjectMapper mapper;
 
+    @Value("${image.server-path}")
+    private String serverPath;
+
+    @Value("${image.root-path}")
+    private String rootPath;
+
     @Value("${keyword.image}")
     private String imageKeyword;
 
@@ -54,7 +60,7 @@ public class ImagePrivateServerConverterImpl implements ImageConverter {
 
         final List<String> convertContentList = new ArrayList<>();
 
-        for(Attachment attachment : attachmentList) {
+        for (Attachment attachment : attachmentList) {
 
             // 첨부파일 삭제여부
             if(attachment.isDelete()) {
@@ -63,10 +69,10 @@ public class ImagePrivateServerConverterImpl implements ImageConverter {
 
             try {
 
-                final String url = attachment.getUrl();
+                final String url = attachment.getUrl().replaceAll(rootPath, serverPath);
                 final Map<String, String> properties = mapper.readValue(attachment.getProperties(), Map.class);
 
-                convertContentList.add(imageDataPostProcessor.createImageTag(url, properties));
+                convertContentList.add(imageDataPostProcessor.createStaticImage(url, properties));
 
             } catch (Exception e) {
                 throw new BusinessException("JSON 매핑 시 에러가 발생하였습니다. : " + e.getMessage());

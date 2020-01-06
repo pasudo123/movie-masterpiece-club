@@ -70,7 +70,7 @@ public class ImageLocalConverterImpl implements ImageConverter {
                 final Map<String, String> properties = mapper.readValue(attachment.getProperties(), Map.class);
 
                 convertContentList.add(
-                        imageDataPostProcessor.createImageTag(encodeString, properties));
+                        imageDataPostProcessor.createImage(encodeString, properties));
 
             } catch (IOException e) {
                 throw new BusinessException("파일경로를 바이트 코드로 변환하는 도중에 에러가 발생하였습니다.");

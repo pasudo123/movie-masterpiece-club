@@ -18,7 +18,19 @@ public class ImageDataPostProcessor {
     @Value("${keyword.image}")
     private String imageKeyword;
 
-    public String createImageTag(final String url, final Map<String, String> properties) {
+    public String createStaticImage(final String url, final Map<String, String> properties) {
+        StringJoiner joiner = new StringJoiner(" ", "<", ">");
+        joiner.add("img");
+        joiner.add("src=\"" + url + "\"");
+
+        for(String key : properties.keySet()) {
+            joiner.add(key + "=\"" + properties.get(key) + "\"");
+        }
+
+        return joiner.toString();
+    }
+
+    public String createImage(final String url, final Map<String, String> properties) {
 
         StringJoiner joiner = new StringJoiner(" ", "<", ">");
         joiner.add("img");
