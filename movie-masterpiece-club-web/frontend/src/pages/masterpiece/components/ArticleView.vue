@@ -1,10 +1,9 @@
 <template>
     <div id="articleView">
 
-        <div
+        <div v-if="loading"
                 class="loadingWrapper"
-                v-loading="loading"
-                v-if="loading"></div>
+                v-loading="loading"></div>
 
         <div v-else>
             <div class="titleWrapper">
@@ -21,7 +20,7 @@
                 </span>
 
                 <!-- 해당 사용자에게 보여주기. -->
-                <span class="modifyArticleText">
+                <span v-if="this.isMyArticle()" class="modifyArticleText">
                     <span class="modifyText" @click="modifyArticleProcess(articleOneState)"> 수정하기 </span>
                     <span class="modifyText" @click="deleteArticleProcess(articleOneState.id)"> 삭제하기 </span>
                 </span>
@@ -54,6 +53,10 @@
     import {createNamespacedHelpers} from 'vuex';
 
     const {
+        mapGetters: authGetters
+    } = createNamespacedHelpers('auth')
+
+    const {
         mapGetters: articleMapGetters,
         mapActions: articleMapActions
     } = createNamespacedHelpers('articleModule');
@@ -75,12 +78,17 @@
             }
         },
         computed: {
+            ...authGetters(['currentAuthState']),
             ...articleMapGetters(['articleOneState'])
         },
         methods: {
             ...articleMapActions(['fetchOneArticle']),
             ...articleMapActions(['deleteOneArticle']),
             ...commentMapMutations(['initListCommentState']),
+
+            isMyArticle() {
+                return (this.currentAuthState.id === this.articleOneState.createdUserId);
+            },
 
             modifyArticleProcess() {
                 this.$router.push({name: 'articleOneEdit', params: {articleId: this.articleOneState.id}}).then(() => {

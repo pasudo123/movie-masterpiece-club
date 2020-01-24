@@ -24,8 +24,6 @@
 
 <script>
 
-
-
     import {createNamespacedHelpers} from 'vuex';
     const {
         mapActions: articleMapActions,
