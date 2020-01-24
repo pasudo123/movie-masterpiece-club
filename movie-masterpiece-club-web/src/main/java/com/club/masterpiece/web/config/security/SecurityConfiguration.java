@@ -50,8 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .headers()
                 .frameOptions().disable();
 
-        /** 일반 필터 타기 이전에 커스텀 필터 등록 : https 에서 google oauth2 문제. **/
-        http.addFilterBefore(new OAuth2Filter(domain), OAuth2LoginAuthenticationFilter.class);
+//        /** 일반 필터 타기 이전에 커스텀 필터 등록 : https 에서 google oauth2 문제. **/
+//        http.addFilterBefore(new OAuth2Filter(domain), OAuth2LoginAuthenticationFilter.class);
 
         http.authorizeRequests()
                 .antMatchers(

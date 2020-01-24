@@ -6,21 +6,6 @@ spring:
     template-loader-path: classpath:/static/templates
     suffix: .ftl
 
-
-# logback setting
-#logging:
-#  level:
-#    org.springframework.web: INFO
-#    org.springframework.security: INFO
-#    org.hibernate: ERROR
-#    com.club.masterpiece.web: INFO
-#  file: gulagbu.log
-
-# GCP
-cloud:
-  storage:
-    google-bucket: doubler-72002954.appspot.com
-
 # default
 table:
   user: user
