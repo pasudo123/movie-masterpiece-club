@@ -78,3 +78,4 @@ movie-masterpiece-club-web/src/main/resources/static/
 ### application.yml 설정 파일 제외
 movie-masterpiece-club-web/src/**/application-prod.yml
 movie-masterpiece-club-web/src/**/application-dev.yml
+local.properties

@@ -1,14 +1,14 @@
 package com.club.masterpiece.bot.config;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
  * - spring boot 2.2 부터는 @EnableConfigurationProperties 이 필요하지 않음
  * - @SpringBootApplication 에서 알아서 @ConfigurationProperties 를 읽어들임
  * - 추가적으로 @Configuration 을 등록할 필요도 없고 알아서 빈으로 등록됨.
+ *
+ * - 현재 버전은 [ spring boot 1.8.x ] 이다.
  *
  */
 @Getter

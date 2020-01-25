@@ -29,8 +29,12 @@ public class AppListener {
     @EventListener
     public void shutDownApplicationServer(final ContextClosedEvent event) {
 
+        /**
+         * 특정 프로필에 대해서만 처리를 할 것인지 여부 결정.
+         */
         String messageBuilder = "STOP Gulagbu Bot\n" + getNowTime();
         gulagbuBot.sendMessageToAdmin(messageBuilder);
+        gulagbuBot.onClosing();
     }
 
     private String getNowTime(){
