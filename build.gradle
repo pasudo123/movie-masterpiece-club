@@ -66,6 +66,12 @@ project(':movie-masterpiece-club-common') {
     }
 }
 
+project(':movie-masterpiece-club-bot') {
+    dependencies {
+//        compile project(':movie-masterpiece-club-common')
+    }
+}
+
 project(':movie-masterpiece-club-web') {
     
     /**
