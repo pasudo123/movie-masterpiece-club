@@ -1,0 +1,17 @@
+## 주소 : t.me/ThinkGuBot
+
+telegram:
+  bot:
+    name: ''
+    username: ''
+    token: ''
+  admin:
+    name: ''
+    username: ''
+    chatId: ''
+
+openapi:
+  moviedb:
+    apiKey:
+
+# example : https://api.themoviedb.org/3/movie/550?api_key=30a9c70f93bc9885831e01e0d7181f50

@@ -2,7 +2,6 @@ package com.club.masterpiece.bot;
 
 import com.club.masterpiece.bot.telegram.GulagbuBot;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +13,7 @@ public class BotApplication {
 
     private static final String PROPERTIES =
             "spring.config.additional-location="
-                    + "/data/etc/gulagbu.com/application-override.yml";
+                    + "classpath:/application-override.yml";
 
     public static void main(String[] args) {
 
