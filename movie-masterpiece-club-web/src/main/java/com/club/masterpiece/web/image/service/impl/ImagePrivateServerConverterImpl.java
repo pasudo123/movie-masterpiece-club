@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by pasudo123 on 2019-12-30
@@ -23,9 +24,9 @@ import java.util.Map;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@Profile("prod")
 public class ImagePrivateServerConverterImpl implements ImageConverter {
 
+    private final Pattern IMAGE_TAG_PATTERN = Pattern.compile("<img src\\s*=\\s*\\\\*\"(.+?)\\\\*\"\\s*>");
     private final ImageDataPostProcessor imageDataPostProcessor;
     private final ObjectMapper mapper;
 
@@ -34,6 +35,9 @@ public class ImagePrivateServerConverterImpl implements ImageConverter {
 
     @Value("${image.root-path}")
     private String rootPath;
+
+    @Value("${image.resource-path}")
+    private String resourcePath;
 
     @Value("${keyword.image}")
     private String imageKeyword;
@@ -69,7 +73,7 @@ public class ImagePrivateServerConverterImpl implements ImageConverter {
 
             try {
 
-                final String url = attachment.getUrl().replaceAll(rootPath, serverPath);
+                final String url = attachment.getUrl().replaceAll(resourcePath, resourcePath);
                 final Map<String, String> properties = mapper.readValue(attachment.getProperties(), Map.class);
 
                 convertContentList.add(imageDataPostProcessor.createStaticImage(url, properties));

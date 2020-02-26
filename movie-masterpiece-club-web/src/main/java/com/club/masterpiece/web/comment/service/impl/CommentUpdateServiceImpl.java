@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentUpdateServiceImpl implements CommentUpdateService {
 
     private final CommentFindService commentFindService;
-    private final CommentRepository commentRepository;
 
     @UpdatableState
     @Override

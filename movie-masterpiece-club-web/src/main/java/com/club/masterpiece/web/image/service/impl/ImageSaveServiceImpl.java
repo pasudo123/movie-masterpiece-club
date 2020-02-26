@@ -6,6 +6,7 @@ import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
 import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.common.attachment.repository.AttachmentRepository;
 import com.club.masterpiece.web.image.service.ImageSaveService;
+import com.club.masterpiece.web.image.service.ImageUploadService;
 import com.club.masterpiece.web.util.image.ImageDataPreProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,11 +36,12 @@ import java.util.UUID;
 @Transactional
 public class ImageSaveServiceImpl implements ImageSaveService {
 
-    @Value("${image.root-path}")
-    private String rootPath;
+    @Value("${image.resource-path}")
+    private String resourcePath;
 
     private final ImageDataPreProcessor imageDataPreProcessor;
     private final AttachmentRepository attachmentRepository;
+    private final ImageUploadService imageUploadService;
 
     @Override
     public List<Attachment> save(final Article article, final String content) {
@@ -53,12 +55,12 @@ public class ImageSaveServiceImpl implements ImageSaveService {
 
             final byte[] decodeData = this.base64Decode(element.getImageSrc());
             final String size = String.valueOf(decodeData.length);
-            final String fileName = this.saveImageInLocalEnv(decodeData);
+            final String fileName = imageUploadService.upload(decodeData);
 
             final ImageDto.CreateInfo createInfo = ImageDto.CreateInfo
                     .builder()
                     .name(fileName)
-                    .url(rootPath + fileName)
+                    .url(resourcePath + fileName)
                     .properties(element.getProperties())
                     .size(size)
                     .build();
@@ -77,33 +79,35 @@ public class ImageSaveServiceImpl implements ImageSaveService {
                 .decode(imageSrc);
     }
 
-    private String saveImageInLocalEnv(final byte[] image) {
+//    private String saveImageInLocalEnv(final byte[] image) {
+//
+//        // TODO 웹서버로 파일 올리기 수행하여야 함.
+//
+//        final String fileName = getFileName(image) + PNG;
+//        final Path folder = Paths.get(resourcePath);
+//
+//        try {
+//
+//            if (!Files.exists(folder)) {
+//                Files.createDirectory(folder);
+//            }
+//
+//            Files.write(Paths.get(resourcePath + fileName), image);
+//
+//        } catch (IOException e) {
+//
+//            log.error("Image 저장 도중 에러 발생 : {}", e.getMessage());
+//
+//        }
+//
+//        return fileName;
+//    }
 
-        final String fileName = getFileName(image) + PNG;
-        final Path folder = Paths.get(rootPath);
-
-        try {
-
-            if (!Files.exists(folder)) {
-                Files.createDirectory(folder);
-            }
-
-            Files.write(Paths.get(rootPath + fileName), image);
-
-        } catch (IOException e) {
-
-            log.error("Image 저장 도중 에러 발생 : {}", e.getMessage());
-
-        }
-
-        return fileName;
-    }
-
-    private String getFileName(byte[] image) {
-
-        String uuid = UUID.nameUUIDFromBytes(image).toString().replaceAll(HYPHEN, SPACE);
-        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
-
-        return (uuid + HYPHEN + now);
-    }
+//    private String getFileName(byte[] image) {
+//
+//        String uuid = UUID.nameUUIDFromBytes(image).toString().replaceAll(HYPHEN, SPACE);
+//        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+//
+//        return (uuid + HYPHEN + now);
+//    }
 }

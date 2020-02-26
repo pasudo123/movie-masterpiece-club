@@ -10,11 +10,5 @@ import java.util.List;
  * Email: oraedoa@gmail.com
  **/
 public interface ImageSaveService {
-
-    static final String HYPHEN = "-";
-    static final String SPACE = "";
-    static final String DATE_TIME_FORMAT = "yyyyMMddHHmmss";
-    static final String PNG = ".png";
-
     public List<Attachment> save(Article article, String content);
 }

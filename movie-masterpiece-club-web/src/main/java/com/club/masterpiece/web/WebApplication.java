@@ -8,7 +8,7 @@ public class WebApplication {
 
     private static final String PROPERTIES =
             "spring.config.additional-location="
-                    + "/data/etc/gulagbu.com/application.yml";
+                    + "/data/etc/gulagbu.com/application-prod.yml";
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(WebApplication.class)

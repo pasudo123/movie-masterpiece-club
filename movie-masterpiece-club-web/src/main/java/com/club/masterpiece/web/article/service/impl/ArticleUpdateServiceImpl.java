@@ -38,6 +38,7 @@ public class ArticleUpdateServiceImpl implements ArticleUpdateService {
         final Article foundArticle = articleFindService.findEntityById(articleId);
         foundArticle.updateArticle(
                 imageConverter.convertImageTagToKeywordOnUpdate(dto));
+
         /** foundArticle 을 통해 조회하는 첨부파일 active 변경. **/
         foundArticle.changeDeleteOnAttachmentList();
 

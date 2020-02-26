@@ -21,5 +21,4 @@ public interface ArticleFindService {
     ArticleDto.OneResponse findOneById(String articleId);
 
     Article findEntityById(String articleId);
-
 }

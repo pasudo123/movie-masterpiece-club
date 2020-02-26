@@ -40,7 +40,6 @@ public class ImageLocalSaveServiceTest {
     @MockBean
     private ImageDataPreProcessor imageDataPreProcessor;
 
-    @Qualifier("ImageLocalSaveServiceImpl")
     @Autowired
     private ImageSaveService imageSaveService;
 

@@ -21,7 +21,7 @@ public class PropertyConfiguration {
         properties.setLocation(new FileSystemResource("/data/etc/application-prod.yml"));
 
         /** 리소스 파일이 미존재시 건너뛰기 설정을 `false` 로 한다. : 미존재시 에러 발생 **/
-        properties.setIgnoreResourceNotFound(false);
+        properties.setIgnoreResourceNotFound(true);
 
         return properties;
     }

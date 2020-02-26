@@ -8,7 +8,6 @@ import com.club.masterpiece.common.comment.repository.CommentRepository;
 import com.club.masterpiece.common.user.model.User;
 import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.comment.service.CommentCreateService;
-import com.club.masterpiece.web.comment.service.CommentFindService;
 import com.club.masterpiece.web.exception.EmptyResultException;
 import com.club.masterpiece.web.util.CommentIdGenerator;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,6 @@ public class CommentCreateServiceImpl implements CommentCreateService {
 
     private final CommentIdGenerator commentIdGenerator;
     private final CommentRepository commentRepository;
-    private final CommentFindService commentFindService;
 
     @UpdatableState
     @Override

@@ -12,8 +12,6 @@ import java.util.regex.Pattern;
  **/
 public interface ImageConverter {
 
-    Pattern IMAGE_TAG_PATTERN = Pattern.compile("<img src\\s*=\\s*\\\\*\"(.+?)\\\\*\"\\s*>");
-
     String convertImageTagToKeywordOnCreate(ArticleDto.CreateRequest dto);
 
     ArticleDto.UpdateRequest convertImageTagToKeywordOnUpdate(ArticleDto.UpdateRequest dto);

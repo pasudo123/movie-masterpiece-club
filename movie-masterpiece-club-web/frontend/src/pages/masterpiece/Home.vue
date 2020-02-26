@@ -8,7 +8,8 @@
                     class="el-menu-demo"
                     mode="horizontal">
 
-                <h3 class="titleText">Gulagbu</h3>
+                <h3 class="titleText"
+                    @click="goServiceMainPage">Gulagbu</h3>
 
                 <el-menu-item
                         index="1"
