@@ -20,13 +20,13 @@ glob.sync('./src/pages/**/main.js').forEach(path => {
 
     // ./src/pages/article/main.js
     // ./src/pages/login/main.js
-    console.debug("============================== path");
-    console.debug(path);
-    console.debug("============================== chunk");
-    console.debug(chunk);
-    console.debug("============================== pages[chunk]");
-    console.debug(pages[chunk]);
-    console.debug("==============================");
+    // console.debug("============================== path");
+    // console.debug(path);
+    // console.debug("============================== chunk");
+    // console.debug(chunk);
+    // console.debug("============================== pages[chunk]");
+    // console.debug(pages[chunk]);
+    // console.debug("==============================");
 
 });
 
