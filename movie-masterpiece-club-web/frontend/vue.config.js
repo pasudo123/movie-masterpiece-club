@@ -37,9 +37,6 @@ module.exports = {
         open: true,
         openPage: 'login',
         port: 8899,
-
-        /** 개발단계 시, context - path 를 넣지 않는다. **/
-
         proxy: {
             [process.env.VUE_APP_BASE_API]: {
                 target: 'http://localhost:8080',
@@ -86,13 +83,13 @@ module.exports = {
             title: 'masterpiece',
             filename: './templates/masterpiece.ftl',
             chunks: ['chunk-vendors', 'chunk-common', 'masterpiece']
-        },
-        laboratory: {
-            entry: './src/pages/laboratory/main.js',
-            template: 'public/index.html',
-            title: 'laboratory',
-            filename: './templates/laboratory.ftl',
-            chunks: ['chunk-vendors', 'chunk-common', 'laboratory']
         }
+        // laboratory: {
+        //     entry: './src/pages/laboratory/main.js',
+        //     template: 'public/index.html',
+        //     title: 'laboratory',
+        //     filename: './templates/laboratory.ftl',
+        //     chunks: ['chunk-vendors', 'chunk-common', 'laboratory']
+        // }
     }
 };
