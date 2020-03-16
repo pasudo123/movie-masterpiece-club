@@ -5,53 +5,52 @@ Vue.use(VueRouter);
 
 export default new VueRouter({
 
-    mode: 'history',
+  mode: 'history',
 
-    // base: (process.env.NODE_ENV === 'production')
-    //     ? process.env.VUE_APP_ROUTER_PATH
-    //     : '/',
+  // base: (process.env.NODE_ENV === 'production')
+  //     ? process.env.VUE_APP_ROUTER_PATH
+  //     : '/',
 
-    base: '/',
+  base: '/',
 
-    routes: [
+  routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/pages/login/Login')
+    },
+    {
+      path: '/masterpiece',
+      component: () => import('@/pages/masterpiece/Home'),
+      children: [
         {
-            path: '/login',
-            name: 'login',
-            component: () => import('@/pages/login/Login')
+          path: '',
+          name: 'articleList',
+          component: () => import('@/pages/masterpiece/components/ArticleList'),
         },
         {
-            path: '/masterpiece',
-            component: () => import('@/pages/masterpiece/Home'),
-            children: [
-                {
-                    path: '',
-                    name: 'articleList',
-                    component: () => import('@/pages/masterpiece/components/ArticleList'),
-                },
-                {
-                    path: 'article-edit',
-                    name: 'articleEdit',
-                    component: () => import('@/pages/masterpiece/components/ArticleEdit'),
-                    children: [
-                        {
-                            path: ':articleId',
-                            name: 'articleOneEdit',
-                            component: () => import('@/pages/masterpiece/components/ArticleEdit'),
-                        }
-                    ]
-
-                },
-                {
-                    path: 'article/:articleId',
-                    name: 'articleView',
-                    component: () => import('@/pages/masterpiece/components/ArticleView')
-                }
-            ]
+          path: 'article-edit',
+          name: 'articleEdit',
+          component: () => import('@/pages/masterpiece/components/ArticleEdit'),
+          children: [
+            {
+              path: ':articleId',
+              name: 'articleOneEdit',
+              component: () => import('@/pages/masterpiece/components/ArticleEdit'),
+            }
+          ]
         },
         {
-            path: '/laboratory',
-            name: 'laboratory',
-            component: () => import('@/pages/laboratory/Laboratory')
+          path: 'article/:articleId',
+          name: 'articleView',
+          component: () => import('@/pages/masterpiece/components/ArticleView')
         }
-    ]
+      ]
+    },
+    {
+      path: '/laboratory',
+      name: 'laboratory',
+      component: () => import('@/pages/laboratory/Laboratory')
+    }
+  ]
 });

@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans|Nanum+Gothic+Coding&display=swap&subset=korean');
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:500&display=swap&subset=korean');
 /**
 - main.js 에 적용. (폰트)
  */
 
 html, body {
-    font-family: 'Nanum Gothic Coding', monospace;
+    font-family: 'Noto Sans KR', sans-serif;
     // 'Black Han Sans', sans-serif;
 }

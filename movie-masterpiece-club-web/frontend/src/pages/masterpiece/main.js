@@ -16,15 +16,15 @@ Vue.config.productionTip = false;
 Vue.use(ElementUI, {locale});
 
 router.beforeEach((to, from, next) => {
-    store.dispatch('auth/currentAuth').then((response) => {
-        next();
-    }).catch(() => {
-        /** 에러 발생 **/
-    })
+  store.dispatch('auth/currentAuth').then((response) => {
+    next();
+  }).catch(() => {
+    /** 에러 발생 **/
+  })
 });
 
 new Vue({
-    store,
-    router,
-    render: h => h(App)
+  store,
+  router,
+  render: h => h(App)
 }).$mount('#app');

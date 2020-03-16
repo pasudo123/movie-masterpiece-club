@@ -1,66 +1,66 @@
 <template>
-    <div id="commentEdit">
+  <div id="commentEdit">
 
-        <el-input
-                class="commentInputClass"
-                placeholder="댓글을 입력..."
-                @keyup.enter.native="writeCommentProcess"
-                v-model="content" />
+    <el-input
+            class="commentInputClass"
+            placeholder="댓글을 입력..."
+            @keyup.enter.native="writeCommentProcess"
+            v-model="content"/>
 
-        <el-button @click="writeCommentProcess">OK</el-button>
+    <el-button @click="writeCommentProcess">OK</el-button>
 
-    </div>
+  </div>
 </template>
 
 <script>
 
-    import {createNamespacedHelpers} from 'vuex';
+  import {createNamespacedHelpers} from 'vuex';
 
-    const {
-        mapActions: commentMapActions
-    } = createNamespacedHelpers('commentModule');
-    const {
-        mapGetters: articleMapGetters
-    } = createNamespacedHelpers('articleModule');
+  const {
+    mapActions: commentMapActions
+  } = createNamespacedHelpers('commentModule');
+  const {
+    mapGetters: articleMapGetters
+  } = createNamespacedHelpers('articleModule');
 
-    export default {
-        name: "CommentEdit",
-        data() {
-            return {
-                isCreate: false,
-                content: ''
-            }
-        },
-        computed: {
-            ...articleMapGetters(['articleOneState'])
-        },
-        methods: {
+  export default {
+    name: "CommentEdit",
+    data() {
+      return {
+        isCreate: false,
+        content: ''
+      }
+    },
+    computed: {
+      ...articleMapGetters(['articleOneState'])
+    },
+    methods: {
 
-            ...commentMapActions(['createCommentOnArticle']),
+      ...commentMapActions(['createCommentOnArticle']),
 
-            writeCommentProcess() {
+      writeCommentProcess() {
 
-                if (this.isCreate) {
-                    return;
-                }
-
-                if (this.content === '') {
-                    return;
-                }
-
-                this.isCreate = true;
-
-                const params = {};
-                params.articleId = this.articleOneState.id;
-                params.content = this.content;
-
-                this.createCommentOnArticle(params).then(() => {
-                    this.isCreate = false;
-                    this.content = '';
-                });
-            }
+        if (this.isCreate) {
+          return;
         }
+
+        if (this.content === '') {
+          return;
+        }
+
+        this.isCreate = true;
+
+        const params = {};
+        params.articleId = this.articleOneState.id;
+        params.content = this.content;
+
+        this.createCommentOnArticle(params).then(() => {
+          this.isCreate = false;
+          this.content = '';
+        });
+      }
     }
+  }
 </script>
 
 <style scoped src="@/style/comment.css">
