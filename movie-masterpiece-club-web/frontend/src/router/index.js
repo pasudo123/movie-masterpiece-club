@@ -27,11 +27,17 @@ export default new VueRouter({
     {
       path: '/article',
       component: Layout,
-      redirect: '/home',
+      redirect: '',
       children: [
         {
+          path: '',
+          name: 'ArticleEdit',
+          component: () => import('@/views/board/ArticleEdit'),
+          pathToRegexpOptions: { strict: true }
+        },
+        {
           path: ':id',
-          name: "Article",
+          name: "ArticleView",
           component: () => import('@/views/board/ArticleView')
         },
       ]

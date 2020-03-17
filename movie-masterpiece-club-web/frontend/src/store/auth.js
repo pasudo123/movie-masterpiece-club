@@ -7,14 +7,10 @@ const state = {
 };
 
 const actions = {
-
     /** main.js  에서 beforeRouter 시 계속 호출. **/
     currentAuth({commit}) {
-
         const uri = 'auth';
-
         return new Promise((resolve, reject) => {
-
             request.get(uri).then((response) => {
                 commit('setCurrentAuth', response.data);
                 resolve();

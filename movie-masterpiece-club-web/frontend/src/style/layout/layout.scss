@@ -1,0 +1,67 @@
+
+#layoutIndex {
+  margin: 0;
+  padding: 0;
+}
+
+// header
+.siteTitleText{
+  font-size: 20px;
+  font-weight: 700;
+  color: black !important;
+  top: -2px;
+  padding: 0 60px 0 100px;
+}
+
+.titleText{
+  margin: 0 80px 0 100px;
+  display:inline-block;
+  float: left;
+  position: relative;
+  font-weight: bold;
+  top: 12px;
+  outline: none;
+}
+
+.titleText:hover{
+  cursor: pointer;
+}
+
+.titleText:active{
+  border: none;
+}
+
+.userInfoText{
+  position: absolute;
+  right: 60px;
+}
+
+.userAvatar {
+  position: relative;
+  right: 10px;
+}
+
+// body
+.body{
+  margin:0 auto;
+  width: 1080px;
+  height: auto;
+}
+
+// bottom
+.bottom{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+div.bottomIndex {
+  .el-divider--horizontal{
+    margin: 0;
+  }
+  .bottomText{
+    text-align: center;
+    padding: 15px 0 15px 0;
+  }
+}
