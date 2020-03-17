@@ -1,42 +1,42 @@
-<template>
-    <div id="laboratory">
-        <h3>Laboratory</h3>
+<!--<template>-->
+<!--    <div id="laboratory">-->
+<!--        <h3>Laboratory</h3>-->
 
-        <p @click="payloadMethod">payload 로 전송</p>
+<!--        <p @click="payloadMethod">payload 로 전송</p>-->
 
-        <p @click="formDataMethod">form data 로 전송</p>
+<!--        <p @click="formDataMethod">form data 로 전송</p>-->
 
-    </div>
-</template>
+<!--    </div>-->
+<!--</template>-->
 
-<script>
+<!--<script>-->
 
-    import {createNamespacedHelpers} from 'vuex';
+<!--    import {createNamespacedHelpers} from 'vuex';-->
 
-    const {mapActions} = createNamespacedHelpers('laboratoryModule');
+<!--    const {mapActions} = createNamespacedHelpers('laboratoryModule');-->
 
-    export default {
+<!--    export default {-->
 
-        name: "Laboratory",
-        methods: {
+<!--        name: "Laboratory",-->
+<!--        methods: {-->
 
-            ...mapActions(['payloadActions']),
-            ...mapActions(['formDataActions']),
+<!--            ...mapActions(['payloadActions']),-->
+<!--            ...mapActions(['formDataActions']),-->
 
-            payloadMethod() {
-                this.payloadActions();
-            },
+<!--            payloadMethod() {-->
+<!--                this.payloadActions();-->
+<!--            },-->
 
-            formDataMethod() {
-                this.formDataActions();
-            }
-        }
-    }
-</script>
+<!--            formDataMethod() {-->
+<!--                this.formDataActions();-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 
-<style scoped>
-    #laboratory{
-        text-align: center;
-        margin: 0 auto;
-    }
-</style>
+<!--<style scoped>-->
+<!--    #laboratory{-->
+<!--        text-align: center;-->
+<!--        margin: 0 auto;-->
+<!--    }-->
+<!--</style>-->

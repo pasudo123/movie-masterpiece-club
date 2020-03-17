@@ -1,15 +1,15 @@
-<template>
-    <div id="app">
-        <router-view />
-    </div>
-</template>
+<!--<template>-->
+<!--    <div id="app">-->
+<!--        <router-view />-->
+<!--    </div>-->
+<!--</template>-->
 
-<script>
-    export default {
-        name: "App"
-    }
-</script>
+<!--<script>-->
+<!--    export default {-->
+<!--        name: "App"-->
+<!--    }-->
+<!--</script>-->
 
-<style scoped>
+<!--<style scoped>-->
 
-</style>
+<!--</style>-->

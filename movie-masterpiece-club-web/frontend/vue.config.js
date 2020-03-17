@@ -5,19 +5,18 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const glob = require('glob');
-const pages = {};
+/** 추후 수행 **/
+// const glob = require('glob');
+// const pages = {};
 
-glob.sync('./src/pages/**/main.js').forEach(path => {
-  const chunk = path.split('./src/pages/')[1].split('/main.js')[0];
-
-  pages[chunk] = {
-    entry: path,
-    template: 'public/index.html',
-    title: chunk,
-    chunks: ['chunk-vendors', 'chunk-common', chunk]
-  };
-
+// glob.sync('./src/pages/**/main.js').forEach(path => {
+  // const chunk = path.split('./src/pages/')[1].split('/main.js')[0];
+  // pages[chunk] = {
+  //   entry: path,
+  //   template: 'public/index.html',
+  //   title: chunk,
+  //   chunks: ['chunk-vendors', 'chunk-common', chunk]
+  // };
   // ./src/pages/article/main.js
   // ./src/pages/login/main.js
   // console.debug("============================== path");
@@ -27,8 +26,7 @@ glob.sync('./src/pages/**/main.js').forEach(path => {
   // console.debug("============================== pages[chunk]");
   // console.debug(pages[chunk]);
   // console.debug("==============================");
-
-});
+// });
 
 module.exports = {
   devServer: {
@@ -38,7 +36,12 @@ module.exports = {
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
         target: 'http://localhost:8080',
-      }
+      },
+      '/*': {
+        target: `http://localhost:8899`,
+        pathRewrite: {'^/.*' : './templates/index.ftl'},
+        ws: false,
+      },
     }
   },
 
@@ -63,25 +66,26 @@ module.exports = {
 
   publicPath: (process.env.NODE_ENV === 'staging'
     || process.env.NODE_ENV === 'production')
-    ? process.env.VUE_APP_PUBLIC_PATH
+    ? '/'
     : '/',
   outputDir: '../src/main/resources/static/',
   assetsDir: '',
   pages: {
-    login: {
-      entry: './src/pages/login/main.js',
-      template: 'public/index.html',
-      title: 'login',
-      filename: './templates/login.ftl',
-      chunks: ['chunk-vendors', 'chunk-common', 'login']
-    },
     index: {
-      entry: './src/pages/masterpiece/main.js',
+      entry: 'src/pages/masterpiece/main.js',
       template: 'public/index.html',
-      title: 'index',
+      title: 'Index',
       filename: './templates/index.ftl',
       chunks: ['chunk-vendors', 'chunk-common', 'index']
+    },
+    login: {
+      entry: 'src/pages/login/main.js',
+      template: 'public/index.html',
+      title: 'Login',
+      filename: './templates/login.ftl',
+      chunks: ['chunk-vendors', 'chunk-common', 'login']
     }
+  }
     // laboratory: {
     //     entry: './src/pages/laboratory/main.js',
     //     template: 'public/index.html',
@@ -89,5 +93,5 @@ module.exports = {
     //     filename: './templates/laboratory.ftl',
     //     chunks: ['chunk-vendors', 'chunk-common', 'laboratory']
     // }
-  }
+  // }
 };
