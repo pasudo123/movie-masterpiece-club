@@ -33,7 +33,7 @@
           width="50">
           <template slot-scope="scope">
             <span class="writerText">
-              {{ scope.row.createdName }}
+              {{ scope.row.vote }}
             </span>
           </template>
         </el-table-column>

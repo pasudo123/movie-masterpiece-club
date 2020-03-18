@@ -31,6 +31,8 @@
     mapGetters: articleMapGetters
   } = createNamespacedHelpers('articleModule');
 
+  import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.snow.css'
   import Quill from 'quill'
   import {ImageDrop} from 'quill-image-drop-module'
   import ImageResize from 'quill-image-resize-module'
@@ -41,7 +43,7 @@
   import {quillEditor} from 'vue-quill-editor'
 
   var toolbarOptions = [
-    [{'header': [2, 3, 4, 5, false]}],
+    [{'header': [1, 2, 3, 4, 5, false]}],
     ['bold', 'italic', 'underline', 'strike'],
     [{'align': []}],
     [{'list': 'ordered'}, {'list': 'bullet'}],
@@ -64,6 +66,7 @@
             toolbar: toolbarOptions,
             imageDrop: true,
             imageResize: true,
+            scrollingContainer: '',
           },
           theme: 'snow'
         },

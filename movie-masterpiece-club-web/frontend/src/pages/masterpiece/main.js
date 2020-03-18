@@ -10,11 +10,6 @@ import '@/style/global.scss';
 /** 라우터 권한 설정 **/
 import './permission';
 
-/** 에디터 설정 **/
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
-
 Vue.config.productionTip = false;
 Vue.use(ElementUI, {locale});
 
