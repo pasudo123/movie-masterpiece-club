@@ -74,7 +74,7 @@ public class ArticleDto {
 
         @SuppressWarnings("Duplicates")
         public OneResponse(Article article){
-            this.id = article.getArticleId();
+            this.id = article.getId();
             this.title = article.getTitle();
             this.content = article.getContent();
             this.registerDate = article.getRegDate().toLocalDate();
