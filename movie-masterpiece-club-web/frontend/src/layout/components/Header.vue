@@ -79,10 +79,6 @@
 </script>
 
 <style>
-  .el-menu-item:not(.is-disabled):hover {
-    /*color: #212422 !important;*/
-  }
-
   .el-menu--horizontal > .el-menu-item.is-active {
     border-bottom: 1px solid transparent !important;
     color: #303133;

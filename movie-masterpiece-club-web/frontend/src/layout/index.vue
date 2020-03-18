@@ -6,9 +6,9 @@
     <div class="body">
       <router-view/>
     </div>
-    <div class="bottom">
+    <footer class="bottom">
       <app-bottom />
-    </div>
+    </footer>
   </div>
 </template>
 

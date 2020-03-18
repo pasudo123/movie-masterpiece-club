@@ -11,8 +11,9 @@
 </script>
 
 <style>
-  body {
-    margin: 0;
+  html, body {
     padding: 0;
+    margin: 0;
+    height: 100%;
   }
 </style>

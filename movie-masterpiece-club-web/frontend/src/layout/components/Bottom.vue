@@ -1,6 +1,5 @@
 <template>
   <div class="bottomIndex">
-    <el-divider></el-divider>
     <div class="bottomText">
       띵작1번지
     </div>

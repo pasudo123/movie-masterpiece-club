@@ -1,33 +1,46 @@
 <template>
   <div id="articleList">
-
     <div class="dataTableWrapper"
          v-loading="isLoading">
+
       <el-table
-              header-cell-class-name="headerCellName"
-              cell-class-name="dataCellName"
-              :data="articleListState"
-              @row-click="enterArticleProcess"
-              style="width: 100%">
+        header-cell-class-name="headerCellName"
+        cell-class-name="dataCellName"
+        :data="articleListState"
+        @row-click="enterArticleProcess"
+        style="width: 100%">
 
         <el-table-column
-                label="Title">
+          label="제목">
           <template slot-scope="scope">
             {{ scope.row.title }}
           </template>
         </el-table-column>
 
         <el-table-column
-                label="Writer"
-                width="200">
+          label="작성자"
+          width="200">
           <template slot-scope="scope">
-            <span class="writerText">{{ scope.row.createdName }}</span>
+            <span class="writerText">
+              {{ scope.row.createdName }}
+            </span>
+          </template>
+        </el-table-column>
+
+        <!-- 추천 -->
+        <el-table-column
+          label="추천"
+          width="50">
+          <template slot-scope="scope">
+            <span class="writerText">
+              {{ scope.row.createdName }}
+            </span>
           </template>
         </el-table-column>
 
         <el-table-column
-                label="Register Date"
-                width="160">
+          label="등록일"
+          width="160">
           <template slot-scope="scope">
             {{ scope.row.registerDate }}
           </template>
@@ -36,12 +49,12 @@
 
       <div class="pageWrapper">
         <el-pagination
-                class="pagination"
-                layout="prev, pager, next"
-                @current-change="pageMove"
-                :page-size="pageSize"
-                :current-page="currentPage"
-                :total="articleAllCountState">
+          class="pagination"
+          layout="prev, pager, next"
+          @current-change="pageMove"
+          :page-size="pageSize"
+          :current-page="currentPage"
+          :total="articleAllCountState">
         </el-pagination>
       </div>
     </div>
@@ -154,7 +167,6 @@
 <style>
   .el-table .headerCellName {
     text-align: center;
-    font-weight: bold;
     font-size: 14px;
     letter-spacing: 1px;
     color: black;
@@ -167,9 +179,8 @@
   .el-table .dataCellName:hover {
     cursor: pointer;
   }
-
 </style>
 
-<style scoped src="@/style/article-list.css">
+<style lang="scss" scoped src="@/style/article/article-list.scss">
 
 </style>
