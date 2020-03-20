@@ -34,6 +34,9 @@ public class OAuth2Filter implements Filter {
     }
 
     @Override
+    public void destroy() {}
+
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         if(log.isDebugEnabled()) {
@@ -42,7 +45,7 @@ public class OAuth2Filter implements Filter {
         }
 
         /** 커스텀한 ServletRequestWrapper 를 태우고, 이후에 필터 적용. **/
-        request = new CustomHttpServletRequestWrapper((HttpServletRequest) request, url);
+        request = new CustomRequestWrapper((HttpServletRequest) request, url);
 
         if(log.isDebugEnabled()) {
             log.debug("[after] changed request : {}", ((HttpServletRequest) request).getRequestURL().toString());
@@ -50,10 +53,5 @@ public class OAuth2Filter implements Filter {
         }
 
         chain.doFilter(request, response);
-    }
-
-    @Override
-    public void destroy() {
-
     }
 }
