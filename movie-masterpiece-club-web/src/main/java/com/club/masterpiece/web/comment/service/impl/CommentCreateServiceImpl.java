@@ -40,7 +40,7 @@ public class CommentCreateServiceImpl implements CommentCreateService {
         log.debug("Comment content : {}", dto.getContent());
 
         Article article = Article.builder()
-                .articleId(articleId)
+                .id(articleId)
                 .build();
 
         Comment comment = Comment.builder()

@@ -93,8 +93,8 @@ public class Article {
     private List<Attachment> attachmentList = new ArrayList<>();
 
     @Builder
-    public Article(String articleId, String title, String content, ArticleType type, User user) {
-        this.id = articleId;
+    public Article(String id, String title, String content, ArticleType type, User user) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.type = type;

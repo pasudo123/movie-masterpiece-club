@@ -56,7 +56,7 @@ public class ArticleFindServiceImpl implements ArticleFindService {
     @Override
     public ArticleDto.OneResponse findOneById(final String articleId) {
 
-        Article article = articleRepository.findOneByArticleId(articleId)
+        Article article = articleRepository.findOneById(articleId)
                 .orElseThrow(() -> new EmptyResultException(String.format("Article is Not Found. : %s", articleId)));
 
         /** 첨부파일 미존재 **/
@@ -74,7 +74,7 @@ public class ArticleFindServiceImpl implements ArticleFindService {
     @Override
     public Article findEntityById(final String articleId) {
 
-        return articleRepository.findOneByArticleId(articleId)
+        return articleRepository.findOneById(articleId)
                 .orElseThrow(() -> new EmptyResultException(String.format("Article is Not Found. : %s", articleId)));
     }
 }

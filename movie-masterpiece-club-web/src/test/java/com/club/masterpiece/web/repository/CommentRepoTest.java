@@ -43,7 +43,7 @@ public class CommentRepoTest {
 
         String articleId = "bbb4ee415bec4fbeb44a3c498f7d4d95";
 
-        List<Comment> commentList = commentRepository.findAllByArticleArticleIdAndCommentNullOrderByRegDateAsc(articleId);
+        List<Comment> commentList = commentRepository.findAllByArticleIdAndCommentNullOrderByRegDateAsc(articleId);
 
         for(Comment comment : commentList) {
             LOGGER.info("comment : {} | {}", comment.getRegDate(), comment.getContent());

@@ -57,7 +57,7 @@ public class Attachment {
     @JoinColumn(
             name = "article_id",
             columnDefinition = "VARCHAR(40)",
-            referencedColumnName = "article_id",
+            referencedColumnName = "id",
             nullable = false,
             foreignKey = @ForeignKey(name = "fk_attachment_article_idx")
     )

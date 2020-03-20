@@ -88,7 +88,7 @@ public class ArticleJpaTest {
 
         LOGGER.info("==================================================================");
 
-        Article foundArticle = articleRepository.findOneByArticleId("test_article_id").get();
+        Article foundArticle = articleRepository.findOneById("test_article_id").get();
 
         LOGGER.info("저장 이전, 저장 이후 article 비교");
 

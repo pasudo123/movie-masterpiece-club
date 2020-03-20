@@ -41,7 +41,7 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
         log.debug("article type : {}", dto.getType());
 
         final Article article = Article.builder()
-                .articleId(articleIdGenerator.generateId())
+                .id(articleIdGenerator.generateId())
                 .title(dto.getTitle())
                 .content(imageConverter.convertImageTagToKeywordOnCreate(dto))
                 .type(dto.getType())

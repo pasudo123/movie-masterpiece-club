@@ -37,7 +37,7 @@ public class CommentFindServiceImpl implements CommentFindService {
     @Override
     public CommentDto.ListResponse findAllByArticleId(final String articleId) {
 
-        List<Comment> commentList = commentRepository.findAllByArticleArticleIdAndCommentNullOrderByRegDateAsc(articleId);
+        List<Comment> commentList = commentRepository.findAllByArticleIdAndCommentNullOrderByRegDateAsc(articleId);
 
         /** comment status : 'active' 추출 **/
         /** dto 내에서 reply status : 'active' 추출 **/
