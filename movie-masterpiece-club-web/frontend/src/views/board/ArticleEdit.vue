@@ -177,6 +177,31 @@
   }
 </script>
 
-<style scoped src="@/style/article-edit.css">
+<style lang="scss" scoped src="@/style/article/article-edit.scss">
 
+</style>
+
+<style lang="scss">
+  .titleClass {
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid #dadada;
+    .el-input__inner {
+      padding: 10px 10px 10px 10px;
+      font-size: 30px;
+      border: none;
+    }
+  }
+  .contentWrapper {
+    .ql-toolbar.ql-snow {
+      border: none;
+    }
+    .ql-container.ql-snow {
+      height: 350px;
+      max-height: 350px;
+      position:relative;
+      overflow-y: auto;
+      top: 10px;
+      border: none;
+    }
+  }
 </style>

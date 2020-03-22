@@ -1,0 +1,18 @@
+
+#articleEdit {
+    width: 850px;
+    margin: 30px auto;
+}
+
+.contentWrapper{
+    position: relative;
+    top: 30px;
+}
+
+.buttonWrapper{
+    display: flex;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    position: relative;
+    top: 60px;
+}
