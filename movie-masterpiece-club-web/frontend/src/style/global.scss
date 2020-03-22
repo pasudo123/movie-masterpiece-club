@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:500&display=swap&subset=korean');
-/**
-- main.js 에 적용. (폰트)
- */
 
-html, body {
+html{
+    height: 100%;
+}
+
+body {
     font-family: 'Noto Sans KR', sans-serif;
     // 'Black Han Sans', sans-serif;
     padding: 0;

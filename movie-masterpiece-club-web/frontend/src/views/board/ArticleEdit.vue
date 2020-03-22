@@ -4,7 +4,7 @@
     <div class="titleWrapper">
       <el-input
               class="titleClass"
-              placeholder="제목을 입력해주세요."
+              placeholder="제목을 입력하세요."
               v-model="title"/>
     </div>
 

@@ -44,18 +44,35 @@ module.exports = {
       },
     }
   },
-
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.scss$/,
+  //       use: [
+  //         'vue-style-loader',
+  //         'css-loader',
+  //         {
+  //           loader: 'sass-loader',
+  //           options: {
+  //             indentedSyntax: true,
+  //             sassOptions: {
+  //               indentedSyntax: true
+  //             }
+  //           }
+  //         }
+  //       ]
+  //     }
+  //   ],
+  // },
   configureWebpack: {
     resolve: {
       alias: {
         '@': resolve('src'),
-        // 'icons': path.resolve(__dirname, 'node_modules/vue-material-design-icons')
       },
       extensions: [
         '.vue'
       ]
     },
-
     plugins: [
       new webpack.ProvidePlugin({
         'window.Quill': 'quill/dist/quill.js',
@@ -66,7 +83,7 @@ module.exports = {
 
   publicPath: (process.env.NODE_ENV === 'staging'
     || process.env.NODE_ENV === 'production')
-    ? '/'
+    ? process.env.VUE_APP_BASE_URL
     : '/',
   outputDir: '../src/main/resources/static/',
   assetsDir: '',

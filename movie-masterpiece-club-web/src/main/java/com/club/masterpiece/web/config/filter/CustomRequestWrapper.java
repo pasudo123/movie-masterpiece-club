@@ -1,7 +1,6 @@
 package com.club.masterpiece.web.config.filter;
 
 import com.nhncorp.lucy.security.xss.XssFilter;
-import jdk.internal.util.xml.impl.Input;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;

@@ -1,13 +1,13 @@
-package com.club.masterpiece.bot;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class BotApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
-
-}
+//package com.club.masterpiece.bot;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class BotApplicationTests {
+//
+//    @Test
+//    void contextLoads() {
+//    }
+//
+//}
