@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfiguration implements WebMvcConfigurer {
 
     private static final int FIRST = 1;
-    private static final String[] PATTERNS = {"/article"};
+    private static final String[] PATTERNS = {"/*"};
 
     @Bean
     public FilterRegistrationBean<XssEscapeServletFilter> formDataXSSFilterRegistrationBean(){

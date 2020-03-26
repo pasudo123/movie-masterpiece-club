@@ -49,10 +49,10 @@ public class Article {
     private ArticleType type;
 
     @Column(name = "vote", columnDefinition = "BIGINT default 0", nullable = false)
-    private Long vote;
+    private Long vote = 0L;
 
     @Column(name = "views_count", columnDefinition = "BIGINT default 0", nullable = false)
-    private Long viewsCount;
+    private Long viewsCount = 0L;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE') default 'ACTIVE'", nullable = false)
