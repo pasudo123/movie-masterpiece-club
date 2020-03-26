@@ -13,16 +13,13 @@ const state = {
 const actions = {
 
     writeArticle({commit}, params) {
-
         const uri = 'article';
-
         const payload = {};
         payload.title = params.title;
         payload.content = params.content;
         payload.type = params.type;
 
         return new Promise((resolve, reject) => {
-
             request.post(uri, payload).then((response) => {
                 resolve();
             }).catch((error) => {

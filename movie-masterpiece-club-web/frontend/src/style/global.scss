@@ -1,13 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:500&display=swap&subset=korean');
 
-html{
-    height: 100%;
-}
-
-body {
+html, body {
     font-family: 'Noto Sans KR', sans-serif;
     // 'Black Han Sans', sans-serif;
+    height: 100%;
     padding: 0;
     margin: 0;
-    height: 100%;
+    overflow: hidden;
 }

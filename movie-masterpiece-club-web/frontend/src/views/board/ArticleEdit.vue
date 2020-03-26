@@ -12,12 +12,16 @@
       <quill-editor
               :options="editorOption"
               v-model="content"/>
-    </div>
 
-    <div class="buttonWrapper">
-      <el-button v-if="!this.isEdit" @click="writeArticleProcess">등록</el-button>
-      <el-button v-else @click="modifyArticleProcess">수정</el-button>
-      <el-button @click="moveHomePage">취소</el-button>
+      <div class="buttonWrapper">
+        <el-button v-if="!this.isEdit"
+                   v-loading="isWriteProcess"
+                   @click="writeArticleProcess">
+          등록
+        </el-button>
+        <el-button v-else @click="modifyArticleProcess">수정</el-button>
+        <el-button @click="moveHomePage">취소</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -66,8 +70,9 @@
             toolbar: toolbarOptions,
             imageDrop: true,
             imageResize: true,
-            scrollingContainer: '',
           },
+          scrollingContainer: '#scrolling-container',
+          placeholder: '내용을 입력하세요.',
           theme: 'snow'
         },
         isEdit: false
@@ -108,12 +113,7 @@
 
       writeArticleProcess() {
 
-        if (this.isWriteProcess) {
-          return;
-        }
-
         this.isWriteProcess = true;
-
         const params = {};
         params.title = this.title;
         params.content = this.content;
@@ -121,8 +121,7 @@
 
         this.writeArticle(params).then(() => {
           this.isWriteProcess = false;
-          this.$router.push({name: 'articleList'}).then(() => {
-          });
+          this.$router.push({name: 'Home'});
         }).catch(() => {
           this.isWriteProcess = false;
         })
@@ -196,12 +195,13 @@
       border: none;
     }
     .ql-container.ql-snow {
-      height: 350px;
-      max-height: 350px;
-      position:relative;
+      height: 90%;
       overflow-y: auto;
-      top: 10px;
       border: none;
     }
+  }
+
+  .quill-editor {
+    height: 95%;
   }
 </style>
