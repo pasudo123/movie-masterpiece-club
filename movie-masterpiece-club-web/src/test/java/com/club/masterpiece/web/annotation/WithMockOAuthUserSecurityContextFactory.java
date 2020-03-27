@@ -33,11 +33,10 @@ public class WithMockOAuthUserSecurityContextFactory implements WithSecurityCont
         }};
 
         User user = User.builder()
-                .id("empty_id")
-                .username("empty_username")
-                .email("empty_email")
-                .profile("empty_profile")
-                .lastLoginDate(LocalDateTime.now())
+                .id(withMockOAuthUser.id())
+                .username(withMockOAuthUser.username())
+                .email(withMockOAuthUser.email())
+                .profile(withMockOAuthUser.profile())
                 .build();
 
         UserDetails oAuth2User = SecurityOAuth2User.builder()

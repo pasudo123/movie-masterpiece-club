@@ -35,6 +35,7 @@ public class CustomRequestWrapper extends HttpServletRequestWrapper {
 
     @RequiredArgsConstructor
     class ServletInputStreamImpl extends ServletInputStream {
+
         private final InputStream inputStream;
 
         @Override

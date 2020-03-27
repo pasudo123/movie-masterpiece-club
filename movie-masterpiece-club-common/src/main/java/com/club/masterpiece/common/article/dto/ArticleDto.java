@@ -73,7 +73,9 @@ public class ArticleDto {
         private String createdName;
         private String createdProfile;
 
-        public OneResponse(){}
+        public OneResponse(String content){
+            this.content = content;
+        }
 
         @SuppressWarnings("Duplicates")
         public OneResponse(Article article){

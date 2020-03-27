@@ -18,4 +18,10 @@ public @interface WithMockOAuthUser {
     String[] authorities() default {};
 
     String password() default "password";
+
+    String id() default "";
+
+    String email() default "";
+
+    String profile() default "";
 }
