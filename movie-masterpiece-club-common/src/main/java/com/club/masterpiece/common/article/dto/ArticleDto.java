@@ -66,17 +66,21 @@ public class ArticleDto {
         private String id;
         private String title;
         private String content;
+        private Long viewCount;
         private LocalDate registerDate;
         private String registerTimeFormat;
         private String createdUserId;
         private String createdName;
         private String createdProfile;
 
+        public OneResponse(){}
+
         @SuppressWarnings("Duplicates")
         public OneResponse(Article article){
             this.id = article.getId();
             this.title = article.getTitle();
             this.content = article.getContent();
+            this.viewCount = article.getViewsCount();
             this.registerDate = article.getRegDate().toLocalDate();
             this.registerTimeFormat = article.getRegDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             this.createdUserId = article.getUser().getId();

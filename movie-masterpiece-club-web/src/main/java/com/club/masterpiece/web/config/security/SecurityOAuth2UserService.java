@@ -43,7 +43,7 @@ public class SecurityOAuth2UserService implements OAuth2UserService<OAuth2UserRe
 
         return SecurityOAuth2User.builder()
                 .user(user)
-                .authorities(Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString())))
+                .authorities(Collections.singleton(new SimpleGrantedAuthority(user.getRole().name())))
                 .attributes(attributes.getAttributes())
                 .attributeKey(attributeKey)
                 .build();

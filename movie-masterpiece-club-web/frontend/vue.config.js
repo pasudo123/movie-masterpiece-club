@@ -37,40 +37,7 @@ module.exports = {
             [process.env.VUE_APP_BASE_API]: {
                 target: 'http://localhost:8080',
             },
-            '/*': {
-                target: `http://localhost:8899`,
-                pathRewrite: {'^/.*': './templates/index.ftl'},
-                ws: false,
-            },
         }
-    },
-    // css: {
-    //     modules: false,
-    //     test: /\.scss$/,
-    //     use: [
-    //         'vue-style-loader',
-    //         'css-loader',
-    //         {
-    //             loader: 'sass-loader',
-    //             options: {
-    //                 indentedSyntax: true,
-    //                 sassOptions: {
-    //                     indentedSyntax: true
-    //                 }
-    //             }
-    //         }
-    //     ]
-    // },
-    chainWebpack(config){
-        config.module
-            .rule('vue')
-            .use('vue-loader')
-            .loader('vue-loader')
-            .tap(options => {
-                options.compilerOptions.preserveWhitespace = true;
-                return options;
-            })
-            .end()
     },
     configureWebpack: {
         resolve: {

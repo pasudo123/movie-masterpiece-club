@@ -30,17 +30,17 @@
         <!-- 추천 -->
         <el-table-column
           label="추천"
-          width="50">
+          width="60">
           <template slot-scope="scope">
             <span class="writerText">
-              {{ scope.row.vote }}
+              {{ scope.row.viewCount }}
             </span>
           </template>
         </el-table-column>
 
         <el-table-column
           label="등록일"
-          width="160">
+          width="200">
           <template slot-scope="scope">
             {{ scope.row.registerDate }}
           </template>
@@ -127,9 +127,7 @@
       ...articleMapActions(['fetchPartialArticle']),
 
       enterArticleProcess(row) {
-        this.$router.push({name: 'articleView', params: {articleId: row.id}})
-          .then(() => {
-          });
+        this.$router.push({name: 'ArticleView', params: {articleId: row.id}});
       },
 
       renderArticleListPage(page) {

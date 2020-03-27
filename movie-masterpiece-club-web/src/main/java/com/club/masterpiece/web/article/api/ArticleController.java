@@ -29,7 +29,7 @@ import java.util.Map;
  * Email: oraedoa@gmail.com
  **/
 @RestController
-@RequestMapping("/gulagbu-api/article")
+@RequestMapping("/api/article")
 @RequiredArgsConstructor
 @Slf4j
 public class ArticleController {

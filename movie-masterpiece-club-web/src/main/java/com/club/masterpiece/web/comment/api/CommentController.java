@@ -21,7 +21,7 @@ import javax.validation.Valid;
  **/
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/gulagbu-api/comment")
+@RequestMapping("/api/comment")
 @Slf4j
 public class CommentController {
 

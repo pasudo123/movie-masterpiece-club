@@ -25,7 +25,7 @@ import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationF
         jsr250Enabled = true
 )
 @RequiredArgsConstructor
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class CustomSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Value("${domain}")
     private String domain;

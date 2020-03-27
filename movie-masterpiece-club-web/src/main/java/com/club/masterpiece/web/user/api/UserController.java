@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Email: oraedoa@gmail.com
  **/
 @RestController
-@RequestMapping("/gulagbu-api/user")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
