@@ -50,7 +50,6 @@ public class WebConfiguration implements WebMvcConfigurer {
     public HttpMessageConverter<?> htmlCharacterEscapes(){
 
         // ObjectMapper 에 문자처리 기능 삽입.
-        ObjectMapper mapper = new ObjectMapper();
         mapper.getFactory().setCharacterEscapes(new HtmlCharacterEscapes());
 
         // MessageConverter 에 mapper 설정.

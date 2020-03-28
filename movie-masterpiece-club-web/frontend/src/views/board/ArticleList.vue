@@ -27,10 +27,9 @@
           </template>
         </el-table-column>
 
-        <!-- 추천 -->
         <el-table-column
-          label="추천"
-          width="60">
+          label="조회수"
+          width="70">
           <template slot-scope="scope">
             <span class="writerText">
               {{ scope.row.viewCount }}

@@ -33,15 +33,14 @@ export default new VueRouter({
           path: '',
           name: 'ArticleEdit',
           component: () => import('@/views/board/ArticleEdit'),
-          pathToRegexpOptions: { strict: true }
         },
         {
-          path: ':id',
+          path: ':articleId',
           name: "ArticleView",
           component: () => import('@/views/board/ArticleView')
         },
       ]
-    }
+    },
     // {
     //   path: '/index',
     //   name: 'index',
