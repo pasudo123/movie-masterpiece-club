@@ -73,7 +73,12 @@ project(':movie-masterpiece-club-file-transper') {
 
 project(':movie-masterpiece-club-bot') {
     dependencies {
-//        compile project(':movie-masterpiece-club-common')
+    }
+}
+
+project(':movie-masterpiece-club-admin') {
+    dependencies {
+        compile project(':movie-masterpiece-club-common')
     }
 }
 
@@ -86,7 +91,7 @@ project(':movie-masterpiece-club-web') {
 
     dependencies {
         compile project(':movie-masterpiece-club-common')
-        compile project(':movie-masterpiece-file-transper')
+        compile project(':movie-masterpiece-club-file-transper')
     }
 
     node {
@@ -132,12 +137,6 @@ project(':movie-masterpiece-club-web') {
     }
 
     processResources.dependsOn 'buildFrontEnd'
-}
-
-project(':movie-masterpiece-club-admin') {
-    dependencies {
-        compile project(':movie-masterpiece-club-common')
-    }
 }
 
 /** gradle task 나열. **/
