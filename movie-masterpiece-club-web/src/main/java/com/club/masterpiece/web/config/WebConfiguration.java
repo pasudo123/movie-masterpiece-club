@@ -1,11 +1,9 @@
 package com.club.masterpiece.web.config;
 
 import com.club.masterpiece.web.config.filter.RequestBodyXSSFilter;
-import com.club.masterpiece.web.config.xss.HtmlCharacterEscapes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +18,6 @@ import java.util.List;
  * - https://ivvve.github.io/2018/12/18/java/Spring/lucy/
  * - https://serverwizard.tistory.com/67
  */
-
 @Configuration
 @RequiredArgsConstructor
 public class WebConfiguration implements WebMvcConfigurer {
@@ -50,7 +47,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     public HttpMessageConverter<?> htmlCharacterEscapes(){
 
         // ObjectMapper 에 문자처리 기능 삽입.
-        mapper.getFactory().setCharacterEscapes(new HtmlCharacterEscapes());
+        mapper.getFactory().setCharacterEscapes(new AntiXSSConfiguration.HTMLCharacterEscapes());
 
         // MessageConverter 에 mapper 설정.
         return new MappingJackson2HttpMessageConverter(mapper);
