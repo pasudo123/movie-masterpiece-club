@@ -17,7 +17,7 @@ import java.util.Set;
  * Blog: https://pasudo123.tistory.com/
  * Email: oraedoa@gmail.com
  **/
-public class SecurityOAuth2User implements UserDetails, OAuth2User, Serializable {
+public class SecurityOAuth2User implements OAuth2User, Serializable {
 
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
     private final User user;
@@ -36,36 +36,6 @@ public class SecurityOAuth2User implements UserDetails, OAuth2User, Serializable
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 
     @Override

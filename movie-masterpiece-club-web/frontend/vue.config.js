@@ -39,6 +39,16 @@ module.exports = {
             },
         }
     },
+    chainWebpack(config){
+      config.module
+        .rule('vue')
+        .use('vue-loader')
+        .loader('vue-loader')
+        .tap(options => {
+          options.compilerOptions.preserveWhitespace = true;
+          return options;
+        }).end()
+    },
     configureWebpack: {
         resolve: {
             alias: {
@@ -55,7 +65,6 @@ module.exports = {
             }),
         ]
     },
-
     publicPath: (process.env.NODE_ENV === 'staging'
         || process.env.NODE_ENV === 'production')
         ? process.env.VUE_APP_BASE_URL
