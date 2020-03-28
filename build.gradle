@@ -66,6 +66,11 @@ project(':movie-masterpiece-club-common') {
     }
 }
 
+project(':movie-masterpiece-club-file-transper') {
+    dependencies {
+    }
+}
+
 project(':movie-masterpiece-club-bot') {
     dependencies {
 //        compile project(':movie-masterpiece-club-common')
@@ -81,6 +86,7 @@ project(':movie-masterpiece-club-web') {
 
     dependencies {
         compile project(':movie-masterpiece-club-common')
+        compile project(':movie-masterpiece-file-transper')
     }
 
     node {

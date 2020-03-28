@@ -61,21 +61,14 @@ public class CustomSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/**/*.png",
                         "/**/*.css",
                         "/**/*.js",
-                        "/**/*.map")
-                    .permitAll()
-                .antMatchers(HttpMethod.GET,"/actuator/health")
-                    .permitAll()
-                .antMatchers("/login/**")
-                    .permitAll()
+                        "/**/*.map").permitAll()
+                .antMatchers(HttpMethod.GET,"/actuator/health").permitAll()
+                .antMatchers("/login/**").permitAll()
                 .and()
             .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
             .httpBasic();
-
-//        http.formLogin()
-//                .loginPage("/login")
-//                .defaultSuccessUrl(defaultSuccessUrl);
 
         http.oauth2Login()
                 .loginPage("/login")
@@ -90,10 +83,4 @@ public class CustomSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl(logoutSuccessUrl)
                 .clearAuthentication(true);
     }
-
-//    @Bean
-//    @Profile("dev")
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
 }

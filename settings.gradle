@@ -7,7 +7,8 @@ pluginManagement {
 
 rootProject.name = 'movie-masterpiece-club'
 
-include 'movie-masterpiece-club-web'
-include 'movie-masterpiece-club-common'
 include 'movie-masterpiece-club-admin'
 include 'movie-masterpiece-club-bot'
+include 'movie-masterpiece-club-file-transper'
+include 'movie-masterpiece-club-common'
+include 'movie-masterpiece-club-web'
