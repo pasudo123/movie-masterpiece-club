@@ -37,7 +37,13 @@ module.exports = {
             [process.env.VUE_APP_BASE_API]: {
                 target: 'http://localhost:8080',
             },
-        }
+          '/*': {
+            /** 해당 내용 사라지면 개발서버에서 개발 시 blank 화면이 나옴. (원인파악 필요) **/
+            target: 'http://localhost:8899',
+            pathRewrite: {'^/.*': './templates/index.ftl'},
+            ws: false
+          }
+        },
     },
     chainWebpack(config){
       config.module
