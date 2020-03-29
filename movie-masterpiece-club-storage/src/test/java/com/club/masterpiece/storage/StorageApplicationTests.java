@@ -1,10 +1,10 @@
-package com.club.masterpiece.filetransper;
+package com.club.masterpiece.storage;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FileTransperApplicationTests {
+class StorageApplicationTests {
 
     @Test
     void contextLoads() {
