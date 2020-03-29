@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * Email: oraedoa@gmail.com
  **/
 @Configuration
-@EntityScan("com.club.masterpiece.common.*")
+@EntityScan(value = {"com.club.masterpiece.common.*"})
 @EnableJpaRepositories("com.club.masterpiece.common.*")
-public class GradleMultiConfiguration {
+public class MultiModuleConfiguration {
 }

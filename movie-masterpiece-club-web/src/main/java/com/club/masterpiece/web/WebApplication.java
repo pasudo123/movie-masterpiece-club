@@ -2,7 +2,9 @@ package com.club.masterpiece.web;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan(value = {"com.club.masterpiece.web", "com.club.masterpiece.storage"})
 @SpringBootApplication
 public class WebApplication {
 
