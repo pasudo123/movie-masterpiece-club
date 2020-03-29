@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 public class ArticleFindServiceImpl implements ArticleFindService {
 
-    private final ImageConverter imageConverter;
+//    private final ImageConverter imageConverter;
     private final ArticleRepository articleRepository;
 
     @Transactional(readOnly = true)
@@ -67,7 +67,8 @@ public class ArticleFindServiceImpl implements ArticleFindService {
         /** 첨부파일 존재 **/
         final ArticleDto.OneResponse dto = new ArticleDto.OneResponse(article);
 
-        return imageConverter.convertKeywordToImageTag(dto, article.getAttachmentList());
+        return dto;
+//        return imageConverter.convertKeywordToImageTag(dto, article.getAttachmentList());
     }
 
     @Transactional(readOnly = true)

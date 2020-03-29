@@ -14,6 +14,7 @@ import com.club.masterpiece.web.util.ArticleIdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,8 +32,10 @@ import java.util.List;
 @Slf4j
 public class ArticleCreateServiceImpl implements ArticleCreateService {
 
-    private final ImageSaveService imageSaveService;
+    @Qualifier("LocalFileStorageServiceImpl")
     private final FileStorageService fileStorageService;
+
+//    private final ImageSaveService imageSaveService;
     private final ArticleIdGenerator articleIdGenerator;
     private final ArticleRepository articleRepository;
 

@@ -26,7 +26,7 @@ public class ImageFile {
 
     private void initFileName(){
         final String uuid = UUID.nameUUIDFromBytes(bytes).toString().replace("-", Strings.EMPTY);
-        final String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        this.fileName = (time + "-" + uuid) + PNG_EXTENSION;
+        final String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_hhmmss"));
+        this.fileName = (time + "_" + uuid) + PNG_EXTENSION;
     }
 }
