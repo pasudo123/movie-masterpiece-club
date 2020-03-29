@@ -35,13 +35,17 @@ public class WebConfiguration implements WebMvcConfigurer {
         return registrationBean;
     }
 
-    @Bean
-    public FilterRegistrationBean<XssEscapeServletFilter> requestBodyXSSFilterRegistrationBean() {
-        FilterRegistrationBean<XssEscapeServletFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new RequestBodyXSSFilter());
-        registrationBean.addUrlPatterns(PATTERNS);
-        return registrationBean;
-    }
+    /**
+     * vue quill editor 자체적으로 XSS Filter 처리가 된다.
+     * 스크립트 문이 자동으로 치환이 됨. 하단의 htmlCharacterEscapes(), configureMessageConverters() 가 없어도 무방하다.
+     */
+//    @Bean
+//    public FilterRegistrationBean<XssEscapeServletFilter> requestBodyXSSFilterRegistrationBean() {
+//        FilterRegistrationBean<XssEscapeServletFilter> registrationBean = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(new RequestBodyXSSFilter());
+//        registrationBean.addUrlPatterns(PATTERNS);
+//        return registrationBean;
+//    }
 
     @Bean
     public HttpMessageConverter<?> htmlCharacterEscapes(){
