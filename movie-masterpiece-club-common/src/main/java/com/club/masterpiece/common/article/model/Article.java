@@ -35,18 +35,24 @@ import java.util.List;
 public class Article {
 
     @Id
-    @Column(name = "article_id", length = 40, nullable = false)
-    private String articleId;
+    @Column(name = "id", length = 40, nullable = false)
+    private String id;
 
-    @Column(name = "article_title", nullable = false, length = 50)
+    @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    @Column(name = "article_content", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "contents", columnDefinition = "TEXT", nullable = false)
     private String content;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "article_type", columnDefinition = "ENUM('GENERAL', 'OFFICIAL')", nullable = false)
+    @Column(name = "types", columnDefinition = "ENUM('GENERAL', 'OFFICIAL')", nullable = false)
     private ArticleType type;
+
+    @Column(name = "vote", columnDefinition = "BIGINT default 0", nullable = false)
+    private Long vote = 0L;
+
+    @Column(name = "views_count", columnDefinition = "BIGINT default 0", nullable = false)
+    private Long viewsCount = 0L;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE') default 'ACTIVE'", nullable = false)
@@ -87,8 +93,8 @@ public class Article {
     private List<Attachment> attachmentList = new ArrayList<>();
 
     @Builder
-    public Article(String articleId, String title, String content, ArticleType type, User user) {
-        this.articleId = articleId;
+    public Article(String id, String title, String content, ArticleType type, User user) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.type = type;
@@ -114,5 +120,13 @@ public class Article {
 
     public void addNewComment(final Comment comment) {
         this.commentList.add(comment);
+    }
+
+    public void plusVote(){
+        this.vote += 1;
+    }
+
+    public void plusViewsCount(){
+        this.viewsCount += 1;
     }
 }

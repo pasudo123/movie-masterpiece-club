@@ -1,6 +1,6 @@
 dependencies {
-    
-    compile group: 'com.google.cloud', name: 'google-cloud-core', version: '1.90.0'
+
+    implementation 'com.navercorp.lucy:lucy-xss-servlet:2.0.0'
 
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -12,19 +12,6 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
 
     compile 'org.springframework.boot:spring-boot-starter-freemarker'
-
-    /** 아파치 ftp 프로토콜 사용을 위함. **/
-    // https://mvnrepository.com/artifact/commons-net/commons-net
-    compile group: 'commons-net', name: 'commons-net', version: '3.6'
-    
-    /** 아파치 ftp 프로토콜 테스트 코드 용 **/
-    // https://mvnrepository.com/artifact/org.mockftpserver/MockFtpServer
-    testCompile group: 'org.mockftpserver', name: 'MockFtpServer', version: '2.0.2'
-
-
-    /** 아파치 파일 입출력 공통 모듈 **/
-    // https://mvnrepository.com/artifact/commons-io/commons-io
-    compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
     /** swagger **/
     /** https://www.tutorialspoint.com/spring_boot/spring_boot_enabling_swagger2 **/

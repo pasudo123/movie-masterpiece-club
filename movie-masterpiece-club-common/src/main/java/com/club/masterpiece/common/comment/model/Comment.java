@@ -79,7 +79,7 @@ public class Comment {
     @ManyToOne(targetEntity = Article.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id",
             columnDefinition = "VARCHAR(40)",
-            referencedColumnName = "article_id",
+            referencedColumnName = "id",
             nullable = false,
             foreignKey = @ForeignKey(name = "fk_comment_article_idx")
     )

@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 public class ArticleFindServiceImpl implements ArticleFindService {
 
-    private final ImageConverter imageConverter;
+//    private final ImageConverter imageConverter;
     private final ArticleRepository articleRepository;
 
     @Transactional(readOnly = true)
@@ -56,7 +56,7 @@ public class ArticleFindServiceImpl implements ArticleFindService {
     @Override
     public ArticleDto.OneResponse findOneById(final String articleId) {
 
-        Article article = articleRepository.findOneByArticleId(articleId)
+        Article article = articleRepository.findOneById(articleId)
                 .orElseThrow(() -> new EmptyResultException(String.format("Article is Not Found. : %s", articleId)));
 
         /** 첨부파일 미존재 **/
@@ -67,14 +67,15 @@ public class ArticleFindServiceImpl implements ArticleFindService {
         /** 첨부파일 존재 **/
         final ArticleDto.OneResponse dto = new ArticleDto.OneResponse(article);
 
-        return imageConverter.convertKeywordToImageTag(dto, article.getAttachmentList());
+        return dto;
+//        return imageConverter.convertKeywordToImageTag(dto, article.getAttachmentList());
     }
 
     @Transactional(readOnly = true)
     @Override
     public Article findEntityById(final String articleId) {
 
-        return articleRepository.findOneByArticleId(articleId)
+        return articleRepository.findOneById(articleId)
                 .orElseThrow(() -> new EmptyResultException(String.format("Article is Not Found. : %s", articleId)));
     }
 }

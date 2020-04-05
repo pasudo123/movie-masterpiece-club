@@ -15,6 +15,6 @@ public interface CommentRepository extends JpaRepository<Comment, String> {
 
     Optional<Comment> findOneByCommendId(String commentId);
 
-    List<Comment> findAllByArticleArticleIdAndCommentNullOrderByRegDateAsc(String articleId);
+    List<Comment> findAllByArticleIdAndCommentNullOrderByRegDateAsc(String id);
 
 }

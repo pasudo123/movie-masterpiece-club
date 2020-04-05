@@ -1,0 +1,15 @@
+
+spring:
+  profiles: dev
+
+image:
+  file:
+    directory: 'D:\www\masterpiece\static\'
+    marker: '<@@MASTERPIECE_CLUB_IMAGE>'
+
+---
+spring:
+  profiles: prod
+
+image:
+  file: ''

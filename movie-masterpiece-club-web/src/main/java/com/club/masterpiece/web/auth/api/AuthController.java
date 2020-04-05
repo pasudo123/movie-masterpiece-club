@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Email: oraedoa@gmail.com
  **/
 @RestController
-@RequestMapping("/gulagbu-api/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     @GetMapping

@@ -15,6 +15,6 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
 
     List<Article> findAllByOrderByRegDateDesc();
 
-    Optional<Article> findOneByArticleId(String articleId);
+    Optional<Article> findOneById(String id);
 
 }

@@ -66,14 +66,25 @@ project(':movie-masterpiece-club-common') {
     }
 }
 
+project(':movie-masterpiece-club-storage') {
+    dependencies {
+        compile project(':movie-masterpiece-club-common')
+    }
+}
+
 project(':movie-masterpiece-club-bot') {
     dependencies {
-//        compile project(':movie-masterpiece-club-common')
+    }
+}
+
+project(':movie-masterpiece-club-admin') {
+    dependencies {
+        compile project(':movie-masterpiece-club-common')
     }
 }
 
 project(':movie-masterpiece-club-web') {
-    
+
     /**
      * https://plugins.gradle.org/plugin/com.moowork.node
      * **/
@@ -81,11 +92,12 @@ project(':movie-masterpiece-club-web') {
 
     dependencies {
         compile project(':movie-masterpiece-club-common')
+        compile project(':movie-masterpiece-club-storage')
     }
 
     node {
         // node -v (using node version)
-        // version = '8.11.2'
+        // version = '12.16.1'
 
         // npm -v (using npm version)
         // 해당 버전을 지정하면 node 플러그인은 npmSetup 태스크에 의해서 해당 버전 npm 을 npmWorkDir 에 설치하고 사용한다.
@@ -107,11 +119,18 @@ project(':movie-masterpiece-club-web') {
         println('=======================================')
         println('install node.js packages.')
         args = ['install']
-        inputs.files file ('package.json')
-        outputs.files file ('node_modules')
+        inputs.files file('package.json')
+        outputs.files file('node_modules')
     }
 
-    task buildFrontEnd(type: NpmTask, dependsOn: setup) {
+    task reBuild(type: NpmTask, dependsOn: setup){
+        println('=======================================')
+        println('npm rebuild node-sass')
+        args = ['rebuild', 'node-sass']
+        inputs.files file('package.json')
+    }
+
+    task buildFrontEnd(type: NpmTask, dependsOn: reBuild) {
         println('=======================================')
         println('build vue.js [production] mode.')
         println('=======================================')
@@ -119,12 +138,6 @@ project(':movie-masterpiece-club-web') {
     }
 
     processResources.dependsOn 'buildFrontEnd'
-}
-
-project(':movie-masterpiece-club-admin') {
-    dependencies {
-        compile project(':movie-masterpiece-club-common')
-    }
 }
 
 /** gradle task 나열. **/

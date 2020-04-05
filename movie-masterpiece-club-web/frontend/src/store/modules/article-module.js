@@ -5,205 +5,202 @@ const articleListState = [];
 const articleOneState = {};
 
 const state = {
-    articleAllCountState,
-    articleListState,
-    articleOneState
+  articleAllCountState,
+  articleListState,
+  articleOneState
 };
 
 const actions = {
 
-    writeArticle({commit}, params) {
+  writeArticle({commit}, params) {
+    const uri = 'article';
+    const payload = {};
+    payload.title = params.title;
+    payload.content = params.content;
+    payload.type = params.type;
 
-        const uri = 'article';
+    return new Promise((resolve, reject) => {
+      request.post(uri, payload).then((response) => {
+        resolve();
+      }).catch((error) => {
+        reject(error);
+      })
+    });
+  },
 
-        const payload = {};
-        payload.title = params.title;
-        payload.content = params.content;
-        payload.type = params.type;
+  fetchAllArticleCount({commit}) {
 
-        return new Promise((resolve, reject) => {
+    const uri = 'article/count';
 
-            request.post(uri, payload).then((response) => {
-                resolve();
-            }).catch((error) => {
-                reject(error);
-            })
-        });
-    },
+    return new Promise((resolve, reject) => {
 
-    fetchAllArticleCount({commit}) {
+      request.get(uri).then((response) => {
+        commit('setArticleAllCountState', response);
+        resolve();
+      }).catch((error) => {
+        console.debug('asddsa');
+        reject(error);
+      })
+    });
+  },
 
-        const uri = 'article/count';
+  fetchAllArticle({commit}, params) {
 
-        return new Promise((resolve, reject) => {
+    const uri = 'article';
 
-            request.get(uri).then((response) => {
-                commit('setArticleAllCountState', response);
-                resolve();
-            }).catch((error) => {
-                console.debug('asddsa');
-                reject(error);
-            })
-        });
-    },
+    return new Promise((resolve, reject) => {
 
-    fetchAllArticle({commit}, params) {
+      request.get(uri).then((response) => {
+        commit('setArticleListStateByFindAll', response);
+        resolve();
+      }).catch((error) => {
+        reject(error);
+      })
+    });
+  },
 
-        const uri = 'article';
+  fetchPartialArticle({commit}, params) {
 
-        return new Promise((resolve, reject) => {
+    const uri = 'article';
 
-            request.get(uri).then((response) => {
-                commit('setArticleListStateByFindAll', response);
-                resolve();
-            }).catch((error) => {
-                reject(error);
-            })
-        });
-    },
+    const queryParam = {};
+    queryParam.page = params.page;
+    queryParam.size = 5;
+    queryParam.direction = 'DESC';
 
-    fetchPartialArticle({commit}, params) {
+    return new Promise((resolve, reject) => {
 
-        const uri = 'article';
+      request.get(uri, {params: queryParam}).then((response) => {
+        commit('setArticleListStateByFindPartial', response);
+        resolve();
+      }).catch((error) => {
+        reject(error);
+      })
+    });
+  },
 
-        const queryParam = {};
-        queryParam.page = params.page;
-        queryParam.size = 5;
-        queryParam.direction = 'DESC';
+  fetchOneArticle({commit}, params) {
 
-        return new Promise((resolve, reject) => {
+    const uri = `article/${params.articleId}`;
 
-            request.get(uri, {params: queryParam}).then((response) => {
-                commit('setArticleListStateByFindPartial', response);
-                resolve();
-            }).catch((error) => {
-                reject(error);
-            })
-        });
-    },
+    return new Promise((resolve, reject) => {
 
-    fetchOneArticle({commit}, params) {
+      request.get(uri).then((response) => {
+        commit('setArticleOneState', response);
+        resolve();
+      })
+    })
+  },
 
-        const uri = `article/${params.articleId}`;
+  modifyArticle({commit}, params) {
 
-        return new Promise((resolve, reject) => {
+    const uri = `article/${params.articleId}`;
 
-            request.get(uri).then((response) => {
-                commit('setArticleOneState', response);
-                resolve();
-            })
-        })
-    },
+    const payload = {};
+    payload.title = params.title;
+    payload.content = params.content;
 
-    modifyArticle({commit}, params) {
+    return new Promise((resolve, reject) => {
 
-        const uri = `article/${params.articleId}`;
+      request.put(uri, payload).then((response) => {
+        commit('updateArticleListState', response);
+        resolve();
+      }).catch((error) => {
+        console.error(error.response);
+        reject();
+      })
+    })
+  },
 
-        const payload = {};
-        payload.title = params.title;
-        payload.content = params.content;
+  deleteOneArticle({commit}, params) {
 
-        return new Promise((resolve, reject) => {
+    const uri = `article/${params.articleId}`;
 
-            request.put(uri, payload).then((response) => {
-                commit('updateArticleListState', response);
-                resolve();
-            }).catch((error) => {
-                console.error(error.response);
-                reject();
-            })
-        })
-    },
+    return new Promise((resolve, reject) => {
 
-    deleteOneArticle({commit}, params) {
-
-        const uri = `article/${params.articleId}`;
-
-        return new Promise((resolve, reject) => {
-
-            request.delete(uri).then((response) => {
-                console.debug(response.data);
-                // commit('setArticleListState', response);
-                resolve();
-            }).catch((error) => {
-                reject(error);
-            })
-        });
-    }
+      request.delete(uri).then((response) => {
+        console.debug(response.data);
+        // commit('setArticleListState', response);
+        resolve();
+      }).catch((error) => {
+        reject(error);
+      })
+    });
+  }
 };
 
 const mutations = {
 
-    setArticleAllCountState(state, response) {
-        state.articleAllCountState = response.data;
-    },
+  setArticleAllCountState(state, response) {
+    state.articleAllCountState = response.data;
+  },
 
-    setArticleListStateByFindAll(state, response) {
+  setArticleListStateByFindAll(state, response) {
 
-        let articleList = response.data.articleList;
+    let articleList = response.data.articleList;
 
-        state.articleListState = [];
+    state.articleListState = [];
 
-        articleList.forEach(element => {
+    articleList.forEach(element => {
 
-            let date = element.registerDate;
-            let array = date.split('-');
-            element.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
+      let date = element.registerDate;
+      let array = date.split('-');
+      element.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
 
-            state.articleListState.push(element);
-        })
-    },
+      state.articleListState.push(element);
+    })
+  },
 
-    setArticleListStateByFindPartial(state, response) {
+  setArticleListStateByFindPartial(state, response) {
 
-        let articleList = response.data.content;
+    let articleList = response.data.content;
 
-        state.articleListState = [];
+    state.articleListState = [];
 
-        articleList.forEach(element => {
+    articleList.forEach(element => {
 
-            let date = element.registerDate;
-            let array = date.split('-');
-            element.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
+      let date = element.registerDate;
+      let array = date.split('-');
+      element.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
 
-            state.articleListState.push(element);
-        })
-    },
+      state.articleListState.push(element);
+    })
+  },
 
-    setArticleOneState(state, response) {
+  setArticleOneState(state, response) {
 
-        state.articleOneState = {};
+    state.articleOneState = {};
 
-        let oneArticle = response.data;
-        let date = oneArticle.registerDate;
-        let array = date.split('-');
-        oneArticle.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
+    let oneArticle = response.data;
+    let date = oneArticle.registerDate;
+    let array = date.split('-');
+    oneArticle.registerDate = `${array[0]}년 ${array[1]}월 ${array[2]}일`;
 
-        state.articleOneState = oneArticle;
-    },
+    state.articleOneState = oneArticle;
+  },
 
-    updateArticleListState(state, response) {
+  updateArticleListState(state, response) {
 
-        articleListState.forEach(element => {
-            if (element.id === response.data.id) {
-                element.title = response.data.title;
-                element.content = response.data.content;
-            }
-        })
-    }
+    articleListState.forEach(element => {
+      if (element.id === response.data.id) {
+        element.title = response.data.title;
+        element.content = response.data.content;
+      }
+    })
+  }
 };
 
 const getters = {
-    articleAllCountState: (state) => state.articleAllCountState,
-    articleListState: (state) => state.articleListState,
-    articleOneState: (state) => state.articleOneState
+  articleAllCountState: (state) => state.articleAllCountState,
+  articleListState: (state) => state.articleListState,
+  articleOneState: (state) => state.articleOneState
 
 };
 
 export default {
-    namespaced: true,
-    state,
-    actions,
-    mutations,
-    getters
+  namespaced: true,
+  state,
+  actions,
+  mutations,
+  getters
 }

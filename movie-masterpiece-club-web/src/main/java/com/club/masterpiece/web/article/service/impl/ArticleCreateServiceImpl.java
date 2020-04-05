@@ -5,6 +5,7 @@ import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.common.article.repository.ArticleRepository;
 import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.common.user.model.User;
+import com.club.masterpiece.storage.service.FileStorageService;
 import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
 import com.club.masterpiece.web.image.service.ImageConverter;
@@ -12,9 +13,12 @@ import com.club.masterpiece.web.image.service.ImageSaveService;
 import com.club.masterpiece.web.util.ArticleIdGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -28,8 +32,10 @@ import java.util.List;
 @Slf4j
 public class ArticleCreateServiceImpl implements ArticleCreateService {
 
-    private final ImageSaveService imageSaveService;
-    private final ImageConverter imageConverter;
+    @Qualifier("LocalFileStorageServiceImpl")
+    private final FileStorageService fileStorageService;
+
+//    private final ImageSaveService imageSaveService;
     private final ArticleIdGenerator articleIdGenerator;
     private final ArticleRepository articleRepository;
 
@@ -37,22 +43,19 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
     @Override
     public ArticleDto.OneResponse create(final User user, final ArticleDto.CreateRequest dto) {
 
-        log.debug("article title : {}", dto.getTitle());
-        log.debug("article type : {}", dto.getType());
-
         final Article article = Article.builder()
-                .articleId(articleIdGenerator.generateId())
-                .title(dto.getTitle())
-                .content(imageConverter.convertImageTagToKeywordOnCreate(dto))
-                .type(dto.getType())
-                .user(user)
-                .build();
+            .id(articleIdGenerator.generateId())
+            .title(dto.getTitle())
+            .content(fileStorageService.getContentIfMarking(dto.getContent()))
+            .type(dto.getType())
+            .user(user)
+            .build();
 
         final Article savedArticle = articleRepository.save(article);
+//        final List<Attachment> attachmentList = imageSaveService.save(savedArticle, dto.getContent());
+        fileStorageService.upload(dto.getContent());
 
-        final List<Attachment> attachmentList = imageSaveService.save(savedArticle, dto.getContent());
-
-        savedArticle.createAttachmentList(attachmentList);
+//        savedArticle.createAttachmentList(attachmentList);
 
         return new ArticleDto.OneResponse(savedArticle);
     }

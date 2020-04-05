@@ -25,7 +25,7 @@ gulagbu-resource:
     id: 'ftproot'
     pw: 'qhdcjsdur123'
 
-image:
-  root-path: D:\gulagbu-static\images\
-  server-path: https://gulagbu.com/web-resources/
-  resource-path: 'https://gulagbu.com/web-resources/'
+#image:
+#  root-path: D:\gulagbu-static\images\
+#  server-path: https://gulagbu.com/web-resources/
+#  resource-path: 'https://gulagbu.com/web-resources/'
