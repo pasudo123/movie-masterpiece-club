@@ -27,16 +27,13 @@ import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationF
 @RequiredArgsConstructor
 public class CustomSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Value("${domain}")
-    private String domain;
-
-    @Value("${security-oauth2-redirect-uri}")
+    @Value("${app.oauth2-redirect}")
     private String oauth2BaseUrl;
 
-    @Value("${default-success-url}")
+    @Value("${app.default-success-url}")
     private String defaultSuccessUrl;
 
-    @Value("${logout-success-url}")
+    @Value("${app.logout-success-url}")
     private String logoutSuccessUrl;
 
     private final SecurityOAuth2UserService securityOAuth2UserService;

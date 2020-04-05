@@ -6,6 +6,13 @@ spring:
     template-loader-path: classpath:/static/templates
     suffix: .ftl
 
+# 개발환경 : vue + springboot
+app:
+  default-success-url: '/login/success'               # 로그인 성공시 controller 매핑 url
+  home-url: 'http://localhost:8899/home'              # 로그인 성공시 controller 에서 리턴하는 url
+  oauth2-redirect: '/login/oauth2/callback/**'        # google oauth2 에서 로그인 콜백 url
+  logout-success-url: 'http://localhost:8899/login'   # 로그아웃 성공시 이동하는 url
+
 ## tables
 table:
   user: user

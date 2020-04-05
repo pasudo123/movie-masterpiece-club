@@ -1,5 +1,6 @@
 spring:
   profiles:
     active: default, prod
-    include: storage        # application-storage.yml 포함
-
+    include:
+      - security
+      - storage
