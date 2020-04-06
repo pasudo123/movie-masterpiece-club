@@ -35,7 +35,6 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
     @Qualifier("LocalFileStorageServiceImpl")
     private final FileStorageService fileStorageService;
 
-//    private final ImageSaveService imageSaveService;
     private final ArticleIdGenerator articleIdGenerator;
     private final ArticleRepository articleRepository;
 

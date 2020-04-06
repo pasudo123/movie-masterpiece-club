@@ -12,4 +12,6 @@ spring:
   profiles: prod
 
 image:
-  file: ''
+  file:
+    directory: ''
+    marker: ''

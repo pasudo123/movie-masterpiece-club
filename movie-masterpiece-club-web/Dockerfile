@@ -13,7 +13,7 @@ MAINTAINER      pasudo123 <pasudo123@naver.com>
 
 ARG             JAR_FILE=movie-masterpiece-club-web-*.jar
 ADD             ${JAR_FILE} movie-masterpiece-club-web.jar
-ENTRYPOINT      ["java", "-jar", "-Dspring.profiles.active=default, prod", "/movie-masterpiece-club-web.jar"]
+ENTRYPOINT      ["java", "-jar", "/movie-masterpiece-club-web.jar"]
 #ARG             DEPLOY_PATH=/data/home/common/deploy/www/gulagbu
 #COPY            ./build/libs/movie-masterpiece-club-web-*.jar /data/home/common/deploy/www/masterpiece/
 #WORKDIR         /volumn1/docker/deploy/www/masterpiece

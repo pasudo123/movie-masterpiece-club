@@ -22,7 +22,7 @@ public class VueController {
         return "login";
     }
 
-    @RequestMapping("/masterpiece")
+    @RequestMapping("/home")
     public String masterpiece() {
         return "masterpiece";
     }
