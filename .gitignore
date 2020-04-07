@@ -79,7 +79,6 @@ movie-masterpiece-club-web/src/main/resources/static/
 *override.yml
 movie-masterpiece-club-web/src/**/application-security.yml
 movie-masterpiece-club-web/src/**/application-prod.yml
-movie-masterpiece-club-web/src/**/application-dev.yml
 
 ### local 속성 파일
 local.properties

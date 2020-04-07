@@ -1,6 +1,6 @@
 
 spring:
-  profiles: dev
+  profiles: dev, staging
 
 image:
   file:

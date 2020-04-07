@@ -9,18 +9,15 @@ spring:
     database-platform: org.hibernate.dialect.MySQL57Dialect
     hibernate:
       ddl-auto: validate
-    generate-ddl: false
-    show-sql: false
+    generate-ddl: false    # true 시, 해당 데이터를 근거로, 서버 시작점에 DDL 문을 생성 : ddl-auto 옵션을 사용하여 좀 더 상세하게 초기화 전략 사용.
+    show-sql: true
     properties:
       hibernate:
-        format_sql: false
+        format_sql: true
 
   security.oauth2.client.registration.google:
     redirect-uri: http://localhost:8080/login/oauth2/callback/google
 
-# springboot
-app:
-  default-success-url: '/login/success'
-  home-url: '/home'
-  oauth2-redirect: '/login/oauth2/callback/**'
-  logout-success-url: '/login'
+logging:
+  level:
+    com.club.masterpiece.web.*: debug

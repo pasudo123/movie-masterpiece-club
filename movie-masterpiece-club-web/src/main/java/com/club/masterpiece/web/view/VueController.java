@@ -24,7 +24,7 @@ public class VueController {
 
     @RequestMapping("/home")
     public String masterpiece() {
-        return "masterpiece";
+        return "index";
     }
 
     @RequestMapping("/login/success")
