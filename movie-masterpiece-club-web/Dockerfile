@@ -4,6 +4,8 @@
 FROM            openjdk:8-jre-alpine
 MAINTAINER      pasudo123 <pasudo123@naver.com>
 
+# VOLUME /static/images
+
 # ARG           : 변수 지정
 # COPY          : {source} {dest} 로 옮김 설정
 # ADD           : {source} {dest} source 에 있는 jar 파일이 dest 에 있는 이름으로 이미지에 적재됨을 설정
@@ -12,8 +14,9 @@ MAINTAINER      pasudo123 <pasudo123@naver.com>
 # CMD           : WORKDIR 에서 명령어 수행
 
 ARG             JAR_FILE=movie-masterpiece-club-web-*.jar
-ADD             ${JAR_FILE} movie-masterpiece-club-web.jar
-ENTRYPOINT      ["java", "-jar", "/movie-masterpiece-club-web.jar"]
+ADD             ${JAR_FILE} target/movie-masterpiece-club-web.jar
+ENTRYPOINT      ["java", "-jar", "target/movie-masterpiece-club-web.jar"]
+
 #ARG             DEPLOY_PATH=/data/home/common/deploy/www/gulagbu
 #COPY            ./build/libs/movie-masterpiece-club-web-*.jar /data/home/common/deploy/www/masterpiece/
 #WORKDIR         /volumn1/docker/deploy/www/masterpiece
@@ -24,3 +27,15 @@ EXPOSE 8080
 
 ## 참고링크
 ## https://swiftymind.tistory.com/91
+
+# [CMD]
+# (1) 컨테이너가 시작될때 실행
+# (2) Dockerfile 에서 한번만 사용가능
+
+# [ENTRYPOINT]
+# (1) [CMD] 과 동일하게 컨테이너가 시작될때 실행
+# (2) [CMD] 과 같이 있으면 ENTRYPOINT 는 실행파일, CMD 는 매개변수 역할을 함.
+
+# [ADD]
+# (1) 파일복사
+# (2) 압축파일인 경우 압축을 품(단, URL로 가져온 파일은 압축만 해제하고 풀지는 않음)
