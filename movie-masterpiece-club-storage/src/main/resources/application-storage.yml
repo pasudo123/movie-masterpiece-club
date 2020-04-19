@@ -13,5 +13,5 @@ spring:
 
 image:
   file:
-    directory: ''
-    marker: ''
+    directory: '/static/images/'
+    marker: '<@@MASTERPIECE_CLUB_IMAGE>'
