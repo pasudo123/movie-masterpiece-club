@@ -93,7 +93,7 @@ project(':movie-masterpiece-club-web') {
 
     dependencies {
         compile project(':movie-masterpiece-club-common')
-        compile project(':movie-masterpiece-club-storage')
+//        compile project(':movie-masterpiece-club-storage')
     }
 
     node {

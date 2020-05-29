@@ -1,5 +1,6 @@
 package com.club.masterpiece.storage.image.service;
 
+import com.club.masterpiece.storage.image.dto.ImageDto;
 import com.club.masterpiece.storage.pojo.ImageFile;
 import com.club.masterpiece.storage.pojo.ImageTag;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,11 @@ public class ImageUploadService {
 
     @Value("${image.file.marker}")
     private String imageFileMarker;
+
+    public ImageDto.CreateResponse upload(final ImageDto.CreateRequest createRequest){
+
+        return null;
+    }
 
     public String removeImageTagIfPossible(String content){
         return content.replaceAll(String.valueOf(IMAGE_TAG_PATTERN), imageFileMarker);

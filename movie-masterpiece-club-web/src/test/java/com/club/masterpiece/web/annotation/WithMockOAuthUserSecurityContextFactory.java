@@ -39,7 +39,7 @@ public class WithMockOAuthUserSecurityContextFactory implements WithSecurityCont
                 .profile(withMockOAuthUser.profile())
                 .build();
 
-        UserDetails oAuth2User = SecurityOAuth2User.builder()
+        UserDetails oAuth2User = (UserDetails) SecurityOAuth2User.builder()
                 .user(user)
                 .attributes(attributes)
                 .authorities(Collections.singleton(new SimpleGrantedAuthority(withMockOAuthUser.roles()[0])))
