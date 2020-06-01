@@ -11,11 +11,9 @@ public class ImageDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Getter
     public static class CreateRequest {
-        private LocalDateTime currentTime;
         private String imageByteData;
 
         public CreateRequest(final String imageByteData){
-            this.currentTime = LocalDateTime.now();
             this.imageByteData = imageByteData;
         }
     }
@@ -23,10 +21,14 @@ public class ImageDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Getter
     public static class CreateResponse {
-        private String imageUrl;
+        private LocalDateTime now;
+        private String path;
+        private int size;
 
-        public CreateResponse(final String imageUrl){
-            this.imageUrl = imageUrl;
+        public CreateResponse(String path, int size) {
+            this.now = LocalDateTime.now();
+            this.path = path;
+            this.size = size;
         }
     }
 }

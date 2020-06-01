@@ -37,17 +37,11 @@ public class Attachment {
     @Column(name = "type", columnDefinition = "ENUM('IMAGE', 'VIDEO') '첨부파일 타입 선정(이미지, 동영상)'", nullable = false)
     private AttachmentType type;
 
-    @Column(name = "name", columnDefinition = "VARCHAR(60) '이름'", length = 60, nullable = false)
-    private String name;
-
     @Column(name = "url", columnDefinition = "TEXT '첨부파일 경로'", nullable = false)
     private String url;
 
-    @Column(name = "properties", columnDefinition = "TEXT '첨부파일 속성'", nullable = false)
-    private String properties;
-
-    @Column(name = "size", columnDefinition = "VARCHAR(20) '파일 사이즈'", nullable = false)
-    private String size;
+    @Column(name = "size", columnDefinition = "INT '첨부파일 사이즈'", nullable = false)
+    private Long size;
 
     @CreatedDate
     @Column(name = "reg_date", nullable = false, updatable = false)
@@ -70,10 +64,8 @@ public class Attachment {
     public Attachment(final Article article, final ImageDto.CreateInfo createInfo) {
         this.article = article;
         this.type = createInfo.getType();
-        this.name = createInfo.getName();
         this.url = createInfo.getUrl();
-        this.properties = createInfo.getProperties();
-        this.size = createInfo.getSize();
+
     }
 
     public void updateActiveToDelete() {

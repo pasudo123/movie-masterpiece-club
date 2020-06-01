@@ -5,7 +5,5 @@ package com.club.masterpiece.common.attachment.model;
  * Email: oraedoa@gmail.com
  **/
 public enum AttachmentType {
-
     IMAGE, VIDEO
-
 }

@@ -5,7 +5,7 @@ spring:
 image:
   file:
     directory: 'D:\www\masterpiece\static\'
-    marker: '<@@MASTERPIECE_CLUB_IMAGE>'
+
 
 ---
 spring:
@@ -13,5 +13,7 @@ spring:
 
 image:
   file:
-    directory: '/static/images/'
-    marker: '<@@MASTERPIECE_CLUB_IMAGE>'
+    scheme: 'http'
+    host: 'masterpiece-1st.com'
+    directory: '/static/images'
+

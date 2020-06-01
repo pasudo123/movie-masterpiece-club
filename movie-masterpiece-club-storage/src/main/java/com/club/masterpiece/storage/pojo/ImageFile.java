@@ -13,20 +13,32 @@ public class ImageFile {
     private static final String PNG_EXTENSION = ".png";
     private byte[] bytes;
     private String fileName;
+    private String fileRelativePath;
 
-    private ImageFile(final byte[] bytes){
+    private ImageFile(final String directory, final byte[] bytes){
+        this.init(bytes);
+        this.fileRelativePath = directory + fileName;
+    }
+
+    public static ImageFile create(final String directory, final byte[] bytes){
+        return new ImageFile(directory, bytes);
+    }
+
+    private void init(final byte[] bytes){
         this.bytes = bytes;
-    }
-
-    public static ImageFile create(final byte[] bytes){
-        ImageFile file = new ImageFile(bytes);
-        file.initFileName();
-        return file;
-    }
-
-    private void initFileName(){
-        final String uuid = UUID.nameUUIDFromBytes(bytes).toString().replace("-", Strings.EMPTY);
+        final String uuid = UUID.nameUUIDFromBytes(this.bytes).toString().replace("-", Strings.EMPTY);
         final String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_hhmmss"));
-        this.fileName = (time + "_" + uuid) + PNG_EXTENSION;
+        this.fileName = (time + uuid) + PNG_EXTENSION;
+    }
+
+    public String getFileInfo(){
+        final StringBuilder builder = new StringBuilder();
+        builder.append("{fileName : ");
+        builder.append(fileName);
+        builder.append(", ");
+        builder.append("{filePath : ");
+        builder.append(fileRelativePath);
+        builder.append(" }");
+        return builder.toString();
     }
 }

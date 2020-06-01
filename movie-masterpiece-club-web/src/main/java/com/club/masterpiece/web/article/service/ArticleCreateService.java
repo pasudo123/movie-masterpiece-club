@@ -12,4 +12,6 @@ public interface ArticleCreateService {
 
     ArticleDto.OneResponse create(User user, ArticleDto.CreateRequest dto);
 
+    String extractImageBytes(ArticleDto.CreateRequest dto);
+
 }
