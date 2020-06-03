@@ -1,8 +1,5 @@
 dependencies {
-
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter'
     compile "org.telegram:telegrambots:4.6"
-}
-
-test {
-    useJUnitPlatform()
 }

@@ -38,14 +38,15 @@ subprojects {
     }
 
     dependencies {
-
         compileOnly 'org.projectlombok:lombok'
 
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
         annotationProcessor 'org.projectlombok:lombok'
 
-        implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+        testCompileOnly 'junit:junit:4.12'
     }
 
     configurations {
@@ -58,6 +59,10 @@ subprojects {
             extendsFrom annotationProcessor
         }
     }
+
+    test {
+        useJUnitPlatform()
+    }
 }
 
 /** gradle multi modules **/
@@ -69,7 +74,7 @@ project(':movie-masterpiece-club-common') {
 
 project(':movie-masterpiece-club-storage') {
     dependencies {
-        compile project(':movie-masterpiece-club-common')
+
     }
 }
 
@@ -93,7 +98,6 @@ project(':movie-masterpiece-club-web') {
 
     dependencies {
         compile project(':movie-masterpiece-club-common')
-//        compile project(':movie-masterpiece-club-storage')
     }
 
     node {

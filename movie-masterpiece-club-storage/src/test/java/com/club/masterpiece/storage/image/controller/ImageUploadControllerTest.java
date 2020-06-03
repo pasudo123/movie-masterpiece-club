@@ -64,7 +64,7 @@ public class ImageUploadControllerTest {
         final String json = mapper.writeValueAsString(createRequest);
         given(imageUploadService.upload(any())).willReturn(createResponse);
 
-        // when
+        // when & then
         this.mockMvc.perform(
                 post("/static/image")
                 .content(json)

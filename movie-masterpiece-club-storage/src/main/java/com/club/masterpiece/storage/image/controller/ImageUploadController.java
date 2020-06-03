@@ -17,7 +17,7 @@ public class ImageUploadController {
     private final ImageUploadService imageUploadService;
 
     @PostMapping("image")
-    public ResponseEntity<ImageDto.CreateResponse> handleImageUpload(@RequestBody ImageDto.CreateRequest createRequest){
+    public ResponseEntity<ImageDto.CreateResponse> handleImage(@RequestBody ImageDto.CreateRequest createRequest){
         return ResponseEntity.ok().body(imageUploadService.upload(createRequest));
     }
 }

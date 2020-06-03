@@ -1,5 +1,6 @@
 package com.club.masterpiece.storage.pojo;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
 
@@ -8,9 +9,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Getter
+@EqualsAndHashCode
 public class ImageFile {
 
     private static final String PNG_EXTENSION = ".png";
+    private static final String HYPHEN = "-";
+    private static final String DATE_IMAGE_FILE_PREFIX = "yyyyMMddhhmmss_";
+
     private byte[] bytes;
     private String fileName;
     private String fileRelativePath;
@@ -26,8 +31,8 @@ public class ImageFile {
 
     private void init(final byte[] bytes){
         this.bytes = bytes;
-        final String uuid = UUID.nameUUIDFromBytes(this.bytes).toString().replace("-", Strings.EMPTY);
-        final String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_hhmmss"));
+        final String uuid = UUID.nameUUIDFromBytes(this.bytes).toString().replace(HYPHEN, Strings.EMPTY);
+        final String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_IMAGE_FILE_PREFIX));
         this.fileName = (time + uuid) + PNG_EXTENSION;
     }
 

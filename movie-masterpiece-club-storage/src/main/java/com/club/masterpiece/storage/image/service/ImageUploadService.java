@@ -25,12 +25,6 @@ public class ImageUploadService {
     @Value("${image.file.directory}")
     private String directory;
 
-    @Value("${image.file.host}")
-    private String host;
-
-    @Value("${image.file.scheme}")
-    private String scheme;
-
     public ImageDto.CreateResponse upload(final ImageDto.CreateRequest createRequest){
 
         final byte[] byteArray = base64Converter.ImageSrcTagToByte(createRequest.getImageByteData());

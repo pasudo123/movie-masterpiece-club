@@ -1,0 +1,30 @@
+
+version: '3'
+
+services:
+  # nginx
+  storage-proxy:
+    image: nginx:1.18
+    container_name: storage-proxy
+    ports:
+      - 20080:80
+      - 20443:443
+    volumes:
+      # {host nginx 의 conf 위치}:{container, nginx 의 conf 위치} --> 마운트
+      - ./nginx/masterpiece-storage-product.conf:/etc/nginx/nginx.conf
+      - /volume1/docker/static/images:/static/images
+    depends_on:
+      # storage 컨테이너 뜨고 난 이후에 proxy 컨테이너 뜸
+      - storage-app
+
+  # app
+  storage-app:
+    build:
+      context: .
+      dockerfile : Dockerfile
+    image: masterpiece-storage
+    container_name: masterpiece-storage
+    volumes:
+      - /volume1/docker/static/images:/static/images
+    expose:
+      - 28080
