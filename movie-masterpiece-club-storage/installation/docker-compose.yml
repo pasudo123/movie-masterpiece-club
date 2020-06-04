@@ -1,3 +1,20 @@
+################################################################
+# ==> COMMAND 기술
+#
+# $ docker-compose -f docker-compose.yml up -d
+#
+################################################################
+# ==> CONFIG 기술
+#
+# version     :  yml 파일 포맷의 버전을 의미
+# services    : 생성될 컨테이너 정보 표시 services 하위 계층에 생성 service 명 기술
+# image       :
+# build       : 지정된 경로 내에 존재하는 Dockerfile 을 실행
+# ports       : docker run -p {host port}:{container port} 와 동일
+#
+#
+#
+################################################################
 
 version: '3'
 
@@ -14,7 +31,7 @@ services:
       - ./nginx/masterpiece-storage-product.conf:/etc/nginx/nginx.conf
       - /volume1/docker/static/images:/static/images
     depends_on:
-      # storage 컨테이너 뜨고 난 이후에 proxy 컨테이너 뜸
+      # storagea-app 컨테이너 실행 이후 storage-proxy 실행.
       - storage-app
 
   # app
