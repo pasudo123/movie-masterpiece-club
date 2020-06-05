@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/static")
+@RequestMapping("/image")
 @RequiredArgsConstructor
 public class ImageUploadController {
 
     private final ImageUploadService imageUploadService;
 
-    @PostMapping("image")
+    @PostMapping
     public ResponseEntity<ImageDto.CreateResponse> handleImage(@RequestBody ImageDto.CreateRequest createRequest){
         return ResponseEntity.ok().body(imageUploadService.upload(createRequest));
     }

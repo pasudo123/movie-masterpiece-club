@@ -29,7 +29,7 @@ services:
     volumes:
       # {host nginx 의 conf 위치}:{container, nginx 의 conf 위치} --> 마운트
       - ./nginx/masterpiece-storage-product.conf:/etc/nginx/nginx.conf
-      - /volume1/docker/static/images:/static/images
+      - /volume1/docker/resources/static/images:/resources/static/images
     depends_on:
       # storagea-app 컨테이너 실행 이후 storage-proxy 실행.
       - storage-app
@@ -41,7 +41,7 @@ services:
       dockerfile : Dockerfile
     image: masterpiece-storage
     container_name: masterpiece-storage
+    ports:
+      - 28080:8080
     volumes:
       - /volume1/docker/static/images:/static/images
-    expose:
-      - 28080

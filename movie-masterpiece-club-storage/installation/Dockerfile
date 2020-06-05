@@ -17,4 +17,4 @@ ENV             SPRING_PROFILE=prod
 ADD             ${JAR_FILE} target/movie-masterpiece-club-storage.jar
 ENTRYPOINT      ["java", "-jar", "-Dspring.profiles.active=${SPRING_PROFILE}", "target/movie-masterpiece-club-storage.jar"]
 
-EXPOSE 28080
+EXPOSE 8080

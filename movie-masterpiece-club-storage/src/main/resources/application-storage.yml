@@ -16,5 +16,5 @@ spring:
 
 image:
   file:
-    directory: '/static/images'
+    directory: '/resources/static/images'
 
