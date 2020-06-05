@@ -1,0 +1,51 @@
+################################################################
+# ==> COMMAND 기술
+#
+# $ docker-compose -f docker-compose.yml up -d        : background 로 실행
+# $ docker-compose -f docker-compose.yml up --build   : re-build 하고 실행
+#
+################################################################
+# ==> CONFIG 기술
+#
+# version       :  yml 파일 포맷의 버전을 의미
+# services      : 생성될 컨테이너 정보 표시 services 하위 계층에 생성 service 명 기술
+# image         :
+# build         : 지정된 경로 내에 존재하는 Dockerfile 을 실행
+#   context     : build 를 수행할 위치 지정
+#   dockerfile  : build 를 수행할 dockerfile 명칭 지정
+# ports         : docker run -p {host port}:{container port} 와 동일
+#
+#
+#
+################################################################
+
+version: '3'
+
+services:
+  # nginx
+  storage-proxy:
+    image: nginx:1.18
+    container_name: storage-proxy
+    ports:
+      - 20080:80
+      - 20443:443
+    volumes:
+      # {host nginx 의 conf 위치}:{container, nginx 의 conf 위치} --> 마운트
+      - ./nginx/masterpiece-storage-product.conf:/etc/nginx/nginx.conf
+      # 스태틱 이미지 경로 마운트 : WRITE 하기위함 (WEB 과 반대)
+      - /volume1/docker/resources/static/images:/resources/static/images
+    depends_on:
+      # storagea-app 컨테이너 실행 이후 storage-proxy 실행.
+      - storage-app
+
+  # app
+  storage-app:
+    build:
+      context: .
+      dockerfile : Dockerfile
+    image: masterpiece-storage
+    container_name: masterpiece-storage
+    ports:
+      - 28080:8080
+    volumes:
+      - /volume1/docker/static/images:/static/images

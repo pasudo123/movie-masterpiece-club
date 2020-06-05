@@ -1,18 +1,12 @@
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
-}
+/**
+ * 서브 프로젝트만 빌드하려면 아래와 같이 입력 (프로젝트 루트 경로에서 수행)
+ * $ ./gradlew :movie-masterpiece-club-storage:build 입력 또는
+ * $ ./gradlew :movie-masterpiece-club-storage:bootJar 입력
+ * 참고 : https://docs.gradle.org/current/userguide/intro_multi_project_builds.html
+ */
 
 dependencies {
-
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter'
     compile 'commons-io:commons-io:2.6'
-
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
 }

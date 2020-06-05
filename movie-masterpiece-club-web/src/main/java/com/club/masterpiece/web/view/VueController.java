@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class VueController {
 
-    @Value("${redirect-url}")
-    private String redirectUrl;
+    @Value("${app.home-url}")
+    private String homeUrl;
 
     @RequestMapping("/login")
     public String login() {
         return "login";
     }
 
-    @RequestMapping("/masterpiece")
+    @RequestMapping("/home")
     public String masterpiece() {
-        return "masterpiece";
+        return "index";
     }
 
     @RequestMapping("/login/success")
     public String loginSuccess() {
-        return "redirect:" + redirectUrl;
+        return "redirect:" + homeUrl;
     }
 }
