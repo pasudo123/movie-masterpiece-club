@@ -7,7 +7,7 @@ spring:
 
 image:
   file:
-    directory: 'D:/www/masterpiece/static/'
+    directory: 'D:/resources/static/images'
 
 
 ---

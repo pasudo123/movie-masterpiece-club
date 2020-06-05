@@ -1,0 +1,25 @@
+
+version: '3'
+
+services:
+  web-proxy:
+    image: nginx:1.18
+    container_name: web-proxy
+    ports:
+      - 23080:80
+      - 23443:443
+    volumes:
+      - ./nginx/masterpiece-web-product.conf:/etc/nginx/nginx.conf
+      # 스태틱 이미지 경로 마운트 : READ 하기위함 (Storage 와 반대)
+      - /volume1/docker/resources/static/images:/resources/static/images
+    depends_on:
+      - web-app
+
+  web-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: masterpiece-web
+    container_name: masterpiece-web
+    ports:
+      - 23555:8080
