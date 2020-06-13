@@ -65,7 +65,7 @@ public class ArticleControllerTest {
 
         // when & then
         mvc.perform(post("/api/article")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(mapper.writeValueAsString(dto)))
             .andDo(print())
             .andExpect(status().isOk())

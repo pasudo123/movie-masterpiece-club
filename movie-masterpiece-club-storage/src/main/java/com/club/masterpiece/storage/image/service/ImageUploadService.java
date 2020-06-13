@@ -18,19 +18,17 @@ import java.util.regex.Pattern;
 @Service
 @Slf4j
 public class ImageUploadService {
-
-    private final Pattern IMAGE_TAG_PATTERN = Pattern.compile("<img src\\s*=\\s*\\\\*\"(.+?)\\\\*\"\\s*>");
-    private final Base64Converter base64Converter;
-
     @Value("${image.file.directory}")
     private String directory;
+
+    private final Base64Converter base64Converter;
 
     public ImageDto.CreateResponse upload(final ImageDto.CreateRequest createRequest){
 
         final byte[] byteArray = base64Converter.ImageSrcTagToByte(createRequest.getImageByteData());
         final ImageFile imageFile = ImageFile.create(directory, byteArray);
         final String path = save(imageFile);
-        final int size = byteArray.length;
+        final long size = (long)byteArray.length;
 
         return new ImageDto.CreateResponse(path, size);
     }

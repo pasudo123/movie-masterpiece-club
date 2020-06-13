@@ -1,7 +1,7 @@
 dependencies {
 
     // reference :: https://www.baeldung.com/spring-5-webclient
-    // WebClient 의존성 추가
+    // WebClient 의존성 추가 (RestTemplate 은 이후에 @Deprecated 됨)
     compile 'org.springframework.boot:spring-boot-starter-webflux'
     compile 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
 

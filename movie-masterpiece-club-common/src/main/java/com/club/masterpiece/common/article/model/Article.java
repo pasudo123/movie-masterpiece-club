@@ -124,6 +124,10 @@ public class Article {
         this.commentList.add(comment);
     }
 
+    public void addNewAttachment(final Attachment attachment){
+        this.attachmentList.add(attachment);
+    }
+
     public void plusVote(){
         this.vote += 1;
     }

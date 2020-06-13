@@ -1,0 +1,10 @@
+server:
+  port: 8085
+
+spring:
+  profiles: dev
+
+image:
+  file:
+    directory: '/resource/static/images'
+

@@ -23,15 +23,17 @@ public class ImageDataUtil {
         final Matcher matcher = buildImageTagMatcher(content);
         int currentIndex = 0;
 
+        String newContent = content;
+
         while(matcher.find()){
             final String imageTag = matcher.group();
             final String styleValue = this.extractStringByPattern(imageTag, IMAGE_STYLE_PATTERN);
             final String widthValue = this.extractStringByPattern(imageTag, IMAGE_WIDTH_PATTERN);
             final CustomImageData customImageData = new CustomImageData(images.get(currentIndex++).getUrl(), styleValue, widthValue);
-            content.replaceFirst(IMAGE_TAG_PATTERN.toString(), customImageData.toImageTag());
+            newContent = newContent.replaceFirst(IMAGE_TAG_PATTERN.toString(), customImageData.toImageTag());
         }
 
-        return content;
+        return newContent;
     }
 
     public List<CustomImageData> extractImage(final String content) {

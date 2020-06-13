@@ -1,6 +1,7 @@
 package com.club.masterpiece.common.attachment.model;
 
 import com.club.masterpiece.common.article.model.Article;
+import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.common.global.type.ActiveStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -61,11 +62,19 @@ public class Attachment {
     @Column(name = "status", columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE') default 'ACTIVE'", nullable = false)
     private ActiveStatus activeStatus = ActiveStatus.ACTIVE;
 
-//    public Attachment(final Article article, final ImageDto.CreateInfo createInfo) {
-//        this.article = article;
-//        this.type = createInfo.getType();
-//        this.url = createInfo.getUrl();
-//    }
+    @Transient
+    private String host;
+
+    public Attachment(final ImageDto.CreateResponse createDto) {
+        this.name = getNameByUrl(createDto.getUrl());
+        this.url = createDto.getUrl();
+        this.size = createDto.getSize();
+        this.type = AttachmentType.IMAGE;
+    }
+
+    private String getNameByUrl(final String url){
+        return url.substring(url.lastIndexOf("/"));
+    }
 
     public void updateActiveToDelete() {
         this.activeStatus = ActiveStatus.DELETE;
@@ -73,5 +82,10 @@ public class Attachment {
 
     public boolean isDelete() {
         return (this.activeStatus == ActiveStatus.DELETE);
+    }
+
+    public void setArticle(Article article){
+        this.article = article;
+        this.article.addNewAttachment(this);
     }
 }

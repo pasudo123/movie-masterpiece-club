@@ -5,5 +5,3 @@ spring:
     location: classpath:banner/banner.txt
   profiles:
     active:  dev
-    include:
-      - storage

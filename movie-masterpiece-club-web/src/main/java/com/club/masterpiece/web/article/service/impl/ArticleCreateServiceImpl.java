@@ -3,8 +3,10 @@ package com.club.masterpiece.web.article.service.impl;
 import com.club.masterpiece.common.article.dto.ArticleDto;
 import com.club.masterpiece.common.article.model.Article;
 import com.club.masterpiece.common.article.repository.ArticleRepository;
+import com.club.masterpiece.common.attachment.dto.AttachmentDto;
 import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.common.user.model.User;
+import com.club.masterpiece.web.attachment.service.AttachmentCreateService;
 import com.club.masterpiece.web.infra.service.WebClientService;
 import com.club.masterpiece.web.article.service.ArticleCreateService;
 import com.club.masterpiece.web.pojo.CustomArticleData;
@@ -32,9 +34,10 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
 
     private final ArticleIdGenerator articleIdGenerator;
     private final ArticleRepository articleRepository;
-
     private final WebClientService webClientService;
     private final ImageDataUtil imageDataUtil;
+
+    private final AttachmentCreateService attachmentCreateService;
 
     @Override
     public ArticleDto.OneResponse create(final User user, final ArticleDto.CreateRequest dto) {
@@ -52,6 +55,7 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
             .build();
 
         final Article savedArticle = articleRepository.save(article);
+        final List<AttachmentDto.Response> attachmentResponses = attachmentCreateService.createNewImage(savedArticle, imageResponses);
 
         return new ArticleDto.OneResponse(savedArticle);
     }

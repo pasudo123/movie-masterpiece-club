@@ -23,9 +23,9 @@ public class ImageDto {
     public static class CreateResponse {
         private LocalDateTime now;
         private String url;
-        private int size;
+        private long size;
 
-        public CreateResponse(String url, int size) {
+        public CreateResponse(String url, long size) {
             this.now = LocalDateTime.now();
             this.url = url;
             this.size = size;
