@@ -1,0 +1,14 @@
+
+
+version: '3'
+
+services:
+  nas-reverse-proxy:
+    image: nginx:latest
+    container_name: nas-reverse-proxy
+    # 나스 내 리버스 프록시 컨테이너 포트 (자취방 내 IP 포트포워딩 상태)
+    ports:
+      - 42369:80
+      - 44235:443
+    volumes:
+      - ./nginx/nas-reverse-proxy.conf:/etc/nginx/nginx.conf

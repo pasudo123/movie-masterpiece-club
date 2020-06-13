@@ -31,7 +31,7 @@ public class ImageFile {
 
     private void init(final byte[] bytes){
         this.bytes = bytes;
-        final String uuid = UUID.nameUUIDFromBytes(this.bytes).toString().replace(HYPHEN, Strings.EMPTY);
+        final String uuid = UUID.randomUUID().toString().replace(HYPHEN, Strings.EMPTY);
         final String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_IMAGE_FILE_PREFIX));
         this.fileName = (time + uuid) + PNG_EXTENSION;
     }
