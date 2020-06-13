@@ -1,11 +1,8 @@
 package com.club.masterpiece.common.attachment.model;
 
 import com.club.masterpiece.common.article.model.Article;
-import com.club.masterpiece.common.attachment.dto.ImageDto;
-import com.club.masterpiece.common.attachment.dto.ImageExtractElement;
 import com.club.masterpiece.common.global.type.ActiveStatus;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -37,6 +34,9 @@ public class Attachment {
     @Column(name = "type", columnDefinition = "ENUM('IMAGE', 'VIDEO') '첨부파일 타입 선정(이미지, 동영상)'", nullable = false)
     private AttachmentType type;
 
+    @Column(name = "name", columnDefinition = "VARCHAR(60)", nullable = false)
+    private String name;
+
     @Column(name = "url", columnDefinition = "TEXT '첨부파일 경로'", nullable = false)
     private String url;
 
@@ -61,12 +61,11 @@ public class Attachment {
     @Column(name = "status", columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE') default 'ACTIVE'", nullable = false)
     private ActiveStatus activeStatus = ActiveStatus.ACTIVE;
 
-    public Attachment(final Article article, final ImageDto.CreateInfo createInfo) {
-        this.article = article;
-        this.type = createInfo.getType();
-        this.url = createInfo.getUrl();
-
-    }
+//    public Attachment(final Article article, final ImageDto.CreateInfo createInfo) {
+//        this.article = article;
+//        this.type = createInfo.getType();
+//        this.url = createInfo.getUrl();
+//    }
 
     public void updateActiveToDelete() {
         this.activeStatus = ActiveStatus.DELETE;

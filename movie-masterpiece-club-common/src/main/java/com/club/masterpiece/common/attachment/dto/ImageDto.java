@@ -1,32 +1,33 @@
 package com.club.masterpiece.common.attachment.dto;
 
-import com.club.masterpiece.common.attachment.model.AttachmentType;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-/**
- * Created by pasudo123 on 2019-12-21
- * Email: oraedoa@gmail.com
- **/
+import java.time.LocalDateTime;
+
 public class ImageDto {
 
-    @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class CreateInfo {
+    @Getter
+    public static class CreateRequest {
+        private String imageByteData;
 
-        private AttachmentType type = AttachmentType.IMAGE;
-        private String name;
+        public CreateRequest(final String imageByteData){
+            this.imageByteData = imageByteData;
+        }
+    }
+
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @Getter
+    public static class CreateResponse {
+        private LocalDateTime now;
         private String url;
-        private String properties;
-        private String size;
+        private int size;
 
-        @Builder
-        public CreateInfo(String name, String url, String properties, String size) {
-            this.name = name;
+        public CreateResponse(String url, int size) {
+            this.now = LocalDateTime.now();
             this.url = url;
-            this.properties = properties;
             this.size = size;
         }
     }

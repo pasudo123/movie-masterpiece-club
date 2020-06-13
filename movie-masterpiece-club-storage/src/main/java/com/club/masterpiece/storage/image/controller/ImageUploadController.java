@@ -1,6 +1,6 @@
 package com.club.masterpiece.storage.image.controller;
 
-import com.club.masterpiece.storage.image.dto.ImageDto;
+import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.storage.image.service.ImageUploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/images")
 @RequiredArgsConstructor
 public class ImageUploadController {
 

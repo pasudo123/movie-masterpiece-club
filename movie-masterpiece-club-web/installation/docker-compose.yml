@@ -10,8 +10,6 @@ services:
       - 23443:443
     volumes:
       - ./nginx/masterpiece-web-product.conf:/etc/nginx/nginx.conf
-      # 스태틱 이미지 경로 마운트 : READ 하기위함 (Storage 와 반대)
-      - /volume1/docker/resources/static/images:/resources/static/images
     depends_on:
       - web-app
 

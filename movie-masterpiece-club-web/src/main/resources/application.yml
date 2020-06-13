@@ -1,4 +1,6 @@
 spring:
+  banner:
+    location: classpath:banner/banner.txt
   profiles:
     active: default, prod
     include:

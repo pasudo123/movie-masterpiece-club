@@ -101,6 +101,8 @@ public class Article {
         this.user = user;
     }
 
+
+
     public void createAttachmentList(final List<Attachment> attachmentList) {
         this.attachmentList = attachmentList;
     }

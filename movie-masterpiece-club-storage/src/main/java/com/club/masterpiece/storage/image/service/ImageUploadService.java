@@ -1,6 +1,6 @@
 package com.club.masterpiece.storage.image.service;
 
-import com.club.masterpiece.storage.image.dto.ImageDto;
+import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.storage.image.exception.ImageSaveException;
 import com.club.masterpiece.storage.pojo.ImageFile;
 import com.club.masterpiece.storage.util.Base64Converter;

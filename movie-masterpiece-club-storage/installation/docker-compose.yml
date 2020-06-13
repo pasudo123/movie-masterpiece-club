@@ -33,7 +33,7 @@ services:
       # {host nginx 의 conf 위치}:{container, nginx 의 conf 위치} --> 마운트
       - ./nginx/masterpiece-storage-product.conf:/etc/nginx/nginx.conf
       # 스태틱 이미지 경로 마운트 : WRITE 하기위함 (WEB 과 반대)
-      - /volume1/docker/resources/static/images:/resources/static/images
+      - /volume1/docker/resource/static/images:/resource/static/images
     depends_on:
       # storagea-app 컨테이너 실행 이후 storage-proxy 실행.
       - storage-app
@@ -48,4 +48,4 @@ services:
     ports:
       - 28080:8080
     volumes:
-      - /volume1/docker/static/images:/static/images
+      - /volume1/docker/resource/static/images:/resource/static/images

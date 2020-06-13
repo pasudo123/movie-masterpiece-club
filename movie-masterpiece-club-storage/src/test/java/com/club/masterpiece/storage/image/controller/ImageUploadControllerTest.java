@@ -1,6 +1,6 @@
 package com.club.masterpiece.storage.image.controller;
 
-import com.club.masterpiece.storage.image.dto.ImageDto;
+import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.storage.image.service.ImageUploadService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -60,11 +61,11 @@ public class ImageUploadControllerTest {
 
         // given
         final String json = mapper.writeValueAsString(createRequest);
-        given(imageUploadService.upload(any())).willReturn(createResponse);
+        given(imageUploadService.upload(Mockito.any())).willReturn(createResponse);
 
         // when & then
         this.mockMvc.perform(
-                post("/image")
+                post("/images")
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))

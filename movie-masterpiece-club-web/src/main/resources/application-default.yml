@@ -18,21 +18,3 @@ table:
   user: user
   article: article
   comment: comment
-
-keyword:
-  image: '@@GULAGBU_IMAGE'
-  video: '@@GULAGBU_VIDEO'
-
-## static
-gulagbu-resource:
-  server: '118.27.12.138'
-  port: 21
-  path: '/home/web-resources/'
-  account:
-    id: 'ftproot'
-    pw: 'qhdcjsdur123'
-
-#image:
-#  root-path: D:\gulagbu-static\images\
-#  server-path: https://gulagbu.com/web-resources/
-#  resource-path: 'https://gulagbu.com/web-resources/'

@@ -6,7 +6,6 @@ import com.club.masterpiece.common.article.repository.ArticleRepository;
 import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.exception.EmptyResultException;
 import com.club.masterpiece.web.global.pojo.PageRequestDto;
-import com.club.masterpiece.web.image.service.ImageConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

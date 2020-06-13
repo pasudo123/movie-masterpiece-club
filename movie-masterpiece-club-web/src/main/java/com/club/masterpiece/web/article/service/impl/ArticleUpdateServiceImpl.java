@@ -2,19 +2,13 @@ package com.club.masterpiece.web.article.service.impl;
 
 import com.club.masterpiece.common.article.dto.ArticleDto;
 import com.club.masterpiece.common.article.model.Article;
-import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.web.annotation.UpdatableState;
 import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.article.service.ArticleUpdateService;
-import com.club.masterpiece.web.image.service.ImageConverter;
-import com.club.masterpiece.web.image.service.ImageSaveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import java.util.List;
 
 /**
  * Created by pasudo123 on 2019-10-26

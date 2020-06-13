@@ -1,6 +1,8 @@
 # include 시, application-{include-name}.yml 을 포함한다.
 # 그리고 해당 값 내부에 profiles.active 가 있으면, 해당 내용도 같이 active profile 로 잡는다.
 spring:
+  banner:
+    location: classpath:banner/banner.txt
   profiles:
     active:  dev
     include:

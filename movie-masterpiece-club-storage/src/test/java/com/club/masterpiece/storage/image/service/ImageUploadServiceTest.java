@@ -1,6 +1,6 @@
 package com.club.masterpiece.storage.image.service;
 
-import com.club.masterpiece.storage.image.dto.ImageDto;
+import com.club.masterpiece.common.attachment.dto.ImageDto;
 import com.club.masterpiece.storage.util.Base64Converter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
