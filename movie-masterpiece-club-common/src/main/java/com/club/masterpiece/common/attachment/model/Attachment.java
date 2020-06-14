@@ -66,14 +66,14 @@ public class Attachment {
     private String host;
 
     public Attachment(final ImageDto.CreateResponse createDto) {
-        this.name = getNameByUrl(createDto.getUrl());
-        this.url = createDto.getUrl();
+        this.name = getNameByUrl(createDto.getPath());
+        this.url = createDto.getUrl() + name;
         this.size = createDto.getSize();
         this.type = AttachmentType.IMAGE;
     }
 
     private String getNameByUrl(final String url){
-        return url.substring(url.lastIndexOf("/"));
+        return url.substring(url.lastIndexOf("/") + 1);
     }
 
     public void updateActiveToDelete() {

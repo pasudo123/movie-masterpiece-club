@@ -1,8 +1,10 @@
 package com.club.masterpiece.web.util.image;
 
 import com.club.masterpiece.common.attachment.dto.ImageDto;
+import com.club.masterpiece.common.attachment.model.Attachment;
 import com.club.masterpiece.web.pojo.CustomImageData;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,7 +21,11 @@ public class ImageDataUtil {
     private static final Pattern IMAGE_WIDTH_PATTERN = Pattern.compile("width(\\s)?=\"(.*?)\"");
     private static final String DOUBLE_QUOTATION = "\"";
 
-    public String changeImageSrcIfPossible(final String content, List<ImageDto.CreateResponse> images){
+    public String changeImageSrcIfPossible(final String content, List<Attachment> images){
+        if(images.size() == 0){
+            return content;
+        }
+
         final Matcher matcher = buildImageTagMatcher(content);
         int currentIndex = 0;
 
@@ -35,7 +41,6 @@ public class ImageDataUtil {
 
         return newContent;
     }
-
     public List<CustomImageData> extractImage(final String content) {
 
         final List<CustomImageData> imageDataList = new ArrayList<>();

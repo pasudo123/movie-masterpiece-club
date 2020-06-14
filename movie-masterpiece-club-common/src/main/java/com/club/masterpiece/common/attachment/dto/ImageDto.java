@@ -23,11 +23,13 @@ public class ImageDto {
     public static class CreateResponse {
         private LocalDateTime now;
         private String url;
+        private String path;
         private long size;
 
-        public CreateResponse(String url, long size) {
+        public CreateResponse(final String url, final String path, final long size) {
             this.now = LocalDateTime.now();
             this.url = url;
+            this.path = path;
             this.size = size;
         }
     }

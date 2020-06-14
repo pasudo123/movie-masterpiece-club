@@ -5,3 +5,7 @@ spring:
     location: classpath:banner/banner.txt
   profiles:
     active:  dev
+
+## services
+services:
+  masterpiece-storage-static-url: 'http://masterpiece-1st-storage.tk/static/images/'

@@ -42,7 +42,7 @@ public class Article {
     private String title;
 
     @Column(name = "contents", columnDefinition = "TEXT", nullable = false)
-    private String content;
+    private String content = "";
 
     @Enumerated(EnumType.STRING)
     @Column(name = "types", columnDefinition = "ENUM('GENERAL', 'OFFICIAL')", nullable = false)
@@ -93,31 +93,19 @@ public class Article {
     private List<Attachment> attachmentList = new ArrayList<>();
 
     @Builder
-    public Article(String id, String title, String content, ArticleType type, User user) {
+    public Article(String id, String title, ArticleType type, User user) {
         this.id = id;
         this.title = title;
-        this.content = content;
         this.type = type;
         this.user = user;
     }
 
-
-
-    public void createAttachmentList(final List<Attachment> attachmentList) {
-        this.attachmentList = attachmentList;
+    public void setContent(final String content) {
+        this.content = content;
     }
 
     public void changeDeleteOnAttachmentList(){
         this.attachmentList.forEach(Attachment::updateActiveToDelete);
-    }
-
-    public void updateAttachmentList(final List<Attachment> attachmentList) {
-        this.attachmentList.addAll(attachmentList);
-    }
-
-    public void updateArticle(final ArticleDto.UpdateRequest dto) {
-        this.title = dto.getTitle();
-        this.content = dto.getContent();
     }
 
     public void addNewComment(final Comment comment) {

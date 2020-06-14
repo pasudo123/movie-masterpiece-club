@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -18,8 +19,12 @@ import java.util.regex.Pattern;
 @Service
 @Slf4j
 public class ImageUploadService {
+
     @Value("${image.file.directory}")
     private String directory;
+
+    @Value("${services.masterpiece-storage-static-url}")
+    private String imageUrl;
 
     private final Base64Converter base64Converter;
 
@@ -30,7 +35,7 @@ public class ImageUploadService {
         final String path = save(imageFile);
         final long size = (long)byteArray.length;
 
-        return new ImageDto.CreateResponse(path, size);
+        return new ImageDto.CreateResponse(imageUrl, path, size);
     }
 
     private String save(final ImageFile imageFile){

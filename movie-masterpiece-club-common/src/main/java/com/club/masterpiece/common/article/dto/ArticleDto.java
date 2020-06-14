@@ -90,6 +90,11 @@ public class ArticleDto {
             this.createdProfile = article.getUser().getProfile();
         }
 
+        public OneResponse(Article article, final String refineContent){
+            this(article);
+            this.content = refineContent;
+        }
+
         public void changeImageIncludeContent(final String content) {
             this.content = content;
         }

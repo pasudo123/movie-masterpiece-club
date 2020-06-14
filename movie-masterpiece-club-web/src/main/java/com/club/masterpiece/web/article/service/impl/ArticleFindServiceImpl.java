@@ -6,6 +6,7 @@ import com.club.masterpiece.common.article.repository.ArticleRepository;
 import com.club.masterpiece.web.article.service.ArticleFindService;
 import com.club.masterpiece.web.exception.EmptyResultException;
 import com.club.masterpiece.web.global.pojo.PageRequestDto;
+import com.club.masterpiece.web.util.image.ImageDataUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,8 +26,8 @@ import java.util.List;
 @Slf4j
 public class ArticleFindServiceImpl implements ArticleFindService {
 
-//    private final ImageConverter imageConverter;
     private final ArticleRepository articleRepository;
+    private final ImageDataUtil imageDataUtil;
 
     @Transactional(readOnly = true)
     @Override
@@ -64,10 +65,9 @@ public class ArticleFindServiceImpl implements ArticleFindService {
         }
 
         /** 첨부파일 존재 **/
-        final ArticleDto.OneResponse dto = new ArticleDto.OneResponse(article);
-
-        return dto;
-//        return imageConverter.convertKeywordToImageTag(dto, article.getAttachmentList());
+        return new ArticleDto.OneResponse(article, imageDataUtil.changeImageSrcIfPossible(
+                article.getContent(),
+                article.getAttachmentList()));
     }
 
     @Transactional(readOnly = true)

@@ -44,18 +44,18 @@ public class ArticleCreateServiceImpl implements ArticleCreateService {
 
         final List<CustomImageData> imageDataList = imageDataUtil.extractImage(dto.getContent());
         final List<ImageDto.CreateResponse> imageResponses = webClientService.uploadImages(imageDataList);
-        final String refineContent = imageDataUtil.changeImageSrcIfPossible(dto.getContent(), imageResponses);
 
         final Article article = Article.builder()
             .id(articleIdGenerator.generateId())
             .title(dto.getTitle())
-            .content(refineContent)
             .type(dto.getType())
             .user(user)
             .build();
 
         final Article savedArticle = articleRepository.save(article);
-        final List<AttachmentDto.Response> attachmentResponses = attachmentCreateService.createNewImage(savedArticle, imageResponses);
+
+        attachmentCreateService.createNewImage(savedArticle, imageResponses);
+        savedArticle.setContent(imageDataUtil.changeImageSrcIfPossible(dto.getContent(), savedArticle.getAttachmentList()));
 
         return new ArticleDto.OneResponse(savedArticle);
     }
