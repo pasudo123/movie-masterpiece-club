@@ -57,7 +57,7 @@ jobs:
       - name: Run command
         run: |
           ls -al
-          touch ./movie-masterpiece-club-web/buils/libs/test.txt
+          touch ./movie-masterpiece-club-web/build/libs/test.txt
       - name: Copy file via ssh password
         # https://github.com/marketplace/actions/scp-files
         uses: appleboy/scp-action@master
@@ -68,7 +68,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
 #          source: "./movie-masterpiece-club-web/build/libs/movie-masterpiece-club-web-*.jar"
-          source: "./movie-masterpiece-club-web/buils/libs/test.txt"
+          source: "./movie-masterpiece-club-web/build/libs/test.txt"
           target: "/volume1/docker/deploy/www/masterpiece-web/"   # NAS 경로
 
   # ssh deploy
