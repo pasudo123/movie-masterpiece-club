@@ -27,10 +27,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         - node-version: ${{ matrix.node-version }}
-#    - name: npm install
-    - run: npm install
-    - run: npm run build:prod
-#    - name: vue frontend build [prod]
+    - name: frontend build
+      run: |
+        npm install
+        npm run build:prod
 
     - name: Move to Root Directory
       run: cd ../../
