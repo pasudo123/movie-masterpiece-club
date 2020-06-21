@@ -12,26 +12,26 @@ on:
 
 jobs:
 # frontend job
-  frontend_build_job:
-    name: FrontEnd Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.16.1'
-          registry-url: 'https://registry.npmjs.org'
-      - name: Vue Project npm build
-        run: |
-          npm install
-          npm run build:prod
-        working-directory: ./movie-masterpiece-club-web/frontend
+#  frontend_build_job:
+#    name: FrontEnd Build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Use Node.js
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: '12.16.1'
+#          registry-url: 'https://registry.npmjs.org'
+#      - name: Vue Project npm build
+#        run: |
+#          npm install
+#          npm run build:prod
+#        working-directory: ./movie-masterpiece-club-web/frontend
 
 # backend job
   backend_build_job:
 # frontend_build_job 이후 실행.
-    needs: frontend_build_job
+#    needs: frontend_build_job
     name: SpringBoot Build
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +47,9 @@ jobs:
       - name: SpringBoot build with gradle
         run: ./gradlew :movie-masterpiece-club-web:bootJar
       - name: Run Command
-        run: ls -al ./movie-masterpiece-club-web/build/lib/
+        run: |
+          ls -al ./movie-masterpiece-club-web/
+          ls -al ./movie-masterpiece-club-web/build/lib/
       - name: Copy file via ssh password
 # https://github.com/marketplace/actions/scp-files
         uses: appleboy/scp-action@master
