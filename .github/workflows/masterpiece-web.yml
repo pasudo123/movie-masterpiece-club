@@ -51,8 +51,8 @@ jobs:
           ls -al ./movie-masterpiece-club-web/build/libs/
       - name: Get latest jar
         run: |
-          echo "::set-output name=lastest_jar::$(ls -dt movie* | sort -V | tail -n 1)
-          echo "::set-output name=source::./movie-masterpiece-club-web/build/libs/$latest_jar
+          echo "::set-output name=lastest_jar::$(ls -dt movie* | sort -V | tail -n 1)"
+          echo "::set-output name=source::./movie-masterpiece-club-web/build/libs/$latest_jar"
         working-directory: ./movie-masterpiece-club-web/build/libs/
 
       - name: Copy file via ssh password
