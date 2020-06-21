@@ -16,21 +16,21 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [8.x, 10.x, 12.x]
 
     steps:
     - uses: actions/checkout@v2
     # frontend (vue)
     - name: Move frontend directory
       run: cd movie-masterpiece-club-web/frontend
-    - name: Use Node.js ${{matrix.node-version}}
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        - node-version: ${{matrix.node-version}}
-    - name: npm install
-      run: npm install
-    - name: vue frontend build [prod]
-      run: npm run build:prod
+        - node-version: ${{ matrix.node-version }}
+#    - name: npm install
+    - run: npm install
+    - run: npm run build:prod
+#    - name: vue frontend build [prod]
 
     - name: Move to Root Directory
       run: cd ../../
