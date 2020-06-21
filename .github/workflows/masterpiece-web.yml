@@ -15,7 +15,7 @@ jobs:
     name: FrontEnd Build By Npm (Vue)
     runs-on: ubuntu-latest
     env:
-      working-directory: .movie-masterpiece-club-web/frontend/
+      working-directory: ./movie-masterpiece-club-web/frontend/
     build:
       steps:
         - uses: actions/checkout@v2
@@ -34,6 +34,8 @@ jobs:
     needs: frontend_build_job
     runs-on: ubuntu-latest
     name: SpringBoot Build By Gradle
+    env:
+      working-directory: .
     build:
       steps:
         - name: Set up JDK 1.8
