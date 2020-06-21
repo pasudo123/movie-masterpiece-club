@@ -21,8 +21,8 @@ jobs:
     steps:
     - name: Checkout sourcecode
       uses: actions/checkout@v2
-
     # frontend (vue)
+    - name: Move frontend directory
       run: cd movie-masterpiece-club-web/frontend
     - name: Use Node.js ${{matrix.node-version}}
       with:
