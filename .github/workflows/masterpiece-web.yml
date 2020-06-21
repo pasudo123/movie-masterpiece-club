@@ -49,6 +49,7 @@ jobs:
       - name: Run Command
         run: |
           ls -al ./movie-masterpiece-club-web/
+          ls -al ./movie-masterpiece-club-web/build/
           ls -al ./movie-masterpiece-club-web/build/lib/
       - name: Copy file via ssh password
 # https://github.com/marketplace/actions/scp-files
