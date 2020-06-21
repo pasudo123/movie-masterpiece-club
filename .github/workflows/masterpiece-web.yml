@@ -16,13 +16,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: pwd
-      run: |
-        pwd
-        ls -al
+    - name: run ls -al
+      run: ls -al
     # frontend (vue)
     - name: Move frontend directory
-      run: cd movie-masterpiece-club-web/frontend/
+      run: |
+        cd movie-masterpiece-club-web/frontend/
+        pwd
+        ls -al
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
