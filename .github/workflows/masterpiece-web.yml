@@ -53,8 +53,8 @@ jobs:
         run: |
           echo "::set-env name=lastest_jar::$(ls -dt movie* | sort -V | tail -n 1)"
           echo "::set-env name=source::./movie-masterpiece-club-web/build/libs/$latest_jar"
-          echo ${{ $latest_jar }}
-          echo ${{ $source }}
+          echo $latest_jar
+          echo $source
         working-directory: ./movie-masterpiece-club-web/build/libs/
 
       - name: Copy file via ssh password
