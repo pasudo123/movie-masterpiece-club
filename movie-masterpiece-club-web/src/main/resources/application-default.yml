@@ -1,17 +1,28 @@
 
-# spring boot template : freemarker
 spring:
-  freemarker:
-    check-template-location: false
-    template-loader-path: classpath:/static/templates
-    suffix: .ftl
+  datasource:
+    url: jdbc:mysql://localhost:3306/masterpiece_club?useSSL=false&allowPublicKeyRetrieval=true&useTimezone=true&serverTimezone=Asia/Seoul
+    username: root
+    password: rootpass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: validate
+    generate-ddl: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  security.oauth2.client.registration.google:
+    redirect-uri: http://localhost:8080/login/oauth2/callback/google
 
-# 개발환경 : vue + springboot
-app:
-  default-success-url: '/login/success'               # 로그인 성공시 controller 매핑 url
-  home-url: 'http://localhost:8899/home'              # 로그인 성공시 controller 에서 리턴하는 url
-  oauth2-redirect: '/login/oauth2/callback/**'        # google oauth2 에서 로그인 콜백 url
-  logout-success-url: 'http://localhost:8899/login'   # 로그아웃 성공시 이동하는 url
+external:
+  image-upload-url: 'http://172.30.1.24:20080/images'
+
+logging:
+  level:
+    com.club.masterpiece.web.*: debug
 
 ## tables
 table:

@@ -1,7 +1,12 @@
 spring:
+  freemarker:
+    check-template-location: false
+    template-loader-path: classpath:/static/templates
+    suffix: .ftl
   banner:
     location: classpath:banner/banner.txt
   profiles:
-    active: default, prod
+    active: prod
     include:
+      - default
       - security
