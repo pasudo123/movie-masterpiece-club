@@ -11,7 +11,7 @@ on:
 #    branches: [ master ]
 
 jobs:
-  frontend_build_job:
+  job1:
     name: FrontEnd Build By Npm (Vue)
     runs-on: ubuntu-latest
     env:
@@ -29,9 +29,9 @@ jobs:
             npm install
             npm run build:prod
 
-  backend_build_job:
+  job2:
     # frontend_build_job 이후 실행.
-    needs: frontend_build_job
+    needs: job1
     runs-on: ubuntu-latest
     name: SpringBoot Build By Gradle
     env:
