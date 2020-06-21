@@ -18,8 +18,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: pwd
       run: |
-        - pwd
-        - ls -al
+        pwd
+        ls -al
     # frontend (vue)
     - name: Move frontend directory
       run: cd movie-masterpiece-club-web/frontend
@@ -30,8 +30,8 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - name: frontend build
       run: |
-        - npm install
-        - npm run build:prod
+        npm install
+        npm run build:prod
 
     - name: Move to Root Directory
       run: cd ../../
