@@ -66,6 +66,7 @@ jobs:
           port: ${{ secrets.PORT }}
           source: "./movie-masterpiece-club-web/build/libs/*"
           target: "/volume1/docker/deploy/www/masterpiece-web/"   # NAS 경로
+          rm: false
 
   # ssh deploy
 #  ssh_deploy_job:
