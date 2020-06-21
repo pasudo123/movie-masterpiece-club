@@ -52,6 +52,7 @@ jobs:
       - name: Get latest jar
         run: |
           echo "::set-output name=lastest_jar::$(ls -dt movie* | sort -V | tail -n 1)"
+          echo "::set-output name=source::./movie-masterpiece-club-web/build/libs/$latest_jar
         working-directory: ./movie-masterpiece-club-web/build/libs/
 
       - name: Copy file via ssh password
@@ -63,7 +64,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "./movie-masterpiece-club-web/build/libs/"$lastest_jar
+          source: $source
           target: "/volume1/docker/deploy/www/masterpiece-web/"   # NAS 경로
 
   # ssh deploy
