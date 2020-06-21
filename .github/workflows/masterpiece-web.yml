@@ -11,7 +11,7 @@ on:
 #    branches: [ master ]
 
 jobs:
-  job1:
+  frontend_build_job:
     name: FrontEnd Build By Npm (Vue)
     runs-on: ubuntu-latest
     env:
@@ -29,15 +29,16 @@ jobs:
             npm install
             npm run build:prod
 
-  job2:
+  backend_build_job:
     # frontend_build_job 이후 실행.
-    needs: job1
+    needs: frontend_build_job
     runs-on: ubuntu-latest
     name: SpringBoot Build By Gradle
     env:
       working-directory: .
     build:
       steps:
+        - uses: actions/checkout@v2
         - name: Set up JDK 1.8
           uses: actions/setup-java@v1
           with:
