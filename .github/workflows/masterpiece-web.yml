@@ -13,10 +13,8 @@ on:
 jobs:
   # frontend job
   frontend_build_job:
-    name: FrontEnd Build By Npm (Vue)
+    name: FrontEnd Build
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./movie-masterpiece-club-web/frontend/
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -28,15 +26,14 @@ jobs:
         run: |
           npm install
           npm run build:prod
+        working-directory: ./movie-masterpiece-club-web/frontend
 
   # backend job
   backend_build_job:
     # frontend_build_job 이후 실행.
     needs: frontend_build_job
     runs-on: ubuntu-latest
-    name: SpringBoot Build By Gradle
-    env:
-      working-directory: .
+    name: SpringBoot Build
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 1.8
