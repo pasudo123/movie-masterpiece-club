@@ -19,11 +19,6 @@ jobs:
     - name: run ls -al
       run: ls -al
     # frontend (vue)
-    - name: Move frontend directory
-      run: |
-        cd movie-masterpiece-club-web/frontend/
-        pwd
-        ls -al
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -31,11 +26,8 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - name: frontend build
       run: |
-        npm install
-        npm run build:prod
-
-    - name: Move to Root Directory
-      run: cd ../../
+        npm install movie-masterpiece-club-web/frontend/
+        npm run build:prod movie-masterpiece-club-web/frontend/
 
     # backend
     - name: Set up JDK 1.8
