@@ -28,8 +28,11 @@ jobs:
     - name: Use Node.js ${{matrix.node-version}}
       with:
         - node-version: ${{matrix.node-version}}
-    - run: npm install
-    - run: npm run build:prod
+    - name: npm install
+      run: npm install
+    - name: vue frontend build [prod]
+      run: npm run build:prod
+
     - name: Move to Root Directory
       run: cd ../../
 
