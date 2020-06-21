@@ -51,25 +51,23 @@ jobs:
 #          ls -al ./movie-masterpiece-club-web/build/libs/
       - name: Get latest jar
         run: |
-          echo "::set-env name=latest_jar::value"
-          echo $latest_jar
-#          echo "::set-env name=lastest_jar::$(ls -dt movie* | sort -V | tail -n 1)"
-#          echo "::set-env name=source::./movie-masterpiece-club-web/build/libs/$latest_jar"
-#          echo $latest_jar
-#          echo $source
-#        working-directory: ./movie-masterpiece-club-web/build/libs/
+          echo "::set-env name=lastest_jar::$(ls -dt movie* | sort -V | tail -n 1)"
+          echo "::set-env name=source::./movie-masterpiece-club-web/build/libs/$latest_jar"
+          echo ${{ $latest_jar }}
+          echo ${{ $source }}
+        working-directory: ./movie-masterpiece-club-web/build/libs/
 
-#      - name: Copy file via ssh password
-## https://github.com/marketplace/actions/scp-files
-#        uses: appleboy/scp-action@master
-## https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USERNAME }}
-#          password: ${{ secrets.PASSWORD }}
-#          port: ${{ secrets.PORT }}
-#          source: $source
-#          target: "/volume1/docker/deploy/www/masterpiece-web/"   # NAS 경로
+      - name: Copy file via ssh password
+# https://github.com/marketplace/actions/scp-files
+        uses: appleboy/scp-action@master
+# https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: $source
+          target: "/volume1/docker/deploy/www/masterpiece-web/"   # NAS 경로
 
   # ssh deploy
 #  ssh_deploy_job:
