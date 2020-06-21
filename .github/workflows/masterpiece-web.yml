@@ -64,7 +64,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: $source_dir$latest_jar
+          source: "./movie-masterpiece-club-web/build/libs/*"
           target: "/volume1/docker/deploy/www/masterpiece-web/"   # NAS 경로
 
   # ssh deploy
