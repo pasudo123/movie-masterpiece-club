@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '12.16.1'
           registry-url: 'https://registry.npmjs.org'
-      - name: frontend build
+      - name: Vue Project npm build
         run: |
           npm install
           npm run build:prod
@@ -32,8 +32,8 @@ jobs:
   backend_build_job:
     # frontend_build_job 이후 실행.
     needs: frontend_build_job
-    runs-on: ubuntu-latest
     name: SpringBoot Build
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 1.8
@@ -44,5 +44,26 @@ jobs:
         run: gradle wrapper --gradle-version=6.3 --distribution-type=bin
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Build with Gradle
+      - name: SpringBoot build with gradle
         run: ./gradlew :movie-masterpiece-club-web:bootJar
+
+  # ssh deploy
+  ssh_deploy_job:
+    needs: backend_build_job
+    name: ssh deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        # https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          # 스크립트 실행 시 막히면 end
+          script_stop: true
+          script: |
+            whoami
+            pwd
+            ls -al
