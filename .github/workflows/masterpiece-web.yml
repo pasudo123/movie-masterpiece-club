@@ -46,11 +46,14 @@ jobs:
         run: chmod +x gradlew
       - name: SpringBoot build with gradle
         run: ./gradlew :movie-masterpiece-club-web:bootJar
-      - name: Run Command
+      - name: Run `ls -al`
         run: |
-          ls -al ./movie-masterpiece-club-web/
-          ls -al ./movie-masterpiece-club-web/build/
           ls -al ./movie-masterpiece-club-web/build/libs/
+      - name: Get latest jar
+        run: |
+          echo "::set-output name=lastest_jar::$(ls -dt movie* | sort -V | tail -n 1)"
+        working-directory: ./movie-masterpiece-club-web/build/libs/
+
       - name: Copy file via ssh password
 # https://github.com/marketplace/actions/scp-files
         uses: appleboy/scp-action@master
@@ -60,7 +63,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "./movie-masterpiece-club-web/build/libs/movie-masterpiece-club-web-*.jar"
+          source: "./movie-masterpiece-club-web/build/libs/"$lastest_jar
           target: "/volume1/docker/deploy/www/masterpiece-web/"   # NAS 경로
 
   # ssh deploy
