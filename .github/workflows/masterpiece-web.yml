@@ -13,8 +13,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
     steps:
     - uses: actions/checkout@v2
+    # frontend (vue)
+    - name: Run pwd
+      run: pwd
+    - name: Move to Frontend Directory
+      run: cd movie-masterpiece-club-web/frontend
+    - name: Use Node.js ${{matrix.node-version}}
+      with:
+        - node-version: ${{matrix.node-version}}
+      run:
+        - npm install
+        - npm run build:prod
+    - name: Move to Root Directory
+      run: cd ../../
+
+    # backend
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
