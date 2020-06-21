@@ -22,7 +22,7 @@ jobs:
         ls -al
     # frontend (vue)
     - name: Move frontend directory
-      run: cd movie-masterpiece-club-web/frontend
+      run: cd movie-masterpiece-club-web/frontend/
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
