@@ -65,10 +65,9 @@ jobs:
 # https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
         with:
           host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          timeout: 3600s
           local: ./movie-masterpiece-club-web/build/libs/sample.txt
           remote: /volume1/docker/deploy/www/masterpiece-web/  # NAS 경로
 #          rm: false
