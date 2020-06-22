@@ -57,16 +57,17 @@ jobs:
 
       - name: Copy file via ssh password
 # https://github.com/marketplace/actions/scp-files
-        uses: appleboy/scp-action@master
+#        uses: appleboy/scp-action@master
+        uses: garygrossgarten/github-action-scp@release
 # https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "./movie-masterpiece-club-web/build/libs/"
-          target: "/volume1/docker/deploy/www/masterpiece-web/"   # NAS 경로
-          rm: false
+          local: ./movie-masterpiece-club-web/build/libs/
+          remote: /volume1/docker/deploy/www/masterpiece-web/  # NAS 경로
+#          rm: false
 
   # ssh deploy
 #  ssh_deploy_job:
