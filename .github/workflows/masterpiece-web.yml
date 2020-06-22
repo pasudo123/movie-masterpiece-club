@@ -69,7 +69,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           timeout: 3600s
-          local: ./movie-masterpiece-club-web/build/libs/
+          local: ./movie-masterpiece-club-web/build/libs/sample.txt
           remote: /volume1/docker/deploy/www/masterpiece-web/  # NAS 경로
 #          rm: false
 
