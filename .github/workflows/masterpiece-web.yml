@@ -65,7 +65,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          local: ./movie-masterpiece-club-web/build/libs/*
+          local: ./movie-masterpiece-club-web/build/libs/$lastest_jar
           remote: /volume1/docker/deploy/www/masterpiece-web/   # NAS 경로
 #          rm: false
 
