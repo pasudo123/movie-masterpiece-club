@@ -49,6 +49,8 @@ jobs:
 #      - name: Run `ls -al`
 #        run: |
 #          ls -al ./movie-masterpiece-club-web/build/libs/
+      - name: Make dir
+        run: mkdir -p ./movie-masterpiece-club-web/build/libs/
       - name: Get latest jar
         run: |
           echo "::set-env name=lastest_jar::$(ls -dt movie* | sort -V | tail -n 1)"
