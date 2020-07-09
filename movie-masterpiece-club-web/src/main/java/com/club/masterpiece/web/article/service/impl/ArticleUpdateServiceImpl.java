@@ -21,8 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class ArticleUpdateServiceImpl implements ArticleUpdateService {
 
-//    private final ImageSaveService imageSaveService;
-//    private final ImageConverter imageConverter;
     private final ArticleFindService articleFindService;
 
     @UpdatableState

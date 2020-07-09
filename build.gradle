@@ -2,7 +2,8 @@ buildscript {
     ext {
         springBootVersion = '2.2.7.RELEASE'
         springManagementVersion = '1.0.8.RELEASE'
-        mooworkVersion = '1.3.1'
+//        mooworkVersion = '1.3.1'
+        gradleNodeVersion = '2.2.4'
     }
 
     repositories {
@@ -15,7 +16,8 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("io.spring.gradle:dependency-management-plugin:${springManagementVersion}")
-        classpath("com.moowork.gradle:gradle-node-plugin:${mooworkVersion}")
+        // https://github.com/node-gradle/gradle-node-plugin/blob/master/docs/usage.md
+        classpath("com.github.node-gradle:gradle-node-plugin:${gradleNodeVersion}")
     }
 }
 
@@ -25,9 +27,7 @@ allprojects {
 }
 
 subprojects {
-
     apply plugin: 'java'
-
     sourceCompatibility = 1.8
 
     apply plugin: 'org.springframework.boot'
@@ -94,55 +94,59 @@ project(':movie-masterpiece-club-web') {
     /**
      * https://plugins.gradle.org/plugin/com.moowork.node
      * **/
-    apply plugin: 'com.moowork.node'
+//    apply plugin: 'com.moowork.node'
+    apply plugin: 'com.github.node-gradle.node'
 
     dependencies {
         compile project(':movie-masterpiece-club-common')
     }
 
-    node {
-        // node -v (using node version)
-        // version = '12.16.1'
-
-        // npm -v (using npm version)
-        // 해당 버전을 지정하면 node 플러그인은 npmSetup 태스크에 의해서 해당 버전 npm 을 npmWorkDir 에 설치하고 사용한다.
-        // 해당 버전을 지정하지 않으면 로컬에 설치된 npm 을 npmSetup 태스크에서 사용한다. 설치되지 않으면 번들로 제공하는 npm 을 사용한다.
-        // npmVersion = '5.6.0'
-
-        // node 배포 파일을 획득하기 위한 BaseUrl
-        distBaseUrl = 'https://nodejs.org/dist'
-
-        download = true
-
-        // 노드 모듈이 설치된 디렉토리
-        nodeModulesDir = file("${project.projectDir}/frontend")
-    }
-
-    npm_install.dependsOn(npm_cache_clean)
-
-    task setup(type: NpmTask) {
-        println('=======================================')
-        println('install node.js packages.')
-        args = ['install']
-        inputs.files file('package.json')
-        outputs.files file('node_modules')
-    }
-
-    task reBuild(type: NpmTask, dependsOn: setup){
-        println('=======================================')
-        println('npm rebuild node-sass')
-        args = ['rebuild', 'node-sass']
-        inputs.files file('package.json')
-    }
-
-    task buildFrontEnd(type: NpmTask, dependsOn: reBuild) {
-        println('=======================================')
-        println('build vue.js [production] mode.')
-        println('=======================================')
-        args = ['run', 'build:prod']
-    }
-
-    processResources.dependsOn 'buildFrontEnd'
+    /**
+     * github action 에서 npm build 를 수행하고 있음.
+     */
+//    node {
+//        // node -v (using node version)
+//        // version = '12.16.1'
+//
+//        // npm -v (using npm version)
+//        // 해당 버전을 지정하면 node 플러그인은 npmSetup 태스크에 의해서 해당 버전 npm 을 npmWorkDir 에 설치하고 사용한다.
+//        // 해당 버전을 지정하지 않으면 로컬에 설치된 npm 을 npmSetup 태스크에서 사용한다. 설치되지 않으면 번들로 제공하는 npm 을 사용한다.
+//        // npmVersion = '5.6.0'
+//
+//        // node 배포 파일을 획득하기 위한 BaseUrl
+//        distBaseUrl = 'https://nodejs.org/dist'
+//
+//        download = true
+//
+//        // 노드 모듈이 설치된 디렉토리
+//        nodeModulesDir = file("${project.projectDir}/frontend")
+//    }
+//
+//    npm_install.dependsOn(npm_cache_clean)
+//
+//    task setup(type: NpmTask) {
+//        println('=======================================')
+//        println('install node.js packages.')
+//        args = ['install']
+//        inputs.files file('package.json')
+//        outputs.files file('node_modules')
+//    }
+//
+//    task reBuild(type: NpmTask, dependsOn: setup){
+//        println('=======================================')
+//        println('npm rebuild node-sass')
+//        args = ['rebuild', 'node-sass']
+//        inputs.files file('package.json')
+//    }
+//
+//    task buildFrontEnd(type: NpmTask, dependsOn: reBuild) {
+//        println('=======================================')
+//        println('build vue.js [production] mode.')
+//        println('=======================================')
+//        args = ['run', 'build:prod']
+//    }
+//
+//    processResources.dependsOn 'buildFrontEnd'
 }
 
 /** gradle task 나열. **/
