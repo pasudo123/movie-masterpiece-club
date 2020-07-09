@@ -46,42 +46,47 @@ jobs:
       - name: Run `ls -al`
         run: |
           ls -al ./movie-masterpiece-club-web/build/libs/
-      # https://github.com/marketplace/actions/scp-files
-      - name: Copy jar file via ssh password
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          source: ./movie-masterpiece-club-web/build/libs/
-          target: /volume1/docker/deploy/www/masterpiece-web/
-          rm: true
-      - name: Copy Docker file via ssh password
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          source: ./movie-masterpiece-club-web/installation/
-          target: /volume1/docker/deploy/www/masterpiece-web/
-          rm: false
 
   cd:
     needs: backend_build_job
     name: docker image build & push
     runs-on: ubuntu-latest
     steps:
+      # https://github.com/marketplace/actions/build-and-push-docker-images
       - name: Build and push Docker images
         uses: docker/build-push-action@v1.1.0
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: pasudo123/repo
+          repository: pasudo123/movie-masterpiece-club-web
           tags: latest
+          dockerfile: ./installation/Dockerfile
 
-  # ssh deploy
+########################################################################################################################
+## unused.
+########################################################################################################################
+# https://github.com/marketplace/actions/scp-files
+#      - name: Copy jar file via ssh password
+#        uses: appleboy/scp-action@master
+#        with:
+#          host: ${{ secrets.HOST }}
+#          port: ${{ secrets.PORT }}
+#          username: ${{ secrets.USERNAME }}
+#          password: ${{ secrets.PASSWORD }}
+#          source: ./movie-masterpiece-club-web/build/libs/
+#          target: /volume1/docker/deploy/www/masterpiece-web/
+#          rm: true
+#      - name: Copy Docker file via ssh password
+#        uses: appleboy/scp-action@master
+#        with:
+#          host: ${{ secrets.HOST }}
+#          port: ${{ secrets.PORT }}
+#          username: ${{ secrets.USERNAME }}
+#          password: ${{ secrets.PASSWORD }}
+#          source: ./movie-masterpiece-club-web/installation/
+#          target: /volume1/docker/deploy/www/masterpiece-web/
+#          rm: false
+
 #  ssh_deploy_job:
 #    needs: backend_build_job
 #    name: ssh deploy
