@@ -11,7 +11,7 @@
     "start": "vue-cli-service serve --open"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^2.6.11",
     "element-ui": "^2.13.0",
     "glob": "^7.1.6",
